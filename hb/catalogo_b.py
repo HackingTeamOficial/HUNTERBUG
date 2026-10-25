@@ -403,25 +403,27 @@ def copyright_antiguo(ctx):
 @check("CON-25", "Sin declaracion de viewport", CON, "info",
        cwe="CWE-1059", owasp="A05:2021")
 def sin_viewport(ctx):
-    if "<head" in ctx.cuerpo_min and "viewport" not in ctx.cuerpo_min[:3000]:
+    cabeza = ctx.cuerpo_min[:3000]
+    if "<head" in cabeza and "viewport" not in cabeza:
         return {"titulo": "El documento no declara viewport",
                 "detalle": "Afecta a la usabilidad movil y suele acompanar a "
                            "sitios antiguos",
                 "recomendacion": "Anadir meta viewport",
-                "evidencia": {}}
+                "evidencia": {"cabecera_html": cabeza[:300]}}
     return None
 
 
 @check("CON-26", "Sin meta charset", CON, "info",
        cwe="CWE-436", owasp="A05:2021")
 def sin_meta_charset(ctx):
-    if "<head" in ctx.cuerpo_min and not re.search(
-            r"<meta[^>]*charset", ctx.cuerpo_min[:3000]):
+    cabeza = ctx.cuerpo_min[:3000]
+    if "<head" in cabeza and not re.search(r"<meta[^>]*charset", cabeza):
         return {"titulo": "El documento no declara charset en el HTML",
                 "detalle": "Puede provocar interpretacion incorrecta de los "
-                           "bytes",
+                           "bytes recibidos",
                 "recomendacion": "Anadir <meta charset=\"utf-8\">",
-                "evidencia": {}}
+                "evidencia": {"cabecera_html": cabeza[:300],
+                              "content_type": ctx.cabecera("content-type")}}
     return None
 
 
@@ -867,8 +869,6 @@ def par_xss_header(ctx):
                                      "cabeceras registradas o mostradas",
                     "evidencia": {"cabecera": cab, "payload": pay}}
     return None
-
-
 @check("PAR-09", "Inyeccion HTML (sin script)", PAR, "medio", activo=True,
        cwe="CWE-79", owasp="A03:2021")
 def par_html_injection(ctx):
@@ -887,6 +887,18 @@ def par_html_injection(ctx):
                     "parametro": nombre,
                     "evidencia": {"payload": pay}}
     return None
+def _ssti_evaluado(ctx, nombre, envoltura):
+    """Comprueba SSTI con DOS expresiones distintas. Con una sola basta
+    una coincidencia casual en el HTML (p. ej. una version "2.4.49")
+    para dar un falso positivo."""
+    for expresion, esperado in (("7*7", "49"), ("123*456", "56088")):
+        pay = envoltura(expresion)
+        u = vulns._sustituir_param(ctx.url, nombre, pay)
+        r = ctx.pedir(u)
+        cuerpo = r.cuerpo or ""
+        if esperado not in cuerpo or pay in cuerpo:
+            return None
+    return pay
 
 
 @check("PAR-10", "SSTI con {{7*7}}", PAR, "critico", activo=True,
@@ -894,21 +906,18 @@ def par_html_injection(ctx):
 def par_ssti_doble(ctx):
     if not _con_parametros(ctx):
         return None
-    pay = "{{7*7}}"
     for nombre, _ in _con_parametros(ctx)[:4]:
-        u = vulns._sustituir_param(ctx.url, nombre, pay)
-        r = ctx.pedir(u)
-        cuerpo = r.cuerpo or ""
-        if "49" in cuerpo and pay not in cuerpo:
-            return {"titulo": "SSTI: '{{7*7}}' se evaluo a 49 en '%s'" % nombre,
-                    "detalle": "La plantilla del servidor evalua la expresion "
-                               "enviada por el usuario",
-                    "recomendacion": "No construir plantillas con entrada del "
-                                     "usuario; usar plantillas estaticas",
+        ultimo = _ssti_evaluado(ctx, nombre,
+                               lambda e: "{{%s}}" % e)
+        if ultimo:
+            return {"titulo": "SSTI evaluado en '%s'" % nombre,
+                    "detalle": "Las expresiones enviadas por el usuario se "
+                               "evaluan en el servidor",
+                    "recomendacion": "No construir plantillas con entrada "
+                                     "del usuario; usar plantillas estaticas",
                     "parametro": nombre,
-                    "evidencia": {"payload": pay,
-                                  "extracto": cuerpo[max(0, cuerpo.find("49") - 80):
-                                                     cuerpo.find("49") + 80][:200]}}
+                    "evidencia": {"payload": ultimo,
+                                  "respuestas": ["49", "56088"]}}
     return None
 
 
@@ -917,42 +926,40 @@ def par_ssti_doble(ctx):
 def par_ssti_dolar(ctx):
     if not _con_parametros(ctx):
         return None
-    pay = "${7*7}"
     for nombre, _ in _con_parametros(ctx)[:4]:
-        u = vulns._sustituir_param(ctx.url, nombre, pay)
-        r = ctx.pedir(u)
-        cuerpo = r.cuerpo or ""
-        if "49" in cuerpo and pay not in cuerpo:
-            return {"titulo": "SSTI: '${7*7}' se evaluo a 49 en '%s'" % nombre,
-                    "detalle": "Motor de plantillas evaluando expresiones del "
-                               "usuario",
-                    "recomendacion": "Plantillas estaticas y escape de la entrada",
+        ultimo = _ssti_evaluado(ctx, nombre,
+                               lambda e: "${%s}" % e)
+        if ultimo:
+            return {"titulo": "SSTI con sintaxis ${} en '%s'" % nombre,
+                    "detalle": "El motor de plantillas evalua las expresiones "
+                               "recibidas del cliente",
+                    "recomendacion": "Plantillas estaticas y escape de la "
+                                     "entrada",
                     "parametro": nombre,
-                    "evidencia": {"payload": pay}}
+                    "evidencia": {"payload": ultimo,
+                                  "respuestas": ["49", "56088"]}}
     return None
-
-
 @check("PAR-12", "Inyeccion CRLF", PAR, "alto", activo=True,
        cwe="CWE-93", owasp="A03:2021")
 def par_crlf(ctx):
     if not _con_parametros(ctx):
         return None
     marca = _marca()
+    pay = "\r\n" + "HunterBug-%s: inyectado" % marca
     for nombre, _ in _con_parametros(ctx)[:4]:
-        pay = "%0d%0aHunterBug-%s: 1" % marca
         u = vulns._sustituir_param(ctx.url, nombre, pay)
         r = ctx.pedir(u)
         if any(k.lower() == "hunterbug-" + marca for k, _ in r.cabeceras):
             return {"titulo": "Inyeccion CRLF en '%s'" % nombre,
-                    "detalle": "Se inyectan cabeceras nuevas en la respuesta",
-                    "recomendacion": "Eliminar CR/LF de los valores que acaban "
+                    "detalle": "Se inyectan cabeceras nuevas en la respuesta a "
+                               "partir de un salto de linea en el parametro",
+                    "recomendacion": "Eliminar CR y LF de los valores que acaban "
                                      "en cabeceras",
                     "parametro": nombre,
-                    "evidencia": {"payload": pay,
-                                  "cabecera_inyectada": "HunterBug-" + marca}}
+                    "evidencia": {"parametro": nombre,
+                                  "cabecera_inyectada": "HunterBug-" + marca,
+                                  "cabeceras": [k for k, _ in r.cabeceras]}}
     return None
-
-
 @check("PAR-13", "Path traversal", PAR, "alto", activo=True,
        cwe="CWE-22", owasp="A01:2021")
 def par_traversal(ctx):
@@ -991,8 +998,6 @@ def par_lfi(ctx):
                     "parametro": nombre,
                     "evidencia": {"payload": pay}}
     return None
-
-
 @check("PAR-15", "Redireccion abierta", PAR, "medio", activo=True,
        cwe="CWE-601", owasp="A01:2021")
 def par_open_redirect(ctx):
@@ -1003,7 +1008,7 @@ def par_open_redirect(ctx):
     for nombre in (interesantes or params)[:4]:
         pay = "https://hunterbug-prueba.invalid/"
         u = vulns._sustituir_param(ctx.url, nombre, pay)
-        r = ctx.pedir(u)
+        r = ctx.pedir(u, seguir=0)
         destino = r.cabecera("location")
         if r.status in (301, 302, 303, 307, 308) and "hunterbug-prueba.invalid" in destino:
             return {"titulo": "Redireccion abierta en '%s'" % nombre,
@@ -1020,27 +1025,46 @@ def par_open_redirect(ctx):
 @check("PAR-16", "SSRF en parametro de URL", PAR, "alto", activo=True,
        cwe="CWE-918", owasp="A10:2021")
 def par_ssrf(ctx):
+    """Solo se reporta si la respuesta delata un fallo de conexion del servidor
+    hacia un destino interno, que es el indicador fiable de SSRF."""
     params = [n for n, _ in _con_parametros(ctx)]
     interesantes = [p for p in params
                     if re.search(r"(url|uri|src|dest|redirect|proxy|fetch|"
                                  r"callback|webhook|feed|host)", p, re.I)]
+    firmas = ("connection refused", "failed to connect", "no route to host",
+              "couldn't connect", "getaddrinfo", "name or service not known",
+              "connection timed out", "econnrefused", "socket error",
+              "failed to open stream")
     for nombre in (interesantes or params)[:3]:
         u = vulns._sustituir_param(ctx.url, nombre, "http://127.0.0.1:1/")
-        t0 = time.time()
         r = ctx.pedir(u, timeout=8)
-        dt = time.time() - t0
-        if r.status and dt < 6 and r.status != 0:
-            return {"titulo": "Posible SSRF en '%s' (verificar)" % nombre,
-                    "detalle": "El servidor proceso una URL a un destino "
-                               "interno en %.2f s y respondio %d; conviene "
-                               "confirmarlo con un colector propio" % (dt, r.status),
-                    "recomendacion": "Validar destinos contra lista blanca y "
-                                     "bloquear rangos internos",
-                    "parametro": nombre,
-                    "evidencia": {"payload": "http://127.0.0.1:1/",
-                                  "status": r.status, "segundos": round(dt, 2)}}
+        cuerpo = (r.cuerpo or "").lower()
+        for f in firmas:
+            if f in cuerpo:
+                return {"titulo": "SSRF en '%s' (el servidor intento conectar)"
+                                  % nombre,
+                        "detalle": "El parametro hace que el servidor realice "
+                                   "la peticion: la respuesta contiene '%s'" % f,
+                        "recomendacion": "Validar destinos contra lista blanca y "
+                                         "bloquear rangos internos",
+                        "parametro": nombre,
+                        "evidencia": {"payload": "http://127.0.0.1:1/",
+                                      "firma": f,
+                                      "extracto": (r.cuerpo or "")[:250]}}
     return None
 
+
+RE_PARAM_RUTA = re.compile(
+    r"(url|uri|src|dest|redirect|redir|next|goto|target|to|out|link|path|file|page|view|callback|return|continue|route|endpoint)", re.I)
+
+
+def _param_no_ruta(ctx):
+    """Primer parametro del objetivo que no controle una ruta o destino.
+    Inyectar operadores NoSQL en esos parametros no es evidencia."""
+    for nombre, _ in _con_parametros(ctx):
+        if not RE_PARAM_RUTA.search(nombre):
+            return nombre
+    return None
 
 @check("PAR-17", "Inyeccion de comandos (indicador)", PAR, "critico",
        activo=True, cwe="CWE-78", owasp="A03:2021")
@@ -1106,47 +1130,47 @@ def par_xpath(ctx):
 @check("PAR-20", "Inyeccion NoSQL ($ne)", PAR, "alto", activo=True,
        cwe="CWE-943", owasp="A03:2021")
 def par_nosql_ne(ctx):
-    if not _con_parametros(ctx):
+    nombre = _param_no_ruta(ctx)
+    if not nombre:
         return None
-    for nombre, _ in _con_parametros(ctx)[:4]:
-        u = vulns._sustituir_param(ctx.url, nombre, "x[$ne]=x")
-        r = ctx.pedir(u)
-        if r.status in (200, 500) and r.status != ctx.r.status:
-            return {"titulo": "Posible inyeccion NoSQL en '%s'" % nombre,
-                    "detalle": "El operador $ne altero la respuesta (%d frente "
-                               "a %d en la base)" % (r.status, ctx.r.status),
-                    "recomendacion": "Convertir los tipos y rechazar objetos en "
-                                     "la entrada",
-                    "parametro": nombre,
-                    "evidencia": {"payload": "x[$ne]=x", "status": r.status,
-                                  "status_base": ctx.r.status}}
+    r = ctx.pedir(vulns._sustituir_param(ctx.url, nombre, "x[$ne]=x"))
+    base = ctx.control()
+    if r.status and base.status and r.status != base.status:
+        return {"titulo": "Posible inyeccion NoSQL en '%s'" % nombre,
+                "detalle": "El operador $ne altero la respuesta (%d frente "
+                           "a %d en el control)" % (r.status, base.status),
+                "recomendacion": "Convertir los tipos y rechazar objetos en "
+                                 "la entrada",
+                "parametro": nombre,
+                "evidencia": {"payload": "x[$ne]=x", "status": r.status,
+                              "status_control": base.status}}
     return None
 
 
 @check("PAR-21", "Inyeccion NoSQL ($gt)", PAR, "alto", activo=True,
        cwe="CWE-943", owasp="A03:2021")
 def par_nosql_gt(ctx):
-    if not _con_parametros(ctx):
+    nombre = _param_no_ruta(ctx)
+    if not nombre:
         return None
-    for nombre, _ in _con_parametros(ctx)[:4]:
-        u = vulns._sustituir_param(ctx.url, nombre, "x[$gt]=")
-        r = ctx.pedir(u)
-        if r.status in (200, 500) and r.status != ctx.r.status:
-            return {"titulo": "Posible inyeccion NoSQL con $gt en '%s'" % nombre,
-                    "detalle": "El operador $gt altero la respuesta",
-                    "recomendacion": "Validar el tipo de los parametros",
-                    "parametro": nombre,
-                    "evidencia": {"payload": "x[$gt]=", "status": r.status}}
+    r = ctx.pedir(vulns._sustituir_param(ctx.url, nombre, "x[$gt]="))
+    base = ctx.control()
+    if r.status and base.status and r.status != base.status:
+        return {"titulo": "Posible inyeccion NoSQL con $gt en '%s'" % nombre,
+                "detalle": "El operador $gt altero la respuesta (%d frente "
+                           "a %d en el control)" % (r.status, base.status),
+                "recomendacion": "Validar el tipo de los parametros",
+                "parametro": nombre,
+                "evidencia": {"payload": "x[$gt]=", "status": r.status,
+                              "status_control": base.status}}
     return None
-
-
 @check("PAR-22", "XML externo (XXE)", PAR, "critico", activo=True,
        cwe="CWE-611", owasp="A05:2021")
 def par_xxe(ctx):
     base = _base(ctx)
     carga = ('<?xml version="1.0"?><!DOCTYPE r [<!ENTITY x SYSTEM '
              '"file:///etc/passwd">]><r>&x;</r>')
-    for ruta in ("/", ctx.ruta):
+    for ruta in ("/", ctx.ruta_base):
         r = ctx.pedir(base + ruta, metodo="POST",
                       cabeceras={"Content-Type": "application/xml"}, cuerpo=carga)
         if re.search(r"root:.*:0:0:", r.cuerpo or ""):
@@ -1170,16 +1194,18 @@ def par_hpp(ctx):
     sep = "&" if "?" in ctx.url else "?"
     u = "%s%s%s=%s&%s=%s" % (ctx.url, sep, nombre, valor, nombre, valor + "x")
     r = ctx.pedir(u)
-    if r.status != ctx.r.status and r.status not in (0,):
+    base = ctx.control()
+    if r.status and base.status and r.status != base.status:
         return {"titulo": "El parametro duplicado cambia la respuesta",
                 "detalle": "Enviar '%s' dos veces altera el comportamiento "
-                           "(%d frente a %d), lo que puede saltarse validaciones"
-                           % (nombre, r.status, ctx.r.status),
+                           "(%d frente a %d en el control), lo que puede "
+                           "saltarse validaciones"
+                           % (nombre, r.status, base.status),
                 "recomendacion": "Rechazar parametros duplicados o normalizar "
                                  "antes de validar",
                 "parametro": nombre,
                 "evidencia": {"status_duplicado": r.status,
-                              "status_base": ctx.r.status}}
+                              "status_control": base.status}}
     return None
 
 
@@ -1188,12 +1214,15 @@ def par_hpp(ctx):
 def par_mass_assignment(ctx):
     base = _base(ctx)
     campos = '{"role":"admin","is_admin":true,"admin":true}'
-    for ruta in (ctx.ruta, "/api/usuario/1", "/api/me"):
+    rutas = (ctx.ruta_base, "/api/perfil", "/api/usuario/1", "/api/me",
+             "/api/usuario")
+    for ruta in rutas:
         r = ctx.pedir(base + ruta, metodo="POST",
                       cabeceras={"Content-Type": "application/json"},
                       cuerpo=campos)
         if r.status in (200, 201) and re.search(
-                r'"(role|is_admin|admin)"\s*:\s*"?admin|true', r.cuerpo or "", re.I):
+                r'"(role|is_admin|admin)"\s*:\s*(?:"admin"|true)',
+                r.cuerpo or "", re.I):
             return {"titulo": "Posible asignacion masiva en %s" % ruta,
                     "detalle": "El servidor acepto campos de privilegio "
                                "enviados por el cliente",
@@ -1236,16 +1265,28 @@ def par_rate_limit(ctx):
 @check("PAR-28", "Enumeracion de usuarios", PAR, "medio", activo=True,
        cwe="CWE-204", owasp="A07:2021")
 def par_enumeracion(ctx):
-    base = _base(ctx)
-    r1 = ctx.pedir(base + "/?usuario=admin")
-    r2 = ctx.pedir(base + "/?usuario=" + _marca(12))
-    if r1.status and r2.status and r1.status != r2.status:
-        return {"titulo": "Respuesta distinta segun el usuario",
-                "detalle": "Un usuario valido devuelve %d y uno inexistente %d"
-                           % (r1.status, r2.status),
-                "recomendacion": "Respuesta generica identica en ambos casos",
-                "evidencia": {"status_valido": r1.status,
-                              "status_invalido": r2.status}}
+    """Prueba valores habituales frente a uno inventado: si la respuesta cambia,
+    el endpoint delata cuales existen."""
+    params = _con_parametros(ctx)
+    if not params:
+        return None
+    nombre, _ = params[0]
+    candidatos = ("admin", "admin@ejemplo.test", "test", "1", "root")
+    malo = _marca(12)
+    r_malo = ctx.pedir(vulns._sustituir_param(ctx.url, nombre, malo))
+    for valor in candidatos:
+        r = ctx.pedir(vulns._sustituir_param(ctx.url, nombre, valor))
+        if r.status and r_malo.status and r.status != r_malo.status:
+            return {"titulo": "Enumeracion de usuarios en '%s'" % nombre,
+                    "detalle": "El valor '%s' devuelve %d y uno inexistente %d, "
+                               "lo que permite descubrir cuentas validas"
+                               % (valor, r.status, r_malo.status),
+                    "recomendacion": "Respuesta generica identica en ambos "
+                                     "casos",
+                    "parametro": nombre,
+                    "evidencia": {"parametro": nombre, "valor_existente": valor,
+                                  "status_existente": r.status,
+                                  "status_inexistente": r_malo.status}}
     return None
 
 
@@ -1266,20 +1307,30 @@ def par_secuencial(ctx):
 @check("PAR-30", "Valor negativo aceptado", PAR, "info", activo=True,
        cwe="CWE-20", owasp="A03:2021")
 def par_negativo(ctx):
+    """Solo se reporta si -1 se trata como un valor valido: misma respuesta que
+    el valor legitimo, no una pagina de error o de vacio."""
     params = _con_parametros(ctx)
+    base_bytes = ctx.r.cuerpo_bytes
     for nombre, valor in params[:4]:
         if not re.fullmatch(r"\d+", valor or ""):
             continue
         u = vulns._sustituir_param(ctx.url, nombre, "-1")
         r = ctx.pedir(u)
-        if r.status == 200 and r.cuerpo_bytes > 0:
-            return {"titulo": "El parametro '%s' acepta valores negativos"
+        base = ctx.control()
+        base_bytes = base.cuerpo_bytes
+        if r.status == base.status and base_bytes > 0 and \
+                abs(r.cuerpo_bytes - base_bytes) <= max(64, base_bytes * 0.2):
+            return {"titulo": "El parametro '%s' trata -1 como valor valido"
                               % nombre,
-                    "detalle": "No se valida el rango; puede alterar calculos "
-                               "o precios",
+                    "detalle": "La respuesta a -1 es practicamente identica a la "
+                               "del valor legitimo (%d frente a %d bytes), senal "
+                               "de que no se valida el rango"
+                               % (r.cuerpo_bytes, base_bytes),
                     "recomendacion": "Validar tipo y rango en el servidor",
                     "parametro": nombre,
-                    "evidencia": {"valor_probado": -1, "status": r.status}}
+                    "evidencia": {"valor_probado": -1, "status": r.status,
+                                  "bytes": r.cuerpo_bytes,
+                                  "bytes_base": base_bytes}}
     return None
 
 
@@ -1306,7 +1357,7 @@ def par_overflow(ctx):
        cwe="CWE-1336", owasp="A03:2021")
 def par_json_injection(ctx):
     base = _base(ctx)
-    r = ctx.pedir(base + ctx.ruta, metodo="POST",
+    r = ctx.pedir(base + ctx.ruta_base, metodo="POST",
                   cabeceras={"Content-Type": "application/json"},
                   cuerpo='{"name":"{{7*7}}","x":"${7*7}"}')
     cuerpo = r.cuerpo or ""
@@ -1324,7 +1375,7 @@ def par_json_injection(ctx):
        cwe="CWE-1321", owasp="A03:2021")
 def par_proto(ctx):
     base = _base(ctx)
-    r = ctx.pedir(base + ctx.ruta, metodo="POST",
+    r = ctx.pedir(base + ctx.ruta_base, metodo="POST",
                   cabeceras={"Content-Type": "application/json"},
                   cuerpo='{"__proto__":{"hunterbug":1},"constructor":{"prototype":{"hb":1}}}')
     if r.status in (200, 201) and "hunterbug" in (r.cuerpo or ""):
@@ -1340,7 +1391,7 @@ def par_proto(ctx):
        cwe="CWE-436", owasp="A03:2021")
 def par_content_type(ctx):
     base = _base(ctx)
-    r = ctx.pedir(base + ctx.ruta, metodo="POST",
+    r = ctx.pedir(base + ctx.ruta_base, metodo="POST",
                   cabeceras={"Content-Type": "text/plain"},
                   cuerpo='{"x":1}')
     if r.status in (200, 201, 202):
@@ -1359,16 +1410,18 @@ def par_suplantacion(ctx):
                        ("X-Rewrite-URL", "/admin"),
                        ("X-Forwarded-Host", "hunterbug.invalid")):
         r = ctx.pedir(ctx.url, cabeceras={cab: valor})
-        if r.status != ctx.r.status and r.status in (200, 302):
+        base = ctx.control()
+        if r.status and base.status and r.status != base.status and \
+                r.status in (200, 302):
             return {"titulo": "La cabecera %s altera la respuesta" % cab,
-                    "detalle": "Respondio %d frente a %d en la base; puede "
-                               "permitir saltarse controles de acceso" %
-                               (r.status, ctx.r.status),
+                    "detalle": "Respondio %d frente a %d en el control; "
+                               "puede permitir saltarse controles de acceso" %
+                               (r.status, base.status),
                     "recomendacion": "No confiar en cabeceras de proxy sin "
                                      "validar el origen",
                     "evidencia": {"cabecera": cab, "valor": valor,
                                   "status": r.status,
-                                  "status_base": ctx.r.status}}
+                                  "status_control": base.status}}
     return None
 
 
@@ -1390,7 +1443,7 @@ def par_js_context(ctx):
     if not _con_parametros(ctx):
         return None
     marca = _marca()
-    pay = "'+%s+'" % marca
+    pay = "'+" + "%s+" % marca + "'"
     for nombre, _ in _con_parametros(ctx)[:4]:
         u = vulns._sustituir_param(ctx.url, nombre, pay)
         r = ctx.pedir(u)
@@ -1404,15 +1457,13 @@ def par_js_context(ctx):
                     "parametro": nombre,
                     "evidencia": {"payload": pay}}
     return None
-
-
 @check("PAR-38", "Redireccion a esquema peligroso", PAR, "medio", activo=True,
        cwe="CWE-601", owasp="A01:2021")
 def par_esquema_peligroso(ctx):
     params = [n for n, _ in _con_parametros(ctx)]
     for nombre in params[:4]:
         u = vulns._sustituir_param(ctx.url, nombre, "javascript:alert(1)")
-        r = ctx.pedir(u)
+        r = ctx.pedir(u, seguir=0)
         if "javascript:alert(1)" in (r.cabecera("location") or ""):
             return {"titulo": "El parametro acepta esquemas peligrosos (%s)"
                               % nombre,
@@ -1434,7 +1485,9 @@ def par_fichero(ctx):
     for nombre in interesantes[:3]:
         u = vulns._sustituir_param(ctx.url, nombre, "/etc/hostname")
         r = ctx.pedir(u)
-        if r.status == 200 and r.cuerpo_bytes > 0 and r.status != ctx.r.status:
+        base = ctx.control()
+        if r.status == 200 and r.cuerpo_bytes > 0 and \
+                base.status and r.status != base.status:
             return {"titulo": "Parametro de fichero sin validar (%s)" % nombre,
                     "detalle": "Acepta una ruta absoluta del sistema",
                     "recomendacion": "Lista blanca de ficheros permitidos",

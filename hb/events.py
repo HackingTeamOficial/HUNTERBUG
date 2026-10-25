@@ -18,6 +18,8 @@ GRAFO = "grafo"          # {"accion": "reiniciar"|"nodo"|"arista", ...}
 HTTP = "http"            # {"modulo", "peticion", "respuesta", "status", "url"}
 ESTADO = "estado"        # {"modulo", "estado"}
 FIN = "fin"              # {"modulo"}
+METRICAS = "metricas"    # {"puntuacion": {...}, "filas": [[k, v], ...]}
+CATALOGO = "catalogo"    # {"id", "nombre", "estado", "categoria", "severidad", "cwe"}
 
 
 class Bus:
@@ -54,6 +56,12 @@ class Bus:
         return self.publicar(HTTP, modulo=modulo, url=url, status=status,
                              peticion=peticion, respuesta=respuesta, ms=ms,
                              tls=tls)
+
+    def metricas(self, puntuacion, filas):
+        return self.publicar(METRICAS, puntuacion=puntuacion, filas=filas)
+
+    def catalogo(self, **datos):
+        return self.publicar(CATALOGO, **datos)
 
     def drenar(self, maximo=400):
         """Saca eventos pendientes sin bloquear. Devuelve una lista."""

@@ -81,6 +81,7 @@ RUTAS_SONDA = [
     "/server-status", "/phpinfo.php", "/actuator", "/actuator/env",
     "/debug", "/console", "/swagger-ui.html", "/api-docs", "/graphql",
     "/backup.zip", "/wp-login.php", "/admin/", "/.well-known/change-password",
+    "/.env.local", "/.htpasswd", "/config.php.bak", "/telescope", "/_debug_toolbar/",
 ]
 
 CABECERAS_SONDA = ["Server", "X-Powered-By", "Via", "X-Backend-Server"]
@@ -107,7 +108,7 @@ class Ctx:
         self.cabeceras = {k.lower(): v for k, v in self.r.cabeceras}
         self.cuerpo = self.r.cuerpo or ""
         self.cuerpo_min = self.cuerpo.lower()
-        self.esquema, self.host, self.puerto, self.ruta = net._host_puerto(url)
+        self.esquema, self.host, self.puerto, self.ruta_base = net._host_puerto(url)
         self.cookies = self._parsear_cookies()
         self._metodos = None
         self._rutas = {}
@@ -132,14 +133,23 @@ class Ctx:
                           "atributos": attrs, "crudo": v})
         return lista
 
-    def pedir(self, url, metodo="GET", cabeceras=None, cuerpo=None, timeout=12):
+    def pedir(self, url, metodo="GET", cabeceras=None, cuerpo=None, timeout=12,
+              seguir=1):
+        """Peticion cruda. `seguir` es el numero de redirecciones a seguir,
+        igual que la respuesta base del contexto, para que las comparaciones
+        sean homogeneas."""
         r = net.peticion_http(url, metodo=metodo, cabeceras=cabeceras,
-                              cuerpo=cuerpo, timeout=timeout)
+                              cuerpo=cuerpo, timeout=timeout, seguir=seguir)
         self.peticiones += 1
         self.bytes_recibidos += r.cuerpo_bytes
         if self.pausa:
             time.sleep(self.pausa)
         return r
+
+    def control(self):
+        """Peticion de control: igual que la base pero hecha ahora, para
+        comparar de forma justa sin mezclar respuestas crudas y seguidas."""
+        return self.pedir(self.url)
 
     def cabecera(self, nombre, defecto=""):
         return self.cabeceras.get(nombre.lower(), defecto)
@@ -192,22 +202,38 @@ class Ctx:
 # --------------------------------------------------------------------------
 
 def ejecutar(url, cabeceras_extra=None, autorizado=False, log=None,
-             pausa=0.15, solo_ids=None, omitir_ids=None):
+             pausa=0.15, solo_ids=None, omitir_ids=None, debe_cancelar=None,
+             progreso=None):
     """Ejecuta el catalogo completo sobre una URL.
 
-    Devuelve (hallazgos, resultados) donde `resultados` incluye el estado de
-    TODOS los chequeos, pasen o no, para poder mostrar cobertura y metricas.
+    Devuelve (hallazgos, resultados, ctx) donde `resultados` incluye el estado
+    de TODOS los chequeos, pasen o no, para poder mostrar cobertura y metricas.
+
+    `debe_cancelar` es un callable opcional que, si devuelve True, detiene la
+    ejecucion; `progreso` recibe (hechos, total, id_del_chequeo) cada pocos
+    chequeos para poder dibujar una barra.
     """
     ctx = Ctx(url, cabeceras_extra=cabeceras_extra, autorizado=autorizado,
               log=log, pausa=pausa)
     hallazgos, resultados = [], []
     t0 = time.time()
 
-    for c in CATALOGO:
-        if solo_ids and c["id"] not in solo_ids:
+    seleccionados = [c for c in CATALOGO
+                     if (not solo_ids or c["id"] in solo_ids)
+                     and not (omitir_ids and c["id"] in omitir_ids)]
+    total = len(seleccionados)
+
+    for indice, c in enumerate(seleccionados):
+        if debe_cancelar is not None and debe_cancelar():
+            resultados.append({"id": c["id"], "nombre": c["nombre"],
+                               "categoria": c["categoria"],
+                               "severidad": c["severidad"], "estado": "cancelado",
+                               "detalle": "cancelado por el usuario",
+                               "cwe": c["cwe"], "owasp": c["owasp"],
+                               "activo": c["activo"]})
             continue
-        if omitir_ids and c["id"] in omitir_ids:
-            continue
+        if progreso is not None and (indice % 10 == 0 or indice == total - 1):
+            progreso(indice + 1, total, c["id"])
         if c["activo"] and not autorizado:
             resultados.append({"id": c["id"], "nombre": c["nombre"],
                                "categoria": c["categoria"],
@@ -250,6 +276,7 @@ def ejecutar(url, cabeceras_extra=None, autorizado=False, log=None,
                                "categoria": c["categoria"],
                                "severidad": h["severidad"], "estado": "fallo",
                                "detalle": str(h.get("detalle", ""))[:200],
+                               "hallazgo": h,
                                "cwe": c["cwe"], "owasp": c["owasp"],
                                "activo": c["activo"]})
         else:

@@ -664,10 +664,6 @@ def cors_wildcard(ctx):
 @check("CRS-02", "CORS refleja el origen recibido", CRS, "alto",
        cwe="CWE-942", owasp="A05:2021")
 def cors_reflejo(ctx):
-    acao = ctx.cabecera("access-control-allow-origin")
-    if acao and acao != "*" and acao.rstrip("/").lower() in \
-            ctx.url.lower() and False:
-        return None
     # comprobacion real: pedir con un Origin propio y ver si lo devuelve
     if not ctx.autorizado:
         return None
@@ -687,16 +683,24 @@ def cors_reflejo(ctx):
 @check("CRS-03", "CORS refleja origen con credenciales", CRS, "critico",
        cwe="CWE-942", owasp="A05:2021")
 def cors_credenciales(ctx):
+    """Prueba activa: con Allow-Credentials el navegador manda cookies, asi que
+    reflejar el Origin convierte la API en legible desde cualquier web."""
     if not ctx.autorizado:
         return None
-    acao = ctx.cabecera("access-control-allow-origin")
-    acac = ctx.cabecera("access-control-allow-credentials").lower()
-    if acao and acao != "*" and acac == "true":
-        return {"titulo": "CORS con credenciales y origen no restringido",
-                "detalle": "Con Allow-Credentials true cualquier origen "
-                           "reflejado puede leer datos autenticados",
-                "recomendacion": "Lista blanca estricta y Vary: Origin",
-                "evidencia": {"acao": acao, "acac": acac}}
+    origen = "https://hunterbug-prueba.invalid"
+    r = ctx.pedir(ctx.url, cabeceras={"Origin": origen})
+    acao = r.cabecera("access-control-allow-origin")
+    acac = r.cabecera("access-control-allow-credentials").lower()
+    if acao and acao != "*" and acac == "true" and \
+            acao.rstrip("/") == origen:
+        return {"titulo": "CORS con credenciales y origen reflejado",
+                "detalle": "Con Allow-Credentials true y el Origin reflejado, "
+                           "cualquier web puede leer respuestas con la sesion "
+                           "del usuario",
+                "recomendacion": "Lista blanca estricta de origenes y "
+                                 "Vary: Origin",
+                "evidencia": {"origin_enviado": origen, "acao": acao,
+                              "acac": acac}}
     return None
 
 
@@ -1021,7 +1025,7 @@ _tls_falla("TLS-13", "Emisor desconocido", "info",
            lambda i: {"emisor": i["cert"].get("emisor")}
            if not i["cert"].get("emisor") else None, cwe="CWE-295")
 
-_tls_falla("TLS-14", "Sin suj eto legible en el certificado", "info",
+_tls_falla("TLS-14", "Sin sujeto legible en el certificado", "info",
            "No se pudo extraer el nombre del titular",
            "Revisar el certificado",
            lambda i: {"sujeto": i["cert"].get("sujeto")}
