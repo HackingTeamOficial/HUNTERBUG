@@ -25,13 +25,17 @@ matplotlib.use("TkAgg")
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-from hb import ai, cve, events, graph, net, vulns
+from hb import ai, cve, events, graph, net, vulns, checks, metrics
+from hb import informe as hb_informe
+from hb import informe_intercambio as hb_intercambio
+from hb import pdfmin as hb_pdfmin
 from hb.ui_widgets import Tabla, VisorHTTP, LienzoGrafo, VentanaModulo
 
 TEMAS = {
     "Dark": {
         'bg': '#050505', 'bg2': '#0a0a0a', 'panel': '#1a1a1a', 'panel2': '#222222',
-        'green': '#00ff41', 'green_dim': '#00cc29', 'blue': '#3399ff',
+        'green': '#00ff41', 'green_dim': '#00cc29', 'green_hover': '#33ff66',
+        'blue': '#3399ff', 'yellow': '#ffdd55', 'orange': '#ff9944',
         'text': '#e2e8f0', 'text2': '#94a3b8', 'text3': '#64748b',
         'red': '#ff3333', 'cyan': '#00d4ff',
         'bar': '#0d0d0d', 'btn': '#1f1f1f', 'btn_hover': '#2a2a2a',
@@ -39,7 +43,8 @@ TEMAS = {
     },
     "Light": {
         'bg': '#f5f5f5', 'bg2': '#ffffff', 'panel': '#e8e8e8', 'panel2': '#dcdcdc',
-        'green': '#0a7d2c', 'green_dim': '#086122', 'blue': '#1d4ed8',
+        'green': '#0a7d2c', 'green_dim': '#086122', 'green_hover': '#0d9938',
+        'blue': '#1d4ed8', 'yellow': '#9a7b00', 'orange': '#b35900',
         'text': '#111111', 'text2': '#444444', 'text3': '#777777',
         'red': '#c00000', 'cyan': '#0055aa',
         'bar': '#e0e0e0', 'btn': '#d5d5d5', 'btn_hover': '#c5c5c5',
@@ -49,6 +54,43 @@ TEMAS = {
 
 C = dict(TEMAS["Dark"])
 RUTA_BASE = os.path.dirname(os.path.abspath(__file__))
+
+FORMATOS_INFORME = [
+    ("html", "HTML",
+     "Informe completo con toda la evidencia, listo para abrir o imprimir.",
+     "Cualquier navegador"),
+    ("pdf", "PDF",
+     "El mismo informe en PDF, para enviar o archivar.",
+     "Adobe, navegador, Word"),
+    ("json", "JSON",
+     "Todos los datos de la evaluacion en crudo.",
+     "Scripts, automatizacion"),
+    ("markdown", "Markdown",
+     "Texto plano para pegar en el reporte o en una wiki.",
+     "HackerOne, Bugcrowd, Obsidian"),
+    ("csv", "CSV",
+     "Una fila por hallazgo, con la evidencia aplanada.",
+     "Excel, Google Sheets"),
+    ("har", "HAR 1.2",
+     "Trafico HTTP capturado, con peticiones y respuestas en bruto.",
+     "OWASP ZAP (Importar > Import HAR), DevTools, Burp con extension"),
+    ("sarif", "SARIF 2.1.0",
+     "Formato estandar de resultados de analisis de seguridad.",
+     "GitHub/GitLab/Azure code scanning, add-on SARIF de ZAP"),
+    ("burp", "Burp XML",
+     "El mismo XML que exporta Burp Suite con sus issues.",
+     "Invicti, Metasploit, Dradis, Burp Pro"),
+    ("zap", "ZAP XML",
+     "El informe XML clasico de OWASP ZAP.",
+     "Lectores de informes de ZAP"),
+]
+
+# extension real de cada formato (el Markdown va en .md, no en .markdown)
+EXTENSION_INFORME = {
+    "html": "html", "pdf": "pdf", "json": "json", "markdown": "md",
+    "csv": "csv", "har": "har", "sarif": "sarif", "burp": "xml",
+    "zap": "xml",
+}
 
 MODULOS = [
     ("dns",     "DNS",              "Registros A, AAAA, MX, TXT, NS, SOA, CAA", False),
@@ -60,6 +102,7 @@ MODULOS = [
     ("xss",     "XSS",              "Cross-site scripting reflejado",          True),
     ("idor",    "IDOR",             "Acceso a objetos ajenos",                 True),
     ("bola",    "BOLA",             "Autorizacion por objeto en API",          True),
+    ("catalogo", "Catalogo",        "Motor completo de 203 chequeos",           True),
 ]
 
 PESTANAS = [
@@ -67,6 +110,8 @@ PESTANAS = [
     ("recon", "Reconocimiento"),
     ("http",  "HTTP"),
     ("vulns", "Vulnerabilidades"),
+    ("catalogo", "Catalogo"),
+    ("informe", "Informe"),
     ("cve",   "CVE"),
     ("grafo", "Grafo / IA"),
     ("log",   "Registro"),
@@ -78,6 +123,33 @@ def dir_datos():
     if getattr(sys, "frozen", False):
         return os.path.dirname(os.path.abspath(sys.executable))
     return RUTA_BASE
+
+
+def dir_informes():
+    """Carpeta donde se guardan los informes generados."""
+    d = os.path.join(dir_datos(), "informes")
+    if not os.path.isdir(d):
+        try:
+            os.makedirs(d)
+        except OSError:
+            return dir_datos()
+    return d
+
+
+def abrir_carpeta(ruta):
+    """Abre una carpeta en el explorador del sistema."""
+    try:
+        if sys.platform.startswith("win"):
+            os.startfile(ruta)
+        elif sys.platform == "darwin":
+            import subprocess
+            subprocess.Popen(["open", ruta])
+        else:
+            import subprocess
+            subprocess.Popen(["xdg-open", ruta])
+        return True
+    except Exception:
+        return False
 
 
 def ruta_recurso(rel):
@@ -170,6 +242,9 @@ class HunterBugGUI(ctk.CTk):
         self.total_modulos = len(MODULOS)
         self.ultimo_http = None
         self.analisis_ia = ""
+        self.catalogo_resultados = {}
+        self.puntuacion = None
+        self._catalogo_pendiente = 0
 
         self.modo = self.leer_tema_guardado()
         C.update(TEMAS[self.modo])
@@ -263,7 +338,8 @@ class HunterBugGUI(ctk.CTk):
                 pass
         for txt in (getattr(self, "console", None), getattr(self, "txt_log", None),
                     getattr(self, "txt_ia", None), getattr(self, "txt_detalle", None),
-                    getattr(self, "txt_vulns", None)):
+                    getattr(self, "txt_vulns", None),
+                    getattr(self, "txt_informe", None)):
             if txt is None:
                 continue
             try:
@@ -283,6 +359,17 @@ class HunterBugGUI(ctk.CTk):
             self.canvas.draw()
         except Exception:
             pass
+        # grafico de puntuacion por categoria (pestana del catalogo)
+        if getattr(self, "fig_cat", None) is not None:
+            try:
+                self.fig_cat.patch.set_facecolor(C['plot_bg'])
+                self.ax_cat.set_facecolor(C['plot_bg'])
+                self.ax_cat.tick_params(colors=C['text2'], labelsize=6)
+                for sp in self.ax_cat.spines.values():
+                    sp.set_color(C['grid'])
+                self.canvas_cat.draw()
+            except Exception:
+                pass
 
     def crear_fondo_canvas(self):
         self.bg_canvas = ctk.CTkCanvas(self, width=1400, height=900,
@@ -589,6 +676,8 @@ class HunterBugGUI(ctk.CTk):
         self.construir_recon()
         self.construir_http()
         self.construir_vulns()
+        self.construir_catalogo()
+        self.construir_informe()
         self.construir_cve()
         self.construir_grafo()
         self.construir_log()
@@ -847,6 +936,552 @@ class HunterBugGUI(ctk.CTk):
         self.txt_vulns.pack(fill="both", expand=True, padx=8, pady=(0, 8))
         self.txt_vulns.configure(state="disabled")
 
+    # ---------------------------------------------------- pestana: catalogo
+    def construir_catalogo(self):
+        """Pestana del motor de 203 chequeos: estado de cada uno, puntuacion
+        de seguridad y metricas de la evaluacion."""
+        m = self.marcos["catalogo"]
+
+        sup = self.reg(ctk.CTkFrame(m, corner_radius=0), fg_color='panel')
+        sup.pack(fill="x", padx=12, pady=(12, 6))
+        self.reg(ctk.CTkLabel(sup, text="MOTOR DE 203 CHEQUEOS DE SEGURIDAD",
+                              font=ctk.CTkFont(family="Consolas", size=10,
+                                               weight="bold")),
+                 fg_color='panel', text_color='green').pack(anchor="w")
+
+        # --- puntuacion y metricas
+        marc = self.reg(ctk.CTkFrame(m, corner_radius=8), fg_color='bg2')
+        marc.pack(fill="x", padx=12, pady=(0, 6))
+        izq = self.reg(ctk.CTkFrame(marc, corner_radius=0), fg_color='bg2')
+        izq.pack(side="left", fill="both", expand=True, padx=10, pady=8)
+        self.lbl_puntuacion = self.reg(
+            ctk.CTkLabel(izq, text="-- / 100",
+                         font=ctk.CTkFont(family="Consolas", size=26,
+                                          weight="bold")),
+            fg_color='bg2', text_color='text')
+        self.lbl_puntuacion.pack(anchor="w")
+        self.lbl_letra = self.reg(
+            ctk.CTkLabel(izq, text="Sin evaluar",
+                         font=ctk.CTkFont(family="Consolas", size=10,
+                                          weight="bold")),
+            fg_color='bg2', text_color='text2')
+        self.lbl_letra.pack(anchor="w")
+        self.barra_puntuacion = self.reg(ctk.CTkProgressBar(izq, height=12),
+                                         fg_color='bg', progress_color='green')
+        self.barra_puntuacion.set(0)
+        self.barra_puntuacion.pack(fill="x", pady=(8, 4))
+        self.lbl_metricas = self.reg(
+            ctk.CTkLabel(izq, text="Ejecuta el catalogo para ver metricas.",
+                         font=ctk.CTkFont(family="Consolas", size=9)),
+            fg_color='bg2', text_color='text2', justify="left")
+        self.lbl_metricas.pack(anchor="w")
+
+        # --- grafico por categoria
+        der = self.reg(ctk.CTkFrame(marc, corner_radius=8), fg_color='bg2')
+        der.pack(side="right", fill="both", padx=(0, 10), pady=8)
+        self.reg(ctk.CTkLabel(der, text="PUNTUACION POR CATEGORIA",
+                              font=ctk.CTkFont(family="Consolas", size=9,
+                                               weight="bold")),
+                 fg_color='bg2', text_color='green').pack(anchor="w", padx=8,
+                                                          pady=(8, 0))
+        self.fig_cat = Figure(figsize=(4.2, 2.1), dpi=100)
+        self.ax_cat = self.fig_cat.add_subplot(111)
+        self.canvas_cat = FigureCanvasTkAgg(self.fig_cat, der)
+        self.canvas_cat.get_tk_widget().pack(fill="both", expand=True,
+                                             padx=8, pady=(0, 8))
+
+        # --- filtros
+        filt = self.reg(ctk.CTkFrame(m, corner_radius=8), fg_color='bg2')
+        filt.pack(fill="x", padx=12, pady=(0, 6))
+        self.reg(ctk.CTkLabel(filt, text="Categoria",
+                              font=ctk.CTkFont(family="Consolas", size=8,
+                                               weight="bold")),
+                 fg_color='bg2', text_color='text2').pack(side="left", padx=(8, 2))
+        self.combo_cat = self.reg(
+            ctk.CTkComboBox(filt, width=150, state="readonly",
+                            font=ctk.CTkFont(family="Consolas", size=9)),
+            fg_color='bg', text_color='text', border_color='text3')
+        self.combo_cat.pack(side="left", padx=(0, 10))
+        self.reg(ctk.CTkLabel(filt, text="Severidad",
+                              font=ctk.CTkFont(family="Consolas", size=8,
+                                               weight="bold")),
+                 fg_color='bg2', text_color='text2').pack(side="left", padx=(0, 2))
+        self.combo_sev = self.reg(
+            ctk.CTkComboBox(filt, width=110, state="readonly",
+                            font=ctk.CTkFont(family="Consolas", size=9)),
+            fg_color='bg', text_color='text', border_color='text3')
+        self.combo_sev.pack(side="left", padx=(0, 10))
+        self.btn_catalogo = self.reg(
+            ctk.CTkButton(filt, text="EJECUTAR CATALOGO", width=170, height=28,
+                          font=ctk.CTkFont(family="Consolas", size=9,
+                                           weight="bold"),
+                          command=self.ejecutar_evaluacion),
+            fg_color='green', hover_color='green_hover', text_color='bg')
+        self.btn_catalogo.pack(side="left", padx=(6, 0))
+        self.btn_csv = self.reg(
+            ctk.CTkButton(filt, text="EXPORTAR CSV", width=130, height=28,
+                          font=ctk.CTkFont(family="Consolas", size=9,
+                                           weight="bold"),
+                          command=self.exportar_catalogo),
+            fg_color='btn', hover_color='btn_hover', text_color='text2')
+        self.btn_csv.pack(side="left", padx=(6, 0))
+
+        # --- tabla de chequeos
+        cuerpo = self.reg(ctk.CTkFrame(m, corner_radius=0), fg_color='panel')
+        cuerpo.pack(fill="both", expand=True, padx=12, pady=(0, 12))
+        self.tablas["catalogo"] = Tabla(
+            cuerpo, ["ID", "Chequeo", "Categoria", "Severidad", "Estado", "CWE"],
+            [70, 400, 110, 80, 100, 90], alto=20)
+        self.tablas["catalogo"].pack(fill="both", expand=True, padx=6, pady=6)
+        self.tablas["catalogo"].al_seleccionar(self.ver_chequeo_catalogo)
+
+        # --- rellenar filtros y tabla
+        cats = ["Todas"] + [n for _, n in checks.CATEGORIAS]
+        self.combo_cat.configure(values=cats)
+        self.combo_cat.set("Todas")
+        sevs = ["Todas", "critico", "alto", "medio", "bajo", "info"]
+        self.combo_sev.configure(values=sevs)
+        self.combo_sev.set("Todas")
+        self.combo_cat.configure(command=lambda _v: self.filtrar_catalogo())
+        self.combo_sev.configure(command=lambda _v: self.filtrar_catalogo())
+        self.catalogo_resultados = {}
+        self.poblar_catalogo()
+
+    def poblar_catalogo(self):
+        """Carga los 203 chequeos en la tabla, en estado pendiente."""
+        t = self.tablas["catalogo"]
+        t.limpiar()
+        for c in checks.CATALOGO:
+            t.agregar([c["id"], c["nombre"], c["categoria"],
+                       c["severidad"].upper(), "PENDIENTE", c["cwe"] or "-"],
+                      etiqueta="info")
+
+    def filtrar_catalogo(self):
+        cat = self.combo_cat.get()
+        sev = self.combo_sev.get()
+        t = self.tablas["catalogo"]
+        t.limpiar()
+        for c in checks.CATALOGO:
+            if cat != "Todas" and c["categoria"] != cat.lower():
+                continue
+            if sev != "Todas" and c["severidad"] != sev:
+                continue
+            estado = self.catalogo_resultados.get(c["id"], {}).get("estado", "PENDIENTE")
+            t.agregar([c["id"], c["nombre"], c["categoria"],
+                       c["severidad"].upper(), estado, c["cwe"] or "-"],
+                      etiqueta=self._etiqueta_estado(estado))
+
+    @staticmethod
+    def _etiqueta_estado(estado):
+        return {"fallo": "critico", "ok": "ok", "omitido": "bajo",
+                "error": "alto", "cancelado": "medio",
+                "PENDIENTE": "info"}.get(estado, "info")
+
+    def ver_chequeo_catalogo(self, valores):
+        if not valores:
+            return
+        cid = valores[0]
+        c = checks.por_id(cid)
+        if not c:
+            return
+        r = self.catalogo_resultados.get(cid, {})
+        lineas = ["CHEQUEO %s" % cid, "Nombre: %s" % c["nombre"],
+                  "Categoria: %s | Severidad: %s" % (c["categoria"],
+                                                    c["severidad"]),
+                  "Activo: %s | Solo HTTPS: %s" % (c["activo"], c["solo_https"]),
+                  "CWE: %s | OWASP: %s" % (c["cwe"] or "-", c["owasp"] or "-")]
+        if r.get("hallazgo"):
+            h = r["hallazgo"]
+            lineas += ["", "HALLAZGO:", str(h.get("titulo", "")),
+                       str(h.get("detalle", ""))[:600],
+                       "", "Evidencia:"]
+            ev = h.get("evidencia") or {}
+            for k, v in list(ev.items())[:12]:
+                lineas.append("  %s: %s" % (k, str(v)[:180]))
+        elif r.get("detalle"):
+            lineas += ["", "Detalle: %s" % r["detalle"]]
+        self.fijar_texto(self.txt_detalle, "\n".join(lineas))
+
+    def exportar_catalogo(self):
+        """Guarda el resultado del catalogo en CSV."""
+        if not self.catalogo_resultados:
+            messagebox.showinfo("Catálogo",
+                                "Todavía no hay resultados. Ejecuta el catálogo.")
+            return
+        ruta = filedialog.asksaveasfilename(
+            defaultextension=".csv", filetypes=[("CSV", "*.csv")],
+            initialfile="hunterbug_catalogo.csv")
+        if not ruta:
+            return
+        try:
+            import csv
+            with open(ruta, "w", newline="", encoding="utf-8") as f:
+                w = csv.writer(f)
+                w.writerow(["id", "chequeo", "categoria", "severidad", "estado",
+                            "cwe", "owasp", "titulo", "detalle"])
+                for c in checks.CATALOGO:
+                    r = self.catalogo_resultados.get(c["id"], {})
+                    h = r.get("hallazgo") or {}
+                    w.writerow([c["id"], c["nombre"], c["categoria"],
+                                c["severidad"], r.get("estado", "PENDIENTE"),
+                                c["cwe"], c["owasp"],
+                                h.get("titulo", ""), h.get("detalle", "")])
+            messagebox.showinfo("Catálogo", "CSV guardado en:\n%s" % ruta)
+        except Exception as e:
+            messagebox.showerror("Error", "No se pudo guardar: %s" % e)
+
+    def pintar_metricas(self, p, filas):
+        self.lbl_puntuacion.configure(text="%s / 100" % p["puntos"])
+        color = {'A': 'green', 'B': 'green', 'C': 'yellow', 'D': 'yellow',
+                 'E': 'orange', 'F': 'red'}.get(p["letra"], 'text')
+        self.lbl_puntuacion.configure(text_color=C.get(color, C['text']))
+        self.lbl_letra.configure(
+            text="Calificacion %s (%s)" % (p["letra"], p["descripcion"]),
+            text_color=C.get(color, C['text2']))
+        self.barra_puntuacion.set(p["puntos"] / 100.0)
+        self.barra_puntuacion.configure(
+            progress_color=C.get(color, C['green']))
+
+        resumen = ["Cobertura: %d de %d chequeos (%.1f%%)"
+                   % (p["ejecutados"],
+                      p["ejecutados"] + p["estados"].get("omitido", 0)
+                      + p["estados"].get("error", 0) + p["estados"].get("cancelado", 0),
+                      p["cobertura"])]
+        resumen.append("Fallos: " + ", ".join(
+            "%s=%d" % (s, p["por_severidad"].get(s, 0))
+            for s in ("critico", "alto", "medio", "bajo", "info")))
+        for nombre, valor in filas:
+            if nombre.startswith(("Peticiones", "Bytes", "Tiempo total",
+                                  "Ritmo", "Respuesta · status",
+                                  "Respuesta · ip")):
+                resumen.append("%s: %s" % (nombre, valor))
+        self.lbl_metricas.configure(text="\n".join(resumen))
+
+        # grafico por categoria
+        self.ax_cat.clear()
+        cats = [c for c in p["categorias"]]
+        if cats:
+            nombres = [c["categoria"][:14] for c in cats]
+            valores = [c["puntos"] for c in cats]
+            colores = ['#ff5555' if v < 40 else '#ff9944' if v < 70
+                       else '#66ddaa' for v in valores]
+            self.ax_cat.barh(nombres, valores, color=colores)
+            self.ax_cat.set_xlim(0, 100)
+            self.ax_cat.set_xlabel("puntos", fontsize=7)
+            self.ax_cat.tick_params(labelsize=6)
+            for i, v in enumerate(valores):
+                self.ax_cat.text(v + 1, i, "%.0f" % v, fontsize=6, va="center")
+        self.fig_cat.tight_layout()
+        self.canvas_cat.draw()
+
+    # ----------------------------------------------------- pestana: informe
+    def construir_informe(self):
+        """Pestana para descargar el informe de la evaluacion en todos los
+        formatos: HTML y PDF con la evidencia completa, y los formatos de
+        intercambio (HAR, SARIF, Burp, ZAP) para otras herramientas."""
+        m = self.marcos["informe"]
+
+        sup = self.reg(ctk.CTkFrame(m, corner_radius=0), fg_color='panel')
+        sup.pack(fill="x", padx=12, pady=(12, 6))
+        self.reg(ctk.CTkLabel(sup, text="INFORME DE LA EVALUACION",
+                              font=ctk.CTkFont(family="Consolas", size=10,
+                                               weight="bold")),
+                 fg_color='panel', text_color='green').pack(anchor="w")
+        self.lbl_informe_estado = self.reg(
+            ctk.CTkLabel(sup, text="Sin datos todavia. Ejecuta una evaluacion "
+                                   "y vuelve aqui para descargar el informe.",
+                         font=ctk.CTkFont(family="Consolas", size=9)),
+            fg_color='panel', text_color='text2', justify="left")
+        self.lbl_informe_estado.pack(anchor="w", pady=(3, 0))
+
+        acciones = self.reg(ctk.CTkFrame(m, corner_radius=8), fg_color='bg2')
+        acciones.pack(fill="x", padx=12, pady=(0, 6))
+        self.btn_informe_todos = self.reg(
+            ctk.CTkButton(acciones, text="GENERAR TODOS LOS FORMATOS",
+                          width=240, height=30,
+                          font=ctk.CTkFont(family="Consolas", size=9,
+                                           weight="bold"),
+                          command=self.generar_todos_los_informes),
+            fg_color='green', hover_color='green_hover', text_color='bg')
+        self.btn_informe_todos.pack(side="left", padx=(8, 6), pady=8)
+        self.reg(ctk.CTkButton(acciones, text="ABRIR CARPETA DE INFORMES",
+                               width=200, height=30,
+                               font=ctk.CTkFont(family="Consolas", size=9,
+                                                weight="bold"),
+                               command=lambda: abrir_carpeta(dir_informes())),
+                 fg_color='btn', hover_color='btn_hover',
+                 text_color='text2').pack(side="left", padx=(0, 6), pady=8)
+        self.lbl_informe_dir = self.reg(
+            ctk.CTkLabel(acciones, text=dir_informes(),
+                         font=ctk.CTkFont(family="Consolas", size=8)),
+            fg_color='bg2', text_color='text3')
+        self.lbl_informe_dir.pack(side="left", padx=(6, 0))
+
+        cuerpo = self.reg(ctk.CTkFrame(m, corner_radius=0), fg_color='panel')
+        cuerpo.pack(fill="both", expand=True, padx=12, pady=(0, 12))
+
+        izq = self.reg(ctk.CTkScrollableFrame(cuerpo, corner_radius=8),
+                       fg_color='bg2')
+        izq.pack(side="left", fill="both", expand=True, padx=(0, 8))
+        self.reg(ctk.CTkLabel(izq, text="FORMATOS DISPONIBLES",
+                              font=ctk.CTkFont(family="Consolas", size=10,
+                                               weight="bold")),
+                 fg_color='bg2', text_color='green').pack(anchor="w",
+                                                          padx=8, pady=(8, 4))
+
+        self.btn_formato = {}
+        for clave, nombre, desc, lector in FORMATOS_INFORME:
+            fila = self.reg(ctk.CTkFrame(izq, corner_radius=6),
+                            fg_color='bg')
+            fila.pack(fill="x", padx=6, pady=3)
+            b = self.reg(
+                ctk.CTkButton(fila, text="DESCARGAR", width=110, height=26,
+                              font=ctk.CTkFont(family="Consolas", size=9,
+                                               weight="bold"),
+                              command=lambda c=clave: self.descargar_informe(c)),
+                fg_color='green', hover_color='green_hover', text_color='bg')
+            b.pack(side="left", padx=6, pady=6)
+            self.btn_formato[clave] = b
+            texto = self.reg(ctk.CTkFrame(fila, corner_radius=0), fg_color='bg')
+            texto.pack(side="left", fill="x", expand=True, padx=(0, 8))
+            self.reg(ctk.CTkLabel(texto, text="%s — %s" % (nombre, desc),
+                                  font=ctk.CTkFont(family="Consolas", size=9,
+                                                   weight="bold"),
+                                  anchor="w", justify="left"),
+                     fg_color='bg', text_color='text').pack(anchor="w")
+            self.reg(ctk.CTkLabel(texto, text="Lo lee: %s" % lector,
+                                  font=ctk.CTkFont(family="Consolas", size=8),
+                                  anchor="w", justify="left"),
+                     fg_color='bg', text_color='text3').pack(anchor="w")
+
+        der = self.reg(ctk.CTkFrame(cuerpo, corner_radius=8, width=430),
+                       fg_color='bg2')
+        der.pack(side="right", fill="y")
+        der.pack_propagate(False)
+        self.reg(ctk.CTkLabel(der, text="RESULTADO DE LA GENERACION",
+                              font=ctk.CTkFont(family="Consolas", size=10,
+                                               weight="bold")),
+                 fg_color='bg2', text_color='green').pack(anchor="w", padx=8,
+                                                          pady=(8, 4))
+        self.txt_informe = tk.Text(der, wrap="word", bd=0,
+                                   font=("Consolas", 9))
+        self.txt_informe.pack(fill="both", expand=True, padx=8, pady=(0, 8))
+        self.txt_informe.configure(state="disabled")
+
+        self.informe_ultimo = None
+        self.informe_generando = False
+
+    # --- datos del informe
+    def _datos_para_informe(self):
+        """Reune el estado actual de la aplicacion en la estructura del informe.
+
+        Debe llamarse SIEMPRE desde el hilo principal: lee widgets de Tk.
+        """
+        objetivo = (self.entry_target.get().strip()
+                    or self.target_actual() or "")
+        if not objetivo:
+            return None
+        if not objetivo.startswith(("http://", "https://")):
+            objetivo = "https://" + objetivo
+        resultados = [v for v in self.catalogo_resultados.values() if v.get("id")]
+        # completa los campos que solo estan en el catalogo
+        for r in resultados:
+            c = checks.por_id(r.get("id"))
+            if c:
+                r.setdefault("nombre", c["nombre"])
+                r.setdefault("categoria", c["categoria"])
+                r.setdefault("severidad", c["severidad"])
+                r.setdefault("cwe", c["cwe"])
+                r.setdefault("owasp", c["owasp"])
+                r.setdefault("estado", "PENDIENTE")
+        puntuacion = self.puntuacion
+        if puntuacion is None and resultados:
+            puntuacion = metrics.puntuacion(resultados)
+        filas = []
+        if puntuacion:
+            try:
+                _, filas = metrics.cuadro(resultados, ctx=None)
+            except Exception:
+                filas = []
+        return hb_informe.construir_datos(
+            objetivo,
+            hallazgos=self.hallazgos,
+            resultados=resultados,
+            puntuacion=puntuacion,
+            filas_metricas=filas,
+            dns=self.dns,
+            ips=self.ips,
+            puertos=self.puertos,
+            tecnologias=self.tecnologias,
+            http_historial=self.http_historial,
+            cves=[h for h in self.hallazgos
+                  if str(h.get("tipo", "")).lower() == "cve"
+                  or str(h.get("id", "")).upper().startswith("CVE")],
+            grafo=self.grafo,
+            autorizado=bool(self.var_autorizado.get()),
+            perfil=self.perfil.get(),
+            duracion=getattr(self, "duracion_evaluacion", 0.0))
+
+    def _escribir_informe(self, texto, nivel="info"):
+        try:
+            self.txt_informe.configure(state="normal")
+            self.txt_informe.insert("end", texto + "\n", nivel)
+            self.txt_informe.see("end")
+            self.txt_informe.configure(state="disabled")
+        except Exception:
+            pass
+
+    def _actualizar_estado_informe(self):
+        n = len(self.hallazgos)
+        n_cat = len(self.catalogo_resultados)
+        if not n and not n_cat:
+            self.lbl_informe_estado.configure(
+                text="Sin datos todavia. Ejecuta una evaluacion y vuelve aqui "
+                     "para descargar el informe.")
+            return
+        self.lbl_informe_estado.configure(
+            text="Listo para generar: %d hallazgo(s) y %d chequeo(s) "
+                 "registrados. Objetivo: %s"
+                 % (n, n_cat, self.entry_target.get().strip() or "-"))
+
+    # --- generacion
+    def _generar(self, clave, ruta, datos=None):
+        """Genera un formato concreto. Devuelve (ruta, detalle).
+
+        `datos` se calcula fuera si la llamada viene de un hilo de trabajo:
+        `_datos_para_informe()` lee widgets de Tk y no es seguro llamarlo
+        desde otro hilo.
+        """
+        if datos is None:
+            datos = self._datos_para_informe()
+        if datos is None:
+            raise RuntimeError("no hay objetivo; ejecuta una evaluacion primero")
+        if clave == "html":
+            hb_informe.escribir_html(datos, ruta)
+            return ruta, "informe completo con toda la evidencia"
+        if clave == "pdf":
+            r, metodo = hb_informe.a_pdf(datos, ruta)
+            return r, ("generado con el navegador del sistema"
+                       if metodo == "navegador" else
+                       "generado con el motor propio (sin navegador)")
+        if clave == "json":
+            hb_informe.a_json(datos, ruta)
+            return ruta, "datos crudos"
+        if clave == "markdown":
+            hb_informe.escribir_markdown(datos, ruta)
+            return ruta, "texto para pegar en el reporte"
+        if clave == "csv":
+            hb_informe.a_csv(datos, ruta)
+            return ruta, "una fila por hallazgo"
+        if clave == "har":
+            hb_intercambio.escribir_har(datos, ruta)
+            return ruta, ("%d peticion(es) — importable en OWASP ZAP"
+                          % len(datos["trafico"]))
+        if clave == "sarif":
+            hb_intercambio.escribir_sarif(datos, ruta)
+            return ruta, "%d resultado(s)" % len(datos["hallazgos"])
+        if clave == "burp":
+            hb_intercambio.escribir_burp_xml(datos, ruta)
+            return ruta, "%d issue(s) en formato Burp" % len(datos["hallazgos"])
+        if clave == "zap":
+            hb_intercambio.escribir_zap_xml(datos, ruta)
+            return ruta, "%d alerta(s) en formato ZAP" % len(datos["hallazgos"])
+        raise RuntimeError("formato desconocido: %s" % clave)
+
+    def descargar_informe(self, clave):
+        if self.informe_generando:
+            messagebox.showinfo("Informe",
+                                "Ya se esta generando un informe. Espera.")
+            return
+        datos = self._datos_para_informe()
+        if datos is None:
+            messagebox.showinfo("Informe",
+                                "Primero ejecuta una evaluacion sobre un objetivo.")
+            return
+        nombre = hb_informe.nombre_por_defecto(
+            datos["meta"]["objetivo"], EXTENSION_INFORME.get(clave, clave),
+            dir_informes(), etiqueta=clave)
+        inicial = os.path.basename(nombre)
+        ruta = filedialog.asksaveasfilename(
+            defaultextension="." + EXTENSION_INFORME.get(clave, clave),
+            initialfile=inicial, initialdir=dir_informes(),
+            filetypes=[(clave.upper(), "*." + EXTENSION_INFORME.get(clave, clave)),
+                       ("Todos", "*.*")])
+        if not ruta:
+            return
+        self._lanzar_generacion([(clave, ruta)], datos)
+
+    def generar_todos_los_informes(self):
+        if self.informe_generando:
+            messagebox.showinfo("Informe",
+                                "Ya se esta generando un informe. Espera.")
+            return
+        datos = self._datos_para_informe()
+        if datos is None:
+            messagebox.showinfo("Informe",
+                                "Primero ejecuta una evaluacion sobre un objetivo.")
+            return
+        objetivo = datos["meta"]["objetivo"]
+        carpeta = dir_informes()
+        trabajos = [(c, hb_informe.nombre_por_defecto(
+            objetivo, EXTENSION_INFORME.get(c, c), carpeta, etiqueta=c))
+            for c, _, _, _ in FORMATOS_INFORME]
+        self._lanzar_generacion(trabajos, datos)
+
+    def _lanzar_generacion(self, trabajos, datos=None):
+        """Genera los informes en un hilo.
+
+        El hilo NO toca widgets ni llama a `after()`: publica en el bus y el
+        hilo principal los consume en `procesar_evento` (Tk no es thread-safe).
+        """
+        if datos is None:
+            datos = self._datos_para_informe()
+        if datos is None:
+            return
+        self.informe_generando = True
+        self.btn_informe_todos.configure(state="disabled")
+        for b in self.btn_formato.values():
+            b.configure(state="disabled")
+        self._escribir_informe(
+            ">>> Generando %d informe(s)..." % len(trabajos), "aviso")
+
+        def tarea():
+            hechos = []
+            for clave, ruta in trabajos:
+                try:
+                    r, detalle = self._generar(clave, ruta, datos)
+                    peso = os.path.getsize(r) / 1024.0
+                    hechos.append((clave, r, detalle, peso, None))
+                    self.bus.publicar("informe_log",
+                                      texto="[OK]  %-9s %s  (%.0f KB, %s)"
+                                            % (clave.upper(),
+                                               os.path.basename(r), peso,
+                                               detalle),
+                                      nivel="exito")
+                except Exception as e:
+                    hechos.append((clave, None, str(e), 0, e))
+                    self.bus.publicar("informe_log",
+                                      texto="[ERROR] %-9s %s"
+                                            % (clave.upper(), str(e)[:160]),
+                                      nivel="error")
+            self.bus.publicar("informe_fin", hechos=hechos)
+
+        threading.Thread(target=tarea, daemon=True).start()
+
+    def _fin_generacion(self):
+        self.informe_generando = False
+        self.btn_informe_todos.configure(state="normal")
+        for b in self.btn_formato.values():
+            b.configure(state="normal")
+        ok = [h for h in (self.informe_ultimo or []) if h[1]]
+        mal = [h for h in (self.informe_ultimo or []) if not h[1]]
+        self._escribir_informe(
+            ">>> Terminado: %d informe(s) generado(s), %d con error."
+            % (len(ok), len(mal)),
+            "exito" if not mal else "aviso")
+        self._escribir_informe("    Carpeta: %s" % dir_informes())
+        self.lbl_status.configure(text="Estado: informes generados")
+
     # --------------------------------------------------------- pestana: cve
     def construir_cve(self):
         m = self.marcos["cve"]
@@ -995,10 +1630,35 @@ class HunterBugGUI(ctk.CTk):
             v = self.ventanas.get(modulo)
             if v is not None:
                 v.escribir("%s  %s" % (marca, texto), nivel)
-            if modulo in ("sqli", "xss", "idor", "bola"):
+            if modulo in ("sqli", "xss", "idor", "bola", "catalogo"):
                 self.escribir_vulns("[%s] %s" % (marca, texto), nivel)
         elif tipo == events.HALLAZGO:
             self.agregar_hallazgo(ev.get("modulo"), ev.get("hallazgo") or {})
+        elif tipo == events.METRICAS:
+            self.pintar_metricas(ev.get("puntuacion") or {},
+                                 ev.get("filas") or [])
+            self.filtrar_catalogo()
+        elif tipo == events.CATALOGO:
+            # los 203 eventos se acumulan; la tabla se repinta de forma
+            # agregada para no ahogar el hilo de interfaz
+            entrada = self.catalogo_resultados.setdefault(ev["id"], {})
+            entrada.update({
+                "id": ev["id"],
+                "estado": ev.get("estado", "PENDIENTE"),
+                "hallazgo": ev.get("hallazgo"),
+                "detalle": ev.get("detalle", "")})
+            if "nombre" not in entrada and ev.get("nombre"):
+                entrada["nombre"] = ev["nombre"]
+            self._catalogo_pendiente = getattr(self, "_catalogo_pendiente", 0) + 1
+            if self._catalogo_pendiente >= 25:
+                self._catalogo_pendiente = 0
+                self.filtrar_catalogo()
+        elif tipo == "informe_log":
+            self._escribir_informe(ev.get("texto", ""),
+                                   ev.get("nivel", "info"))
+        elif tipo == "informe_fin":
+            self.informe_ultimo = ev.get("hechos") or []
+            self._fin_generacion()
         elif tipo == events.PROGRESO:
             self.actualizar_modulo(ev.get("modulo"), pct=ev.get("pct"))
         elif tipo == events.ESTADO:
@@ -1661,6 +2321,7 @@ class HunterBugGUI(ctk.CTk):
             "token_b": self.entry_token_b.get().strip(),
             "cookie_a": self.entry_cookie_a.get().strip(),
             "cookie_b": self.entry_cookie_b.get().strip(),
+            "autorizado": autorizado,
         }
         self.registrar(">>> Evaluacion iniciada sobre %s (perfil %s, autorizacion=%s)"
                        % (objetivo, cfg["perfil"],
@@ -1837,6 +2498,59 @@ class HunterBugGUI(ctk.CTk):
                 self.bus.hallazgo(clave, h)
             L("BOLA: %d resultado(s)." % len(res), "exito" if res else "info")
 
+        elif clave == "catalogo":
+            self.ejecutar_catalogo_modulo(
+                objetivo, cab, bool(cfg.get("autorizado")), L)
+
+    def ejecutar_catalogo_modulo(self, objetivo, cab, autorizado, L):
+        """Ejecuta el motor de 203 chequeos y publica cada resultado."""
+        total = len(checks.CATALOGO)
+        L("Motor de %d chequeos sobre %s (autorizacion=%s)..."
+          % (total, objetivo, "si" if autorizado else "NO"), "info")
+        if not autorizado:
+            L("Sin autorizacion solo se ejecutan los %d chequeos pasivos."
+              % (total - sum(1 for c in checks.CATALOGO if c["activo"])),
+              "aviso")
+
+        acumulados = {}
+
+        def progreso(hechos, tot, cid):
+            self.bus.progreso("catalogo", int(hechos / tot * 100),
+                              "%d/%d %s" % (hechos, tot, cid))
+
+        hallazgos, resultados, ctx = checks.ejecutar(
+            objetivo, cabeceras_extra=cab, autorizado=autorizado,
+            log=lambda t, n="info": L(t, n), pausa=0.05,
+            debe_cancelar=lambda: self.cancel_requested, progreso=progreso)
+
+        for r in resultados:
+            acumulados[r["id"]] = r
+            self.bus.catalogo(id=r["id"], nombre=r["nombre"],
+                              estado=r["estado"], categoria=r["categoria"],
+                              severidad=r["severidad"], cwe=r["cwe"],
+                              hallazgo=r.get("hallazgo"),
+                              detalle=r.get("detalle", ""))
+            if r["estado"] == "fallo":
+                h = r.get("hallazgo") or {}
+                h.setdefault("modulo", "catalogo")
+                self.bus.hallazgo("catalogo", h)
+
+        self.catalogo_resultados = acumulados
+        p, filas = metrics.cuadro(resultados, ctx=ctx)
+        self.bus.metricas(p, filas)
+        self.puntuacion = p
+
+        fallos = p["por_severidad"]
+        L("Catalogo: %d chequeos | puntuacion %s/100 (%s) | "
+          "criticos=%d altos=%d medios=%d"
+          % (len(resultados), p["puntos"], p["letra"],
+             fallos.get("critico", 0), fallos.get("alto", 0),
+             fallos.get("medio", 0)),
+          "exito" if p["letra"] in ("A", "B") else "aviso")
+        self.ui(self.pintar_metricas, p, filas)
+        self.ui(self.filtrar_catalogo)
+        self.ui(self.fijar_progreso_global)
+
     def ui(self, fn, *args):
         if not self._vivo:
             return
@@ -1852,6 +2566,10 @@ class HunterBugGUI(ctk.CTk):
         self.lbl_status.configure(text="Estado: completado")
         self.fijar_progreso_global()
         self.actualizar_resumen()
+        try:
+            self._actualizar_estado_informe()
+        except Exception:
+            pass
         if self.grafo.nodos:
             self.reorganizar_grafo()
 
@@ -1872,6 +2590,9 @@ class HunterBugGUI(ctk.CTk):
         self.http_historial = []
         self.ultimo_http = None
         self.analisis_ia = ""
+        self.catalogo_resultados = {}
+        self.puntuacion = None
+        self._catalogo_pendiente = 0
         self.grafo.limpiar()
         self.bus.vaciar()
         for tabla in self.tablas.values():

@@ -1,5 +1,5 @@
 import sys, traceback
-sys.path.insert(0, r"C:/Users/m/Desktop/HunterBug_2.3.0")
+sys.path.insert(0, ".")
 
 errores = []
 

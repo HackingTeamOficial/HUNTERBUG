@@ -1,22 +1,10 @@
 # HunterBug 1.0
 
-**Framework de evaluación de Seguridad para Bug Hunters**
+**Framework de evaluación de seguridad para bug hunters**
 
-Creada Para la Comunidad **Hacking Team** · By **Juan Antonio**
+> Versión mejorada y creada para la comunidad **hacking team** · by **Juan Antonio**
 
-<img width="1920" height="1031" alt="Screenshot 2026-10-25 033454" src="https://github.com/user-attachments/assets/647a4a5e-3209-44e7-beba-4e8ed6d3ce68" />
-<img width="1920" height="1027" alt="12" src="https://github.com/user-attachments/assets/ffd18b72-92ff-405c-a244-3760c155996f" />
-<img width="1920" height="1028" alt="11" src="https://github.com/user-attachments/assets/af847931-9698-4607-9aae-484a2ef20502" />
-<img width="1912" height="878" alt="10" src="https://github.com/user-attachments/assets/a542728f-3ecc-4ca9-b555-17ae66c7d92f" />
-<img width="1920" height="1028" alt="9" src="https://github.com/user-attachments/assets/c7bb83ba-440e-4898-8919-f1ce9261d53f" />
-<img width="1920" height="1028" alt="8" src="https://github.com/user-attachments/assets/5fa50aca-883e-45f0-8d9d-91dec19a5b69" />
-<img width="1920" height="1028" alt="7" src="https://github.com/user-attachments/assets/141c0508-a188-4c91-9a75-978f8497bccc" />
-<img width="1920" height="1031" alt="6" src="https://github.com/user-attachments/assets/fc72a407-ee58-48c4-bc96-1b72a7e88061" />
-<img width="1920" height="1030" alt="5" src="https://github.com/user-attachments/assets/70429b90-3846-47eb-b943-ed676e2e3ed6" />
-<img width="1920" height="1027" alt="4" src="https://github.com/user-attachments/assets/688a05f3-9e10-4bc0-94a5-a1ab35b96c4e" />
-<img width="1920" height="1030" alt="3" src="https://github.com/user-attachments/assets/3c5a1e97-748e-495d-b3cd-318da6f10f2b" />
-<img width="1920" height="1030" alt="2" src="https://github.com/user-attachments/assets/442329d0-f735-4970-82c2-ce88631a4a9a" />
-
+---
 
 ## Qué es
 
@@ -25,6 +13,12 @@ vulnerabilidades web** en pruebas autorizadas. Reúne en una sola ventana lo que
 normalmente obliga a saltar entre cinco o seis utilidades: reconocimiento DNS,
 escaneo de puertos con banner, captura de tráfico HTTP en bruto, auditoría de
 cabeceras, mapeo a CVE y pruebas de SQLi, XSS, IDOR y BOLA.
+
+En la versión 1.0 el análisis se apoya en un **catálogo de 203 chequeos** que
+mide el objetivo en once categorías —cabeceras, cookies, CORS, métodos, TLS,
+respuesta, contenido, rutas expuestas, tecnología, fugas de información y
+pruebas de inyección y lógica sobre parámetros— y devuelve un **índice de
+seguridad de 0 a 100** con su desglose.
 
 Su rasgo distintivo es que **todo el resultado se va construyendo en vivo**: cada
 módulo reporta estado, porcentaje y duración; los hallazgos aparecen en su
@@ -50,7 +44,7 @@ detecta, documenta y prioriza, y deja el trabajo fino en tus manos.
 
 ## Qué contiene
 
-### Módulos de evaluación (9)
+### Módulos de evaluación (10)
 
 | Módulo | Tipo | Qué hace |
 |---|---|---|
@@ -63,9 +57,78 @@ detecta, documenta y prioriza, y deja el trabajo fino en tus manos.
 | **XSS** | Activo | Cross-site scripting reflejado |
 | **IDOR** | Activo | Acceso a objetos ajenos comparando dos identificadores |
 | **BOLA** | Activo | Autorización por objeto en API comparando dos credenciales |
+| **Catálogo** | Mixto | **Motor de 203 chequeos** agrupados en 11 categorías, con puntuación de seguridad |
 
 > Los módulos **activos** requieren marcar la casilla de autorización. Sin ella se
 > omiten y la herramienta sigue funcionando en modo pasivo.
+
+### El catálogo de 203 chequeos
+
+El módulo **Catálogo** es el corazón del análisis. Ejecuta 203 verificaciones
+organizadas en once categorías, y cada una devuelve título, detalle, evidencia,
+CWE y recomendación. Es lo que permite pasar de "mirar una web" a **medirla**.
+
+| Categoría | Chequeos | Qué cubre |
+|---|---|---|
+| **Cabeceras** | 40 | HSTS, CSP, nosniff, X-Frame-Options, Referrer-Policy, Permissions-Policy, COOP, CORP, exposición del *stack*, caché, compresión, CSP en políticas de *sandbox*… |
+| **Cookies** | 12 | Secure, HttpOnly, SameSite, Domain, Path, Prefijo `__Host-`/`__Secure-`, caducidad, longitud y nombres por defecto |
+| **CORS** | 7 | Reflexión de `Origin`, credenciales con origen abierto, origen `null`, cabeceras expuestas, `Vary` |
+| **Métodos** | 8 | TRACE, verbos de escritura (PUT, DELETE, PATCH), WebDAV, métodos no estándar, negación de verbos inocuos |
+| **TLS** | 14 | Versiones negociadas, TLS 1.0/1.1, ciphers débiles, caducidad y emisor del certificado, Autoridad, *pinning* |
+| **Respuesta** | 12 | Compresión, caché, duplicados de cabecera, errores del servidor, redirecciones, *MIME sniffing* |
+| **Contenido** | 28 | Comentarios con credenciales, *source maps*, secretos en el cliente, correos, IPs internas, rutas absolutas, contenido mixto, SRI, formularios, CSRF, `target=_blank`, `iframes`, errores verbosos |
+| **Rutas** | 12 | `.git`, `.env`, `.svn`, `.DS_Store`, `server-status`, `phpinfo()`, Actuator, *debug*, consola, Swagger, *backups*, listado de directorios |
+| **Tecnología** | 20 | WordPress, Drupal, Joomla, Shopify, Next.js, React, Vue, Angular, Laravel, Django, Rails, Spring, ASP.NET, PHP, Tomcat, nginx, Apache, IIS, Cloudflare, Vercel |
+| **Parámetros** | 40 | SQLi (errores, booleana, cabeceras, cookies), XSS, SSTI, CRLF, *path traversal*, LFI, redirección abierta, SSRF, LDAP, XPath, NoSQL, XXE, HPP, asignación masiva, enumeración de usuarios, HPP, *prototype pollution*, suplantación de cabeceras, límites de peticiones… |
+| **Fugas** | 10 | Introspección de GraphQL, `robots.txt`, `security.txt`, `sitemap.xml`, copias de seguridad, paneles de administración |
+
+Cada chequeo se muestra en la pestaña **Catálogo** con su identificador, su
+estado (`FALLO`, `OK`, `OMITIDO`, `ERROR`), su CWE y su evidencia, y se puede
+filtrar por categoría o por severidad.
+
+### Puntuación y métricas
+
+Al terminar, el catálogo produce un **índice de seguridad de 0 a 100** con letra
+(A–F), calculado con decaimiento exponencial sobre la penalización acumulada
+por severidad: diferencia objetivos muy cargados de fallos de los simplemente
+descuidados sin saturarse en cero. Además entrega:
+
+- Desglose de la puntuación **por categoría** (con gráfico).
+- Fallos por severidad: críticos, altos, medios, bajos e informativos.
+- **Cobertura**: cuántos chequeos se ejecutaron frente a los omitidos.
+- Métricas de red: peticiones, bytes, tiempo total, tiempo medio por petición
+  y ritmo (peticiones/segundo).
+- Métricas de la respuesta: *status*, versión HTTP, IP, compresión, servidor.
+- Métricas de TLS: versión, cifrado, emisor, validez y clave.
+
+El resultado se puede **exportar a CSV** desde la propia pestaña.
+
+### Informes y compatibilidad con otras herramientas
+
+La pestaña **Informe** genera el informe completo de la evaluación en nueve
+formatos, con toda la evidencia recogida. Hay un botón por formato y otro para
+generarlos todos de una vez en `informes/`.
+
+| Formato | Qué es | Quién lo lee |
+|---|---|---|
+| **HTML** | Informe completo, autocontenido (sin recursos externos), con portada, resumen ejecutivo, gráficos SVG, todos los hallazgos con su evidencia, la superficie de ataque, las métricas, el catálogo de 203 chequeos y el tráfico HTTP en bruto | Cualquier navegador |
+| **PDF** | El mismo informe en PDF. Se genera con el navegador del sistema en modo *headless* (fidelidad idéntica al HTML) y, si no hay navegador, con un **generador de PDF propio sin dependencias** | Adobe, navegador, Word |
+| **JSON** | Todos los datos de la evaluación en crudo | Scripts, automatización |
+| **Markdown** | Texto plano con tablas, para pegar en el reporte o en una wiki | HackerOne, Bugcrowd, Obsidian |
+| **CSV** | Una fila por hallazgo, con la evidencia aplanada | Excel, Google Sheets |
+| **HAR 1.2** | El tráfico HTTP capturado, con peticiones y respuestas en bruto | **OWASP ZAP** (Importar → *Import HAR*), Chrome DevTools, Burp con extensión |
+| **SARIF 2.1.0** | Formato estándar de resultados de análisis, con reglas, niveles, mapeo a CWE y las peticiones/respuestas (`webRequest`/`webResponse`) | GitHub / GitLab / Azure *code scanning*, add-on SARIF de ZAP |
+| **Burp XML** | El mismo XML que exporta Burp Suite con sus *issues* (incluye el DTD con `<!ATTLIST issues burpVersion>`, que es lo que detectan los importadores) | Invicti, Metasploit, Dradis, Burp Pro |
+| **ZAP XML** | El informe XML clásico de OWASP ZAP (`<OWASPZAPReport>` con `<alertitem>`, `riskcode` y `cweid`) | Lectores de informes de ZAP |
+
+El tráfico HTTP capturado se adjunta como evidencia reproducible: el HAR, el
+SARIF y el XML de Burp incluyen la petición y la respuesta en bruto de cada
+hallazgo.
+
+Los nueve formatos están verificados contra su especificación: el HAR declara
+la versión 1.2 y sus entradas llevan los campos obligatorios; el SARIF declara
+2.1.0 y sus niveles son válidos; los XML parsean y llevan los elementos que
+esperan sus lectores.
 
 ### Reconocimiento
 
@@ -92,6 +155,23 @@ detecta, documenta y prioriza, y deja el trabajo fino en tus manos.
   `*` u orígenes en `http:`.
 
 ### Vulnerabilidades
+
+El catálogo de 203 chequeos incluye, además de los módulos independientes:
+
+- **Inyección SQL**: firmas de error para MySQL, MSSQL, PostgreSQL, Oracle,
+  SQLite, JDBC y Hibernate; diferencial booleano; inyección desde cabeceras
+  (`User-Agent`, `Referer`) y desde cookies.
+- **XSS e inyección HTML**: payloads con marcador único y aleatorio por
+  petición, en contexto de parámetro, de cabecera y de JavaScript.
+- **SSTI**: detección con **dos expresiones distintas** evaluadas, para que una
+  coincidencia casual en el HTML no dé un falso positivo.
+- **CRLF, path traversal, LFI, redirección abierta, SSRF, LDAP, XPath, NoSQL
+  (`$ne`, `$gt`), XXE y contaminación de prototipos**.
+- **Lógica**: asignación masiva, contaminación de parámetros (HPP),
+  enumeración de usuarios, validación de rangos y tipos, suplantación de
+  cabeceras de proxy y ausencia de límite de peticiones.
+
+Los módulos independientes aportan además:
 
 - **SQLi**: 15 firmas de error para MySQL, MSSQL, PostgreSQL, Oracle, SQLite,
   JDBC y Hibernate; 8 payloads de error y 3 pares de condiciones booleanas. Marca
@@ -196,14 +276,31 @@ ejecutan contra objetivos reales, no contra simulaciones vacías:
 
 | Suite | Qué cubre | Resultado |
 |---|---|---|
-| `verificar_motores.py` | Detectores contra un **laboratorio vulnerable local** + red real (example.com) | **41 / 41** |
-| `prueba_gui.py` | Interfaz completa de extremo a extremo: pestañas, tema, ventanas, evaluación real, grafo, IA, informe, reinicio y cierre | **90 / 90** |
+| `verificar_catalogo.py` | Los **203 chequeos** contra 11 objetivos del laboratorio vulnerable + objetivo real: que disparen donde deben, que **no den falsos positivos**, métricas y puntuación | **78 / 78** |
+| `prueba_catalogo_gui.py` | La pestaña del catálogo de extremo a extremo: construcción, 203 filas, ejecución real, puntuación, filtros, detalle, modo sin autorización y cambio de tema | **23 / 23** |
+| `verificar_informes.py` | Los **9 formatos de informe** con datos reales: HTML autocontenido con toda la evidencia, PDF válido, y el HAR, SARIF, Burp XML y ZAP XML contra su especificación | **104 / 104** |
+| `prueba_informe_gui.py` | La pestaña de informes: botones por formato, generación de cada uno desde la interfaz, «generar todos», nombres y extensiones, y el registro de resultados | **41 / 41** |
+| `prueba_pdf.py` | El generador de PDF propio: validez, tabla `xref` con offsets correctos, troceado de texto, acentos y escapes peligrosos | **17 / 17** |
+| `verificar_motores.py` | Detectores clásicos contra el laboratorio + red real (example.com) | **41 / 41** |
+| `prueba_gui.py` | Interfaz completa de extremo a extremo: pestañas, tema, ventanas, evaluación real, grafo, IA, informe, reinicio y cierre | **92 / 92** |
+| `probar_exe.py` | Que el `.exe` empaquetado **arranca y crea su ventana** | OK |
 | `smoke_test.py` | Regresión de las funciones base (tema, fondo, persistencia, cierre limpio) | OK |
 
-Los detectores no se dan por buenos "porque compilan": SQLi, XSS, IDOR y BOLA se
-verifican contra un servidor deliberadamente vulnerable que levanta el propio
-proyecto (`banco_pruebas.py`), y se comprueba que **encuentran el fallo** y que
-**no lo inventan** cuando la versión está parcheada.
+Los detectores no se dan por buenos "porque compilan": se verifican contra un
+servidor deliberadamente vulnerable que levanta el propio proyecto
+(`banco_pruebas.py`), y se comprueba que **encuentran el fallo** y que
+**no lo inventan** donde no lo hay. Cada objetivo del laboratorio lleva un
+fallo plantado de una familia distinta, y la batería exige además que los
+chequeos que no corresponden **no se disparen** en ese objetivo: así se cazan
+los falsos positivos, no solo las detecciones.
+
+Durante el desarrollo de esta versión, esa disciplina corrigió diez chequeos
+reales: un `self.ruta` que tapaba al método `ruta()`, un `%0d` interpretado
+como formato, CRLF escrito como caracteres reales en vez de su escape, un
+*regex* de asignación masiva cuya alternancia quedaba fuera del grupo, una
+comparación entre respuestas crudas y respuestas con redirecciones seguidas, y
+una detección de SSTI que daba positivo con cualquier versión que contuviera
+"49".
 
 ---
 
@@ -227,7 +324,14 @@ uso recae en quien ejecuta la herramienta.
 **Opción 1 — ejecutable (recomendado)**
 
 ```
-HunterBug 1.0.exe        Doble clic. No requiere instalar nada.
+dist\HunterBug 1.0.exe        Doble clic. No requiere instalar nada.
+```
+
+Para recompilarlo después de tocar el código:
+
+```
+compilar.bat                    (doble clic, o desde la carpeta)
+python probar_exe.py            # comprueba que el .exe arranca
 ```
 
 **Opción 2 — desde el código**
@@ -241,8 +345,14 @@ python HunterBugGUI.py
 **Verificar que todo funciona**
 
 ```
+python verificar_catalogo.py    # 78 pruebas: los 203 chequeos
+python prueba_catalogo_gui.py   # 23 pruebas: la pestana del catalogo
+python verificar_informes.py    # 104 pruebas: los 9 formatos de informe
+python prueba_informe_gui.py    # 41 pruebas: la pestana de informes
+python prueba_pdf.py            # 17 pruebas: el generador de PDF propio
 python verificar_motores.py     # 41 pruebas de los motores
-python prueba_gui.py            # 90 pruebas de la interfaz
+python prueba_gui.py            # 92 pruebas de la interfaz
+python probar_exe.py            # el .exe empaquetado arranca
 ```
 
 ---

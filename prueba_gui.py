@@ -63,10 +63,10 @@ def paso_estructura():
     check("Logotipo cargado", app.logo_img is not None)
     check("Icono de ventana localizado", os.path.exists(app.ruta_ico),
           "-> %s" % app.ruta_ico)
-    check("9 modulos en la barra lateral", len(app.filas) == 9,
+    check("10 modulos en la barra lateral", len(app.filas) == 10,
           "-> %d" % len(app.filas))
-    check("7 pestanas creadas", len(app.marcos) == 7, "-> %d" % len(app.marcos))
-    check("Tablas creadas", len(app.tablas) >= 9,
+    check("9 pestanas creadas", len(app.marcos) == 9, "-> %d" % len(app.marcos))
+    check("Tablas creadas", len(app.tablas) >= 10,
           "-> %s" % sorted(app.tablas.keys()))
     check("Visor HTTP presente", app.visor_http is not None)
     check("Lienzo de grafo presente", app.lienzo is not None)
