@@ -1,8 +1,8 @@
 # HunterBug 1.0
 
-**Framework de evaluación de seguridad para bug hunters**
+**Framework de evaluación de Seguridad para Bug Hunters**
 
-creada para la comunidad **hacking team** · by **Juan Antonio**
+Creada Para la Comunidad **Hacking Team** · By **Juan Antonio**
 
 <img width="1920" height="1031" alt="Screenshot 2026-10-25 033454" src="https://github.com/user-attachments/assets/647a4a5e-3209-44e7-beba-4e8ed6d3ce68" />
 <img width="1920" height="1027" alt="12" src="https://github.com/user-attachments/assets/ffd18b72-92ff-405c-a244-3760c155996f" />
