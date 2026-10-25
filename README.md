@@ -2,9 +2,21 @@
 
 **Framework de evaluación de seguridad para bug hunters**
 
-> Versión mejorada y creada para la comunidad **hacking team** · by **Juan Antonio**
+creada para la comunidad **hacking team** · by **Juan Antonio**
 
----
+<img width="1920" height="1031" alt="Screenshot 2026-10-25 033454" src="https://github.com/user-attachments/assets/647a4a5e-3209-44e7-beba-4e8ed6d3ce68" />
+<img width="1920" height="1027" alt="12" src="https://github.com/user-attachments/assets/ffd18b72-92ff-405c-a244-3760c155996f" />
+<img width="1920" height="1028" alt="11" src="https://github.com/user-attachments/assets/af847931-9698-4607-9aae-484a2ef20502" />
+<img width="1912" height="878" alt="10" src="https://github.com/user-attachments/assets/a542728f-3ecc-4ca9-b555-17ae66c7d92f" />
+<img width="1920" height="1028" alt="9" src="https://github.com/user-attachments/assets/c7bb83ba-440e-4898-8919-f1ce9261d53f" />
+<img width="1920" height="1028" alt="8" src="https://github.com/user-attachments/assets/5fa50aca-883e-45f0-8d9d-91dec19a5b69" />
+<img width="1920" height="1028" alt="7" src="https://github.com/user-attachments/assets/141c0508-a188-4c91-9a75-978f8497bccc" />
+<img width="1920" height="1031" alt="6" src="https://github.com/user-attachments/assets/fc72a407-ee58-48c4-bc96-1b72a7e88061" />
+<img width="1920" height="1030" alt="5" src="https://github.com/user-attachments/assets/70429b90-3846-47eb-b943-ed676e2e3ed6" />
+<img width="1920" height="1027" alt="4" src="https://github.com/user-attachments/assets/688a05f3-9e10-4bc0-94a5-a1ab35b96c4e" />
+<img width="1920" height="1030" alt="3" src="https://github.com/user-attachments/assets/3c5a1e97-748e-495d-b3cd-318da6f10f2b" />
+<img width="1920" height="1030" alt="2" src="https://github.com/user-attachments/assets/442329d0-f735-4970-82c2-ce88631a4a9a" />
+
 
 ## Qué es
 
