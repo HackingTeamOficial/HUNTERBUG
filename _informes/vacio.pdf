@@ -1,0 +1,84 @@
+%PDF-1.4
+%âãÏÓ
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Count 1 /Kids [5 0 R] >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 6 0 R >>
+endobj
+6 0 obj
+<< /Length 4164 >>
+stream
+BT 0.043 0.239 0.173 rg /F2 22.00 Tf 1 0 0 1 46.00 763.89 Tm (Informe de evaluación de seguridad) Tj ET
+BT 0.333 0.333 0.333 rg /F1 11.00 Tf 1 0 0 1 46.00 746.89 Tm (Objetivo: http://127.0.0.1:8080/buscar?q=test) Tj ET
+BT 0.333 0.333 0.333 rg /F1 11.00 Tf 1 0 0 1 46.00 731.89 Tm (HunterBug 1.1  ·  Fecha: 25/10/2026 a las 21:57  ·  Perfil: estándar) Tj ET
+0.043 0.239 0.173 RG 1.20 w 46.00 723.89 m 549.28 723.89 l S
+1.000 0.984 0.922 rg 46.00 688.29 503.28 21.60 re f
+0.992 0.902 0.541 RG 0.70 w 46.00 688.29 m 46.00 709.89 l S
+BT 0.067 0.067 0.067 rg /F2 9.00 Tf 1 0 0 1 54.00 695.89 Tm (Evaluación pasiva: no se confirmó la autorización, así que no se envió ninguna petición de ataque.) Tj ET
+BT 0.043 0.239 0.173 rg /F2 14.00 Tf 1 0 0 1 46.00 660.29 Tm (1. Resumen ejecutivo) Tj ET
+0.800 0.800 0.800 RG 0.50 w 46.00 655.29 m 549.28 655.29 l S
+BT 0.067 0.067 0.067 rg /F2 9.50 Tf 1 0 0 1 46.00 635.79 Tm (El objetivo obtiene 100.0 sobre 100 \(calificación A, excelente\).) Tj ET
+BT 0.067 0.067 0.067 rg /F1 9.50 Tf 1 0 0 1 46.00 621.69 Tm (No se han registrado hallazgos. Conviene recordar que la ausencia de hallazgos no equivale a ausencia de) Tj ET
+BT 0.067 0.067 0.067 rg /F1 9.50 Tf 1 0 0 1 46.00 609.59 Tm (vulnerabilidades: significa que las comprobaciones automáticas de esta pasada no encontraron nada con la evidencia) Tj ET
+BT 0.067 0.067 0.067 rg /F1 9.50 Tf 1 0 0 1 46.00 597.49 Tm (recogida.) Tj ET
+BT 0.067 0.067 0.067 rg /F1 9.50 Tf 1 0 0 1 46.00 583.39 Tm (Se ejecutaron 203 de los 203 chequeos del catálogo \(cobertura 100.0%\). Los chequeos omitidos requieren confirmar la) Tj ET
+BT 0.067 0.067 0.067 rg /F1 9.50 Tf 1 0 0 1 46.00 571.29 Tm (autorización o solo aplican sobre HTTPS.) Tj ET
+BT 0.067 0.067 0.067 rg /F1 9.50 Tf 1 0 0 1 46.00 557.19 Tm (La evaluación se ejecutó SIN confirmar autorización, por lo que solo se realizaron comprobaciones pasivas \(no se) Tj ET
+BT 0.067 0.067 0.067 rg /F1 9.50 Tf 1 0 0 1 46.00 545.09 Tm (envió ninguna petición de ataque\).) Tj ET
+BT 0.122 0.161 0.216 rg /F2 11.00 Tf 1 0 0 1 46.00 524.49 Tm (Puntuación por categoría) Tj ET
+BT 0.122 0.161 0.216 rg /F2 11.00 Tf 1 0 0 1 46.00 502.49 Tm (Hallazgos por severidad) Tj ET
+0.043 0.239 0.173 rg 46.00 478.29 503.28 18.20 re f
+BT 1.000 1.000 1.000 rg /F2 9.00 Tf 1 0 0 1 50.00 485.49 Tm (Severidad) Tj ET
+BT 1.000 1.000 1.000 rg /F2 9.00 Tf 1 0 0 1 250.00 485.49 Tm (Nº) Tj ET
+0.898 0.906 0.922 RG 0.40 w 246.00 478.29 m 246.00 460.89 l S
+BT 0.067 0.067 0.067 rg /F1 9.00 Tf 1 0 0 1 50.00 467.29 Tm (Crítico) Tj ET
+BT 0.067 0.067 0.067 rg /F1 9.00 Tf 1 0 0 1 250.00 467.29 Tm (0) Tj ET
+0.953 0.957 0.965 rg 46.00 443.49 503.28 17.40 re f
+0.898 0.906 0.922 RG 0.40 w 246.00 460.89 m 246.00 443.49 l S
+BT 0.067 0.067 0.067 rg /F1 9.00 Tf 1 0 0 1 50.00 449.89 Tm (Alto) Tj ET
+BT 0.067 0.067 0.067 rg /F1 9.00 Tf 1 0 0 1 250.00 449.89 Tm (0) Tj ET
+0.898 0.906 0.922 RG 0.40 w 246.00 443.49 m 246.00 426.09 l S
+BT 0.067 0.067 0.067 rg /F1 9.00 Tf 1 0 0 1 50.00 432.49 Tm (Medio) Tj ET
+BT 0.067 0.067 0.067 rg /F1 9.00 Tf 1 0 0 1 250.00 432.49 Tm (0) Tj ET
+0.953 0.957 0.965 rg 46.00 408.69 503.28 17.40 re f
+0.898 0.906 0.922 RG 0.40 w 246.00 426.09 m 246.00 408.69 l S
+BT 0.067 0.067 0.067 rg /F1 9.00 Tf 1 0 0 1 50.00 415.09 Tm (Bajo) Tj ET
+BT 0.067 0.067 0.067 rg /F1 9.00 Tf 1 0 0 1 250.00 415.09 Tm (0) Tj ET
+0.898 0.906 0.922 RG 0.40 w 246.00 408.69 m 246.00 391.29 l S
+BT 0.067 0.067 0.067 rg /F1 9.00 Tf 1 0 0 1 50.00 397.69 Tm (Informativo) Tj ET
+BT 0.067 0.067 0.067 rg /F1 9.00 Tf 1 0 0 1 250.00 397.69 Tm (0) Tj ET
+0.800 0.800 0.800 RG 0.50 w 46.00 391.29 m 549.28 391.29 l S
+BT 0.043 0.239 0.173 rg /F2 14.00 Tf 1 0 0 1 46.00 361.29 Tm (2. Hallazgos) Tj ET
+0.800 0.800 0.800 RG 0.50 w 46.00 356.29 m 549.28 356.29 l S
+BT 0.067 0.067 0.067 rg /F1 9.50 Tf 1 0 0 1 46.00 336.79 Tm (No se registraron hallazgos.) Tj ET
+BT 0.420 0.447 0.502 rg /F1 8.00 Tf 1 0 0 1 46.00 314.19 Tm (HunterBug 1.1 ? informe generado automáticamente el 2026-10-25 21:57:44. Documento de uso exclusivo en pruebas autorizadas.) Tj ET
+BT 0.420 0.447 0.502 rg /F1 8.00 Tf 1 0 0 1 46.00 301.59 Tm (La ausencia de hallazgos no demuestra la ausencia de vulnerabilidades.) Tj ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000218 00000 n 
+0000000320 00000 n 
+0000000462 00000 n 
+7 0 obj
+<< /Title (Informe HunterBug ? http://127.0.0.1:8080/buscar?q=test) /Author (HunterBug 1.1) /Subject (Evaluación de seguridad) /Keywords (hunterbug, seguridad, informe) /Producer (HunterBug) >>
+endobj
+trailer
+<< /Size 8 /Root 1 0 R /Info 7 0 R >>
+startxref
+4677
+%%EOF

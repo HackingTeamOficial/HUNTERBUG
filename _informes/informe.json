@@ -1,0 +1,6307 @@
+{
+  "meta": {
+    "herramienta": "HunterBug 1.1",
+    "objetivo": "http://127.0.0.1:8080/buscar?q=test",
+    "fecha": "2026-10-25 21:57:42",
+    "fecha_larga": "25/10/2026 a las 21:57",
+    "autorizado": true,
+    "perfil": "completo",
+    "duracion_s": 1.23
+  },
+  "puntuacion": {
+    "puntos": 1.8,
+    "letra": "F",
+    "descripcion": "critico",
+    "penalizacion": 260.6,
+    "penalizacion_media": 1.409,
+    "por_severidad": {
+      "critico": 8,
+      "alto": 17,
+      "medio": 19,
+      "bajo": 16,
+      "info": 28
+    },
+    "estados": {
+      "ok": 97,
+      "fallo": 88,
+      "omitido": 18,
+      "error": 0
+    },
+    "categorias": [
+      {
+        "categoria": "cors",
+        "puntos": 0.0,
+        "letra": "F",
+        "fallos": 7,
+        "total": 7,
+        "penalizacion": 32.2
+      },
+      {
+        "categoria": "metodos",
+        "puntos": 0.0,
+        "letra": "F",
+        "fallos": 6,
+        "total": 8,
+        "penalizacion": 22.0
+      },
+      {
+        "categoria": "rutas",
+        "puntos": 0.0,
+        "letra": "F",
+        "fallos": 12,
+        "total": 12,
+        "penalizacion": 74.0
+      },
+      {
+        "categoria": "fugas",
+        "puntos": 0.6,
+        "letra": "F",
+        "fallos": 7,
+        "total": 10,
+        "penalizacion": 17.8
+      },
+      {
+        "categoria": "cookies",
+        "puntos": 1.0,
+        "letra": "F",
+        "fallos": 6,
+        "total": 12,
+        "penalizacion": 19.2
+      },
+      {
+        "categoria": "contenido",
+        "puntos": 3.8,
+        "letra": "F",
+        "fallos": 20,
+        "total": 28,
+        "penalizacion": 32.0
+      },
+      {
+        "categoria": "parametros",
+        "puntos": 5.2,
+        "letra": "F",
+        "fallos": 9,
+        "total": 40,
+        "penalizacion": 41.4
+      },
+      {
+        "categoria": "cabeceras",
+        "puntos": 22.0,
+        "letra": "F",
+        "fallos": 17,
+        "total": 40,
+        "penalizacion": 21.2
+      },
+      {
+        "categoria": "tecnologia",
+        "puntos": 89.2,
+        "letra": "B",
+        "fallos": 4,
+        "total": 20,
+        "penalizacion": 0.8
+      },
+      {
+        "categoria": "respuesta",
+        "puntos": 100.0,
+        "letra": "A",
+        "fallos": 0,
+        "total": 12,
+        "penalizacion": 0.0
+      },
+      {
+        "categoria": "tls",
+        "puntos": 100.0,
+        "letra": "A",
+        "fallos": 0,
+        "total": 14,
+        "penalizacion": 0.0
+      }
+    ],
+    "ejecutados": 185,
+    "cobertura": 91.1
+  },
+  "metricas": [
+    [
+      "Puntuacion de seguridad",
+      "1.8 / 100"
+    ],
+    [
+      "Calificacion",
+      "F (critico)"
+    ],
+    [
+      "Penalizacion acumulada",
+      "260.6 puntos"
+    ],
+    [
+      "Chequeos en el catalogo",
+      "203"
+    ],
+    [
+      "Chequeos ejecutados",
+      "185 (cobertura 91.1%)"
+    ],
+    [
+      "Chequeos superados",
+      "97"
+    ],
+    [
+      "Chequeos fallidos",
+      "88"
+    ],
+    [
+      "Omitidos (sin autorizacion o no aplicables)",
+      "18"
+    ],
+    [
+      "Errores de ejecucion",
+      "0"
+    ],
+    [
+      "Criticos",
+      "8"
+    ],
+    [
+      "Altos",
+      "17"
+    ],
+    [
+      "Medios",
+      "19"
+    ],
+    [
+      "Bajos",
+      "16"
+    ],
+    [
+      "Informativos",
+      "28"
+    ],
+    [
+      "Peticiones realizadas",
+      "100"
+    ],
+    [
+      "Bytes recibidos",
+      "104.188"
+    ],
+    [
+      "Tiempo total",
+      "1.64 s"
+    ],
+    [
+      "Tiempo medio por peticion",
+      "16.4 ms"
+    ],
+    [
+      "Ritmo",
+      "61.08 peticiones/s"
+    ],
+    [
+      "Cookies recibidas",
+      "1"
+    ],
+    [
+      "Cabeceras recibidas",
+      "11"
+    ],
+    [
+      "Respuesta · url",
+      "http://127.0.0.1:8080/buscar?q=test"
+    ],
+    [
+      "Respuesta · status",
+      "200"
+    ],
+    [
+      "Respuesta · motivo",
+      "OK"
+    ],
+    [
+      "Respuesta · version_http",
+      "HTTP/1.1"
+    ],
+    [
+      "Respuesta · ip",
+      "127.0.0.1"
+    ],
+    [
+      "Respuesta · bytes_cuerpo",
+      "1653"
+    ],
+    [
+      "Respuesta · tiempo_ms",
+      "1.4"
+    ],
+    [
+      "Respuesta · compresion",
+      "ninguna"
+    ],
+    [
+      "Respuesta · content_type",
+      "text/html; charset=utf-8"
+    ],
+    [
+      "Respuesta · redirecciones",
+      "0"
+    ],
+    [
+      "Respuesta · servidor",
+      "Apache/2.4.49 (Unix)"
+    ]
+  ],
+  "hallazgos": [
+    {
+      "n": 26,
+      "id": "CRS-03",
+      "titulo": "CORS con credenciales y origen reflejado",
+      "severidad": "critico",
+      "confianza": "",
+      "categoria": "cors",
+      "modulo": "",
+      "cwe": "CWE-942",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Con Allow-Credentials true y el Origin reflejado, cualquier web puede leer respuestas con la sesion del usuario",
+      "recomendacion": "Lista blanca estricta de origenes y Vary: Origin",
+      "evidencia": {
+        "origin_enviado": "https://hunterbug-prueba.invalid",
+        "acao": "https://hunterbug-prueba.invalid",
+        "acac": "true"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 57,
+      "id": "FUG-01",
+      "titulo": "Repositorio Git expuesto accesible",
+      "severidad": "critico",
+      "confianza": "",
+      "categoria": "rutas",
+      "modulo": "",
+      "cwe": "CWE-538",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1/.git/config",
+      "parametro": "",
+      "detalle": "Permite reconstruir el codigo fuente completo",
+      "recomendacion": "Bloquear el acceso a .git desde el servidor web",
+      "evidencia": {
+        "ruta": "/.git/config",
+        "status": 200,
+        "bytes": 107,
+        "extracto": "[core]\n\trepositoryformatversion = 0\n\tfilemode = true\n[remote \"origin\"]\n\turl = https://git.interno/panel.git"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 58,
+      "id": "FUG-02",
+      "titulo": "Fichero .env expuesto accesible",
+      "severidad": "critico",
+      "confianza": "",
+      "categoria": "rutas",
+      "modulo": "",
+      "cwe": "CWE-538",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1/.env",
+      "parametro": "",
+      "detalle": "Contiene credenciales, claves y configuracion de la aplicacion",
+      "recomendacion": "Sacar el .env del directorio publico",
+      "evidencia": {
+        "ruta": "/.env",
+        "status": 200,
+        "bytes": 74,
+        "extracto": "APP_ENV=production\nDB_PASSWORD=Sup3rS3cret0\nAWS_SECRET_ACCESS_KEY=abcd1234"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 64,
+      "id": "FUG-08",
+      "titulo": "Actuator /env expuesto accesible",
+      "severidad": "critico",
+      "confianza": "",
+      "categoria": "rutas",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1/actuator/env",
+      "parametro": "",
+      "detalle": "Muestra variables de entorno, incluidas credenciales",
+      "recomendacion": "Deshabilitar o proteger el endpoint env",
+      "evidencia": {
+        "ruta": "/actuator/env",
+        "status": 200,
+        "bytes": 127,
+        "extracto": "{\"activeProfiles\": [\"prod\"], \"propertySources\": [{\"name\": \"systemEnvironment\", \"properties\": {\"DB_PASSWORD\": {\"value\": \"x\"}}}]}"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 66,
+      "id": "FUG-10",
+      "titulo": "Consola expuesta accesible",
+      "severidad": "critico",
+      "confianza": "",
+      "categoria": "rutas",
+      "modulo": "",
+      "cwe": "CWE-489",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1/console",
+      "parametro": "",
+      "detalle": "Una consola interactiva expuesta permite ejecucion de codigo",
+      "recomendacion": "Eliminar o proteger la consola",
+      "evidencia": {
+        "ruta": "/console",
+        "status": 200,
+        "bytes": 28,
+        "extracto": "<h1>Consola interactiva</h1>"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 72,
+      "id": "FUG-17",
+      "titulo": "Copia de seguridad accesible (/backup.zip)",
+      "severidad": "critico",
+      "confianza": "",
+      "categoria": "fugas",
+      "modulo": "",
+      "cwe": "CWE-530",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Una copia descargable entrega el codigo o la base de datos completa",
+      "recomendacion": "Retirar las copias del directorio web",
+      "evidencia": {
+        "ruta": "/backup.zip",
+        "bytes": 504
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 80,
+      "id": "PAR-01",
+      "titulo": "Inyeccion SQL (basada en errores) en 'q'",
+      "severidad": "critico",
+      "confianza": "",
+      "categoria": "parametros",
+      "modulo": "",
+      "cwe": "CWE-89",
+      "owasp": "A03:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "q",
+      "detalle": "El parametro 'q' refleja un error de MySQL al inyectar \"'\"",
+      "recomendacion": "Usar consultas parametrizadas (prepared statements) y validacion estricta de entrada.",
+      "evidencia": {
+        "payload": "'",
+        "motor": "MySQL",
+        "fragmento": "<h1>Error</h1>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to u"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 83,
+      "id": "PAR-17",
+      "titulo": "Inyeccion de comandos en 'q'",
+      "severidad": "critico",
+      "confianza": "",
+      "categoria": "parametros",
+      "modulo": "",
+      "cwe": "CWE-78",
+      "owasp": "A03:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "q",
+      "detalle": "El comando enviado aparece en la salida",
+      "recomendacion": "No construir comandos con entrada del usuario; usar APIs del sistema",
+      "evidencia": {
+        "payload": ";echo hunterbug_probe"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 18,
+      "id": "CKI-01",
+      "titulo": "1 cookie(s) sin secure",
+      "severidad": "alto",
+      "confianza": "",
+      "categoria": "cookies",
+      "modulo": "",
+      "cwe": "CWE-614",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "La cookie viaja tambien por HTTP sin cifrar y puede ser interceptada",
+      "recomendacion": "Anadir el atributo Secure a todas las cookies de sesion",
+      "evidencia": {
+        "cookies": [
+          "PHPSESSID=abc123; Path=/"
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 19,
+      "id": "CKI-02",
+      "titulo": "1 cookie(s) sin httponly",
+      "severidad": "alto",
+      "confianza": "",
+      "categoria": "cookies",
+      "modulo": "",
+      "cwe": "CWE-1004",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Sin HttpOnly el JavaScript de la pagina puede leer la cookie, lo que convierte cualquier XSS en robo de sesion",
+      "recomendacion": "Anadir HttpOnly a las cookies de sesion",
+      "evidencia": {
+        "cookies": [
+          "PHPSESSID=abc123; Path=/"
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 39,
+      "id": "CON-03",
+      "titulo": "2 posible(s) secreto(s) en el cliente",
+      "severidad": "alto",
+      "confianza": "",
+      "categoria": "contenido",
+      "modulo": "",
+      "cwe": "CWE-798",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Claves o tokens embebidos en el HTML o el JS son visibles para cualquiera",
+      "recomendacion": "Mover los secretos al servidor y rotarlos",
+      "evidencia": {
+        "hallazgos": [
+          "api_key = \"AKIAIOSFODNN7EXAMPLE1\" = AKIAIOSF...",
+          "AWS key: AKIAIOSFODNN..."
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 45,
+      "id": "CON-10",
+      "titulo": "Formulario de contrasena con method=GET",
+      "severidad": "alto",
+      "confianza": "",
+      "categoria": "contenido",
+      "modulo": "",
+      "cwe": "CWE-598",
+      "owasp": "A04:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "La contrasena queda en la URL, en el historial y en los registros del servidor",
+      "recomendacion": "Usar POST sobre HTTPS",
+      "evidencia": {
+        "formulario": "<form action=\"/login\" method=\"get\"> <input type=\"text\" name=\"usuario\"> <input type=\"password\" name=\"clave\"> <input type=\"submit\"> </form>"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 25,
+      "id": "CRS-02",
+      "titulo": "CORS refleja cualquier Origin enviado",
+      "severidad": "alto",
+      "confianza": "",
+      "categoria": "cors",
+      "modulo": "",
+      "cwe": "CWE-942",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "El servidor devuelve el origen solicitado sin validarlo, lo que permite leer respuestas desde cualquier web",
+      "recomendacion": "Validar el Origin contra una lista blanca",
+      "evidencia": {
+        "origin_enviado": "https://hunterbug-prueba.invalid",
+        "acao_devuelto": "https://hunterbug-prueba.invalid"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 27,
+      "id": "CRS-04",
+      "titulo": "CORS acepta el origen null",
+      "severidad": "alto",
+      "confianza": "",
+      "categoria": "cors",
+      "modulo": "",
+      "cwe": "CWE-942",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "El origen null procede de iframes sandbox o ficheros locales y no deberia autorizarse",
+      "recomendacion": "Rechazar explicitamente el origen null",
+      "evidencia": {
+        "acao": "null"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 28,
+      "id": "CRS-05",
+      "titulo": "CORS con comodin y credenciales",
+      "severidad": "alto",
+      "confianza": "",
+      "categoria": "cors",
+      "modulo": "",
+      "cwe": "CWE-942",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Combinacion contradictoria que algunos proxies resuelven reflejando el origen",
+      "recomendacion": "Eliminar el comodin cuando se usan credenciales",
+      "evidencia": {
+        "acao": "*",
+        "acac": "true"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 59,
+      "id": "FUG-03",
+      "titulo": "Metadatos SVN expuestos accesible",
+      "severidad": "alto",
+      "confianza": "",
+      "categoria": "rutas",
+      "modulo": "",
+      "cwe": "CWE-538",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1/.svn/entries",
+      "parametro": "",
+      "detalle": "Revela el historial de versiones y el codigo fuente",
+      "recomendacion": "Bloquear el acceso a .svn",
+      "evidencia": {
+        "ruta": "/.svn/entries",
+        "status": 200,
+        "bytes": 15,
+        "extracto": "12\n\ndir\n/trunk\n"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 62,
+      "id": "FUG-06",
+      "titulo": "phpinfo() expuesto accesible",
+      "severidad": "alto",
+      "confianza": "",
+      "categoria": "rutas",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1/phpinfo.php",
+      "parametro": "",
+      "detalle": "Expone la configuracion completa de PHP",
+      "recomendacion": "Eliminar phpinfo() de produccion",
+      "evidencia": {
+        "ruta": "/phpinfo.php",
+        "status": 200,
+        "bytes": 56,
+        "extracto": "<html><title>phpinfo()</title><h1>PHP Version 8.1.2</h1>"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 63,
+      "id": "FUG-07",
+      "titulo": "Spring Boot Actuator expuesto accesible",
+      "severidad": "alto",
+      "confianza": "",
+      "categoria": "rutas",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1/actuator",
+      "parametro": "",
+      "detalle": "Los endpoints de gestion pueden filtrar configuracion y permitir cambios",
+      "recomendacion": "Proteger /actuator con autenticacion",
+      "evidencia": {
+        "ruta": "/actuator",
+        "status": 200,
+        "bytes": 46,
+        "extracto": "{\"_links\": {\"env\": {\"href\": \"/actuator/env\"}}}"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 65,
+      "id": "FUG-09",
+      "titulo": "Endpoint de depuracion expuesto accesible",
+      "severidad": "alto",
+      "confianza": "",
+      "categoria": "rutas",
+      "modulo": "",
+      "cwe": "CWE-489",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1/debug",
+      "parametro": "",
+      "detalle": "Suele permitir ejecutar codigo o volcar el estado interno",
+      "recomendacion": "Eliminar los endpoints de depuracion",
+      "evidencia": {
+        "ruta": "/debug",
+        "status": 200,
+        "bytes": 44,
+        "extracto": "<h1>Debug console</h1><p>ejecutar codigo</p>"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 74,
+      "id": "FUG-20",
+      "titulo": "Fichero sensible accesible (/.env.local)",
+      "severidad": "alto",
+      "confianza": "",
+      "categoria": "fugas",
+      "modulo": "",
+      "cwe": "CWE-538",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Suele contener credenciales o hashes",
+      "recomendacion": "Eliminar copias y ficheros de configuracion del directorio publico",
+      "evidencia": {
+        "ruta": "/.env.local",
+        "bytes": 32
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 1,
+      "id": "HDR-02",
+      "titulo": "Falta la cabecera content-security-policy",
+      "severidad": "alto",
+      "confianza": "",
+      "categoria": "cabeceras",
+      "modulo": "",
+      "cwe": "CWE-1021",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Sin CSP no hay defensa en profundidad contra XSS ni control de origenes",
+      "recomendacion": "default-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'self'",
+      "evidencia": {
+        "cabecera_ausente": "content-security-policy"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 33,
+      "id": "MTH-03",
+      "titulo": "El servidor acepta PUT",
+      "severidad": "alto",
+      "confianza": "",
+      "categoria": "metodos",
+      "modulo": "",
+      "cwe": "CWE-650",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "PUT sobre una ruta inexistente devolvio 201: puede permitir subir contenido",
+      "recomendacion": "Rechazar PUT con 405 salvo donde sea necesario",
+      "evidencia": {
+        "status": 201,
+        "ruta": "http://127.0.0.1:8080/hunterbug-sonda-1792961860"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 34,
+      "id": "MTH-04",
+      "titulo": "El servidor acepta DELETE",
+      "severidad": "alto",
+      "confianza": "",
+      "categoria": "metodos",
+      "modulo": "",
+      "cwe": "CWE-650",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "DELETE sobre una ruta inexistente devolvio 204",
+      "recomendacion": "Rechazar DELETE con 405 salvo donde sea necesario",
+      "evidencia": {
+        "status": 204,
+        "ruta": "http://127.0.0.1:8080/hunterbug-sonda-1792961860"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 81,
+      "id": "PAR-06",
+      "titulo": "XSS reflejado en 'q'",
+      "severidad": "alto",
+      "confianza": "",
+      "categoria": "parametros",
+      "modulo": "",
+      "cwe": "CWE-79",
+      "owasp": "A03:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "q",
+      "detalle": "El payload vuelve sin escapar en el cuerpo de la respuesta del parametro 'q'",
+      "recomendacion": "Escapar la salida segun contexto, aplicar CSP estricta y validar la entrada.",
+      "evidencia": {
+        "payload": "<hbmkhbiotuty>",
+        "fragmento": "ic en la raiz</p> <h2>Resultados para <hbmkhbiotuty></h2> </body> </html>"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 84,
+      "id": "PAR-24",
+      "titulo": "Posible asignacion masiva en /api/perfil",
+      "severidad": "alto",
+      "confianza": "",
+      "categoria": "parametros",
+      "modulo": "",
+      "cwe": "CWE-915",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "El servidor acepto campos de privilegio enviados por el cliente",
+      "recomendacion": "Lista blanca de campos asignables",
+      "evidencia": {
+        "ruta": "/api/perfil",
+        "status": 200,
+        "extracto": "{\"role\":\"admin\",\"is_admin\":true,\"admin\":true}"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 20,
+      "id": "CKI-03",
+      "titulo": "1 cookie(s) sin samesite",
+      "severidad": "medio",
+      "confianza": "",
+      "categoria": "cookies",
+      "modulo": "",
+      "cwe": "CWE-1275",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Sin SameSite el navegador envia la cookie en peticiones cruzadas, lo que facilita CSRF",
+      "recomendacion": "Anadir SameSite=Lax o Strict",
+      "evidencia": {
+        "cookies": [
+          "PHPSESSID=abc123; Path=/"
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 22,
+      "id": "CKI-08",
+      "titulo": "Identificador de sesion corto (6 caracteres)",
+      "severidad": "medio",
+      "confianza": "",
+      "categoria": "cookies",
+      "modulo": "",
+      "cwe": "CWE-330",
+      "owasp": "A02:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Un identificador corto es adivinable por fuerza bruta",
+      "recomendacion": "Usar al menos 128 bits de entropia",
+      "evidencia": {
+        "cookie": "PHPSESSID",
+        "longitud": 6
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 38,
+      "id": "CON-02",
+      "titulo": "El codigo referencia source maps",
+      "severidad": "medio",
+      "confianza": "",
+      "categoria": "contenido",
+      "modulo": "",
+      "cwe": "CWE-540",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Los ficheros .map permiten reconstruir el codigo fuente original",
+      "recomendacion": "No publicar los .map en produccion",
+      "evidencia": {
+        "referencias": [
+          "/app.js.map-->"
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 41,
+      "id": "CON-05",
+      "titulo": "2 direccion(es) IP privada(s) en el cuerpo",
+      "severidad": "medio",
+      "confianza": "",
+      "categoria": "contenido",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Revelan la topologia interna de la red",
+      "recomendacion": "Eliminar las referencias a la red interna",
+      "evidencia": {
+        "ips": [
+          "10.20.30.40",
+          "192.168.1.10"
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 42,
+      "id": "CON-06",
+      "titulo": "Rutas absolutas del sistema en el cuerpo",
+      "severidad": "medio",
+      "confianza": "",
+      "categoria": "contenido",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Revelan la estructura de directorios del servidor",
+      "recomendacion": "Usar rutas relativas y errores genericos",
+      "evidencia": {
+        "rutas": [
+          "/var/www"
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 44,
+      "id": "CON-09",
+      "titulo": "Formulario que envia datos a otro dominio",
+      "severidad": "medio",
+      "confianza": "",
+      "categoria": "contenido",
+      "modulo": "",
+      "cwe": "CWE-346",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Los datos del usuario salen del sitio",
+      "recomendacion": "Enviar los formularios al propio dominio",
+      "evidencia": {
+        "acciones": [
+          "https://recolector.invalid/recoger"
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 47,
+      "id": "CON-12",
+      "titulo": "2 formulario(s) POST sin token anti-CSRF",
+      "severidad": "medio",
+      "confianza": "",
+      "categoria": "contenido",
+      "modulo": "",
+      "cwe": "CWE-352",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Sin token, otra web puede enviar el formulario en nombre del usuario",
+      "recomendacion": "Token por sesion y validacion SameSite",
+      "evidencia": {
+        "formularios": [
+          "<form action=\"https://recolector.invalid/recoger\" method=\"post\"> <input type=\"text\" name=\"usuario\"> </form>",
+          "<form action=\"/perfil\" method=\"post\"> <input type=\"text\" name=\"nombre\"> <input type=\"submit\"> </form>"
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 24,
+      "id": "CRS-01",
+      "titulo": "CORS permite cualquier origen (*)",
+      "severidad": "medio",
+      "confianza": "",
+      "categoria": "cors",
+      "modulo": "",
+      "cwe": "CWE-942",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Cualquier web puede leer la respuesta desde el navegador de la victima",
+      "recomendacion": "Lista blanca de origenes concretos",
+      "evidencia": {
+        "acao": "*"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 61,
+      "id": "FUG-05",
+      "titulo": "Estado del servidor expuesto accesible",
+      "severidad": "medio",
+      "confianza": "",
+      "categoria": "rutas",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1/server-status",
+      "parametro": "",
+      "detalle": "Revela peticiones en curso, clientes y carga del servidor",
+      "recomendacion": "Restringir /server-status a la red local",
+      "evidencia": {
+        "ruta": "/server-status",
+        "status": 200,
+        "bytes": 120,
+        "extracto": "<html><title>Apache Server Status</title><h1>Apache Server Status for 127.0.0.1</h1>Current Time: now\nTotal accesses: 12"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 67,
+      "id": "FUG-11",
+      "titulo": "Documentacion de API expuesta accesible",
+      "severidad": "medio",
+      "confianza": "",
+      "categoria": "rutas",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1/swagger-ui.html",
+      "parametro": "",
+      "detalle": "Describe todos los endpoints y sus esquemas, incluidos los internos",
+      "recomendacion": "Proteger la documentacion en produccion",
+      "evidencia": {
+        "ruta": "/swagger-ui.html",
+        "status": 200,
+        "bytes": 45,
+        "extracto": "<html><title>Swagger UI</title><p>swagger</p>"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 68,
+      "id": "FUG-12",
+      "titulo": "Especificacion de API expuesta accesible",
+      "severidad": "medio",
+      "confianza": "",
+      "categoria": "rutas",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1/api-docs",
+      "parametro": "",
+      "detalle": "Facilita la enumeracion completa de la API",
+      "recomendacion": "Restringir el acceso a la especificacion",
+      "evidencia": {
+        "ruta": "/api-docs",
+        "status": 200,
+        "bytes": 55,
+        "extracto": "{\"openapi\": \"3.0.0\", \"paths\": {\"/api/v1/usuarios\": {}}}"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 2,
+      "id": "HDR-03",
+      "titulo": "Falta la cabecera x-content-type-options",
+      "severidad": "medio",
+      "confianza": "",
+      "categoria": "cabeceras",
+      "modulo": "",
+      "cwe": "CWE-436",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Sin nosniff el navegador puede interpretar un fichero con otro tipo MIME",
+      "recomendacion": "X-Content-Type-Options: nosniff",
+      "evidencia": {
+        "cabecera_ausente": "x-content-type-options"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 3,
+      "id": "HDR-04",
+      "titulo": "Falta la cabecera x-frame-options",
+      "severidad": "medio",
+      "confianza": "",
+      "categoria": "cabeceras",
+      "modulo": "",
+      "cwe": "CWE-1021",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Sin proteccion de framing la pagina es embebible y vulnerable a clickjacking",
+      "recomendacion": "X-Frame-Options: DENY (o CSP frame-ancestors 'none')",
+      "evidencia": {
+        "cabecera_ausente": "x-frame-options"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 31,
+      "id": "MTH-01",
+      "titulo": "Metodo TRACE habilitado",
+      "severidad": "medio",
+      "confianza": "",
+      "categoria": "metodos",
+      "modulo": "",
+      "cwe": "CWE-693",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "TRACE devuelve la peticion completa y facilita Cross-Site Tracing",
+      "recomendacion": "Deshabilitar TRACE (TraceEnable off)",
+      "evidencia": {
+        "status": 200,
+        "cuerpo": "TRACE / HTTP/1.1\r\nHost: 127.0.0.1:8080\r\n\r\n"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 32,
+      "id": "MTH-02",
+      "titulo": "OPTIONS anuncia metodos de escritura",
+      "severidad": "medio",
+      "confianza": "",
+      "categoria": "metodos",
+      "modulo": "",
+      "cwe": "CWE-650",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "El servidor declara: GET, HEAD, POST, PUT, DELETE, PATCH, PROPFIND, TRACE",
+      "recomendacion": "Deshabilitar los metodos no usados",
+      "evidencia": {
+        "allow": "GET, HEAD, POST, PUT, DELETE, PATCH, PROPFIND, TRACE",
+        "peligrosos": [
+          "PUT",
+          "DELETE",
+          "PATCH"
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 36,
+      "id": "MTH-08",
+      "titulo": "WebDAV habilitado",
+      "severidad": "medio",
+      "confianza": "",
+      "categoria": "metodos",
+      "modulo": "",
+      "cwe": "CWE-650",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Anuncia: PROPFIND",
+      "recomendacion": "Deshabilitar WebDAV si no se usa",
+      "evidencia": {
+        "metodos_dav": [
+          "PROPFIND"
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 82,
+      "id": "PAR-09",
+      "titulo": "Inyeccion HTML en 'q'",
+      "severidad": "medio",
+      "confianza": "",
+      "categoria": "parametros",
+      "modulo": "",
+      "cwe": "CWE-79",
+      "owasp": "A03:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "q",
+      "detalle": "Se pueden inyectar etiquetas HTML arbitrarias; con un navegador puede escalarse a XSS",
+      "recomendacion": "Escapar la salida segun contexto",
+      "evidencia": {
+        "payload": "<hbmk-hbfs3u5q>x</hbmk-hbfs3u5q>"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 85,
+      "id": "PAR-27",
+      "titulo": "No se observa limite de peticiones",
+      "severidad": "medio",
+      "confianza": "",
+      "categoria": "parametros",
+      "modulo": "",
+      "cwe": "CWE-770",
+      "owasp": "A04:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "12 peticiones seguidas devolvieron siempre 200, sin 429 ni bloqueo",
+      "recomendacion": "Aplicar limite por IP y por cuenta en endpoints sensibles",
+      "evidencia": {
+        "peticiones": 12,
+        "codigos": [
+          200
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 87,
+      "id": "PAR-37",
+      "titulo": "Entrada reflejada dentro de JavaScript (q)",
+      "severidad": "medio",
+      "confianza": "",
+      "categoria": "parametros",
+      "modulo": "",
+      "cwe": "CWE-79",
+      "owasp": "A03:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "q",
+      "detalle": "El valor vuelve sin escapar en un contexto de script, lo que permite romper la cadena",
+      "recomendacion": "Escapar segun contexto JS y usar JSON.stringify",
+      "evidencia": {
+        "payload": "'+hbx6644j+'"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 21,
+      "id": "CKI-07",
+      "titulo": "Cookie de sesion con nombre por defecto (PHPSESSID)",
+      "severidad": "bajo",
+      "confianza": "",
+      "categoria": "cookies",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Revela el framework (PHP) sin necesidad de fingerprint",
+      "recomendacion": "Renombrar la cookie de sesion",
+      "evidencia": {
+        "cookie": "PHPSESSID=abc123; Path=/",
+        "framework": "PHP"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 37,
+      "id": "CON-01",
+      "titulo": "2 comentario(s) HTML con informacion sensible",
+      "severidad": "bajo",
+      "confianza": "",
+      "categoria": "contenido",
+      "modulo": "",
+      "cwe": "CWE-615",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Los comentarios viajan al cliente y revelan notas internas, credenciales o rutas",
+      "recomendacion": "Eliminar los comentarios en produccion",
+      "evidencia": {
+        "comentarios": [
+          "TODO: quitar el usuario admin / password: Sup3rS3cret0 antes de publicar",
+          "FIXME: la api key de produccion es api_key = \"AKIAIOSFODNN7EXAMPLE1\""
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 43,
+      "id": "CON-08",
+      "titulo": "2 script(s) sin Subresource Integrity",
+      "severidad": "bajo",
+      "confianza": "",
+      "categoria": "contenido",
+      "modulo": "",
+      "cwe": "CWE-353",
+      "owasp": "A08:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Si el CDN se compromete, el script se ejecuta sin que nadie lo detecte",
+      "recomendacion": "Anadir integrity y crossorigin a los scripts de terceros",
+      "evidencia": {
+        "scripts": [
+          "<script src=\"https://cdn.ejemplo.invalid/lib.js\">",
+          "<script src=\"/app.js\">"
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 48,
+      "id": "CON-13",
+      "titulo": "1 enlace(s) _blank sin rel=noopener",
+      "severidad": "bajo",
+      "confianza": "",
+      "categoria": "contenido",
+      "modulo": "",
+      "cwe": "CWE-1022",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "La pagina destino puede manipular la ventana de origen mediante window.opener",
+      "recomendacion": "Anadir rel=\"noopener noreferrer\"",
+      "evidencia": {
+        "enlaces": [
+          "<a href=\"https://externo.invalid\" target=\"_blank\">"
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 29,
+      "id": "CRS-06",
+      "titulo": "Respuesta CORS sin Vary: Origin",
+      "severidad": "bajo",
+      "confianza": "",
+      "categoria": "cors",
+      "modulo": "",
+      "cwe": "CWE-436",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Una cache intermedia puede servir la cabecera CORS de un origen a otro",
+      "recomendacion": "Anadir Vary: Origin",
+      "evidencia": {
+        "vary": ""
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 60,
+      "id": "FUG-04",
+      "titulo": "Fichero .DS_Store expuesto accesible",
+      "severidad": "bajo",
+      "confianza": "",
+      "categoria": "rutas",
+      "modulo": "",
+      "cwe": "CWE-538",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1/.DS_Store",
+      "parametro": "",
+      "detalle": "Revela nombres de ficheros y estructura de directorios",
+      "recomendacion": "Bloquear el acceso a .DS_Store",
+      "evidencia": {
+        "ruta": "/.DS_Store",
+        "status": 200,
+        "bytes": 22,
+        "extracto": "Bud1index.html"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 69,
+      "id": "FUG-14",
+      "titulo": "robots.txt expone rutas internas",
+      "severidad": "bajo",
+      "confianza": "",
+      "categoria": "fugas",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Rutas listadas: /admin/, /backup/, /config/",
+      "recomendacion": "No listar rutas privadas en robots.txt",
+      "evidencia": {
+        "rutas": [
+          "/admin/",
+          "/backup/",
+          "/config/"
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 4,
+      "id": "HDR-05",
+      "titulo": "Falta la cabecera referrer-policy",
+      "severidad": "bajo",
+      "confianza": "",
+      "categoria": "cabeceras",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Sin Referrer-Policy se filtran URLs completas a terceros",
+      "recomendacion": "Referrer-Policy: strict-origin-when-cross-origin",
+      "evidencia": {
+        "cabecera_ausente": "referrer-policy"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 5,
+      "id": "HDR-06",
+      "titulo": "Falta la cabecera permissions-policy",
+      "severidad": "bajo",
+      "confianza": "",
+      "categoria": "cabeceras",
+      "modulo": "",
+      "cwe": "CWE-693",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Sin Permissions-Policy las APIs del navegador quedan sin restringir",
+      "recomendacion": "Permissions-Policy: geolocation=(), microphone=(), camera=()",
+      "evidencia": {
+        "cabecera_ausente": "permissions-policy"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 6,
+      "id": "HDR-07",
+      "titulo": "Falta la cabecera cross-origin-opener-policy",
+      "severidad": "bajo",
+      "confianza": "",
+      "categoria": "cabeceras",
+      "modulo": "",
+      "cwe": "CWE-346",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Sin COOP la ventana puede ser referenciada desde otro origen",
+      "recomendacion": "Cross-Origin-Opener-Policy: same-origin",
+      "evidencia": {
+        "cabecera_ausente": "cross-origin-opener-policy"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 7,
+      "id": "HDR-08",
+      "titulo": "Falta la cabecera cross-origin-resource-policy",
+      "severidad": "bajo",
+      "confianza": "",
+      "categoria": "cabeceras",
+      "modulo": "",
+      "cwe": "CWE-346",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Sin CORP los recursos pueden ser embebidos desde otros origenes",
+      "recomendacion": "Cross-Origin-Resource-Policy: same-origin",
+      "evidencia": {
+        "cabecera_ausente": "cross-origin-resource-policy"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 13,
+      "id": "HDR-34",
+      "titulo": "Sin cabecera Cache-Control",
+      "severidad": "bajo",
+      "confianza": "",
+      "categoria": "cabeceras",
+      "modulo": "",
+      "cwe": "CWE-525",
+      "owasp": "A04:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "El contenido puede quedar en cache de proxies intermedios o del navegador",
+      "recomendacion": "Cache-Control: no-store en respuestas autenticadas o sensibles",
+      "evidencia": {
+        "cache_control": ""
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 14,
+      "id": "HDR-36",
+      "titulo": "La cabecera Server revela version",
+      "severidad": "bajo",
+      "confianza": "",
+      "categoria": "cabeceras",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Facilita elegir exploits concretos para esa version",
+      "recomendacion": "Ocultar la version (ServerTokens Prod, server_tokens off)",
+      "evidencia": {
+        "server": "Apache/2.4.49 (Unix)"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 15,
+      "id": "HDR-37",
+      "titulo": "X-Powered-By revela la tecnologia",
+      "severidad": "bajo",
+      "confianza": "",
+      "categoria": "cabeceras",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Expone el lenguaje y a veces la version exacta",
+      "recomendacion": "Eliminar la cabecera",
+      "evidencia": {
+        "x_powered_by": "PHP/8.1.2"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 16,
+      "id": "HDR-38",
+      "titulo": "Cabeceras que revelan infraestructura (2)",
+      "severidad": "bajo",
+      "confianza": "",
+      "categoria": "cabeceras",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Revelan servidores intermedios, frameworks o versiones internas",
+      "recomendacion": "Eliminar o minimizar estas cabeceras",
+      "evidencia": {
+        "x-runtime": "0.0412",
+        "via": "1.1 hunterbug-proxy"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 35,
+      "id": "MTH-05",
+      "titulo": "Un metodo no estandar no es rechazado",
+      "severidad": "bajo",
+      "confianza": "",
+      "categoria": "metodos",
+      "modulo": "",
+      "cwe": "CWE-650",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "El metodo HUNTERBUG devolvio 200 en lugar de 405/501",
+      "recomendacion": "Rechazar metodos no implementados",
+      "evidencia": {
+        "status": 200
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 23,
+      "id": "CKI-12",
+      "titulo": "Ninguna cookie cumple Secure + HttpOnly + SameSite",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "cookies",
+      "modulo": "",
+      "cwe": "CWE-614",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Se han visto 1 cookie(s) y ninguna reune las tres protecciones",
+      "recomendacion": "Aplicar las tres a todas las cookies",
+      "evidencia": {
+        "total_cookies": 1,
+        "cookies": [
+          "PHPSESSID=abc123; Path=/"
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 40,
+      "id": "CON-04",
+      "titulo": "2 direccion(es) de correo en el cuerpo",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "contenido",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Facilitan campanas de phishing y enumeracion",
+      "recomendacion": "Ofuscar o eliminar los correos publicos",
+      "evidencia": {
+        "correos": [
+          "admin@ejemplo.test",
+          "soporte@ejemplo.test"
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 46,
+      "id": "CON-11",
+      "titulo": "Campo de contrasena sin autocomplete",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "contenido",
+      "modulo": "",
+      "cwe": "CWE-522",
+      "owasp": "A07:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "El navegador puede almacenar la contrasena en equipos compartidos",
+      "recomendacion": "autocomplete=\"current-password\" o \"off\"",
+      "evidencia": {
+        "input": "<input type=\"password\" name=\"clave\">"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 49,
+      "id": "CON-14",
+      "titulo": "1 iframe(s) sin atributo sandbox",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "contenido",
+      "modulo": "",
+      "cwe": "CWE-1021",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "El contenido embebido se ejecuta con los permisos de la pagina",
+      "recomendacion": "Anadir sandbox a los iframes de terceros",
+      "evidencia": {
+        "iframes": [
+          "<iframe src=\"https://externo.invalid/widget\">"
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 50,
+      "id": "CON-15",
+      "titulo": "Meta generator revela el CMS y su version",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "contenido",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "<meta name=\"generator\" content=\"PanelCMS 3.1.4\">",
+      "recomendacion": "Eliminar la etiqueta generator",
+      "evidencia": {
+        "meta": "<meta name=\"generator\" content=\"PanelCMS 3.1.4\">"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 51,
+      "id": "CON-19",
+      "titulo": "1 referencia(s) a almacenamiento externo",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "contenido",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Los buckets mal configurados son una fuga de datos habitual",
+      "recomendacion": "Revisar las politicas del bucket",
+      "evidencia": {
+        "buckets": [
+          "https://panel-datos.s3.amazonaws.com"
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 52,
+      "id": "CON-20",
+      "titulo": "2 endpoint(s) de API referenciados",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "contenido",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Amplia la superficie de ataque conocida",
+      "recomendacion": "Revisar que cada endpoint comprueba autorizacion",
+      "evidencia": {
+        "endpoints": [
+          "/api/v1/facturas",
+          "/api/v1/usuarios"
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 53,
+      "id": "CON-21",
+      "titulo": "El HTML enlaza paneles de administracion",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "contenido",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Facilita localizar la zona privilegiada",
+      "recomendacion": "Restringir el acceso por red o autenticacion fuerte",
+      "evidencia": {
+        "rutas": [
+          "/admin/panel"
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 54,
+      "id": "CON-23",
+      "titulo": "El cuerpo declara un numero de version",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "contenido",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Version visible: 3.1.4",
+      "recomendacion": "Ocultar las versiones de los componentes",
+      "evidencia": {
+        "version": "3.1.4"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 55,
+      "id": "CON-24",
+      "titulo": "Copyright de 2019 (hace 7 anos)",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "contenido",
+      "modulo": "",
+      "cwe": "CWE-1059",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Suele indicar un sitio sin mantenimiento, con componentes antiguos",
+      "recomendacion": "Actualizar y revisar dependencias",
+      "evidencia": {
+        "anios": [
+          2019
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 56,
+      "id": "CON-28",
+      "titulo": "3 tecnologias identificadas por el contenido",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "contenido",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Detectadas: WordPress, Next.js, React",
+      "recomendacion": "Minimizar las huellas del stack",
+      "evidencia": {
+        "tecnologias": [
+          "WordPress",
+          "Next.js",
+          "React"
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 30,
+      "id": "CRS-07",
+      "titulo": "CORS expone cabeceras sensibles al JavaScript",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "cors",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Expose-Headers incluye cabeceras de autenticacion",
+      "recomendacion": "Exponer solo las cabeceras necesarias",
+      "evidencia": {
+        "expose_headers": "Authorization"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 70,
+      "id": "FUG-15",
+      "titulo": "No publica /.well-known/security.txt",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "fugas",
+      "modulo": "",
+      "cwe": "CWE-1059",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Sin canal declarado de reporte de vulnerabilidades",
+      "recomendacion": "Publicar security.txt con un contacto de seguridad",
+      "evidencia": {
+        "status": 404
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 71,
+      "id": "FUG-16",
+      "titulo": "sitemap.xml accesible",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "fugas",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Facilita el inventario de URLs del sitio",
+      "recomendacion": "Revisar si el sitemap debe ser publico",
+      "evidencia": {
+        "bytes": 66
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 73,
+      "id": "FUG-19",
+      "titulo": "Panel de administracion accesible (/admin/)",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "fugas",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Expone la interfaz de gestion del CMS",
+      "recomendacion": "Restringir por IP o autenticacion adicional",
+      "evidencia": {
+        "ruta": "/admin/",
+        "status": 200
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 75,
+      "id": "FUG-22",
+      "titulo": "La pagina 404 revela el servidor y su version",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "fugas",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Firma encontrada: Apache/2.4.49",
+      "recomendacion": "Pagina 404 personalizada",
+      "evidencia": {
+        "firma": "Apache/2.4.49",
+        "extracto": "<html><head><title>404 Not Found</title></head><body><h1>Not Found</h1><address>Apache/2.4.49 (Unix) Server at 127.0.0.1 Port 8080</address></body></html>"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 8,
+      "id": "HDR-09",
+      "titulo": "Falta la cabecera cross-origin-embedder-policy",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "cabeceras",
+      "modulo": "",
+      "cwe": "CWE-346",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Sin COEP no se aisla el contexto de ejecucion",
+      "recomendacion": "Cross-Origin-Embedder-Policy: require-corp",
+      "evidencia": {
+        "cabecera_ausente": "cross-origin-embedder-policy"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 9,
+      "id": "HDR-10",
+      "titulo": "Falta la cabecera x-permitted-cross-domain-policies",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "cabeceras",
+      "modulo": "",
+      "cwe": "CWE-346",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Sin esta cabecera los plugins de Adobe pueden cargar contenido cruzado",
+      "recomendacion": "X-Permitted-Cross-Domain-Policies: none",
+      "evidencia": {
+        "cabecera_ausente": "x-permitted-cross-domain-policies"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 10,
+      "id": "HDR-11",
+      "titulo": "Falta la cabecera x-dns-prefetch-control",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "cabeceras",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Sin control de prefetch DNS se filtran dominios a terceros",
+      "recomendacion": "X-DNS-Prefetch-Control: off",
+      "evidencia": {
+        "cabecera_ausente": "x-dns-prefetch-control"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 11,
+      "id": "HDR-12",
+      "titulo": "Falta la cabecera x-download-options",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "cabeceras",
+      "modulo": "",
+      "cwe": "CWE-436",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Sin X-Download-Options los ficheros descargados pueden ejecutarse en contexto del sitio",
+      "recomendacion": "X-Download-Options: noopen",
+      "evidencia": {
+        "cabecera_ausente": "x-download-options"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 12,
+      "id": "HDR-13",
+      "titulo": "Falta la cabecera clear-site-data",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "cabeceras",
+      "modulo": "",
+      "cwe": "CWE-613",
+      "owasp": "A07:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Sin Clear-Site-Data no se limpian los datos del sitio al cerrar sesion",
+      "recomendacion": "Clear-Site-Data: \"cache\", \"cookies\"",
+      "evidencia": {
+        "cabecera_ausente": "clear-site-data"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 17,
+      "id": "HDR-40",
+      "titulo": "El documento no declara idioma (lang)",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "cabeceras",
+      "modulo": "",
+      "cwe": "CWE-1059",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Afecta a accesibilidad y a la interpretacion del contenido por herramientas automaticas",
+      "recomendacion": "Anadir lang al elemento html",
+      "evidencia": {
+        "extracto": "<!doctype html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scal"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 86,
+      "id": "PAR-34",
+      "titulo": "El endpoint acepta text/plain en un cuerpo JSON",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "parametros",
+      "modulo": "",
+      "cwe": "CWE-436",
+      "owasp": "A03:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "No se valida el tipo de contenido declarado",
+      "recomendacion": "Rechazar tipos no esperados con 415",
+      "evidencia": {
+        "status": 200
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 88,
+      "id": "PAR-40",
+      "titulo": "La respuesta con parametros no aplica CSP ni nosniff",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "parametros",
+      "modulo": "",
+      "cwe": "CWE-693",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Una respuesta dinamica sin estas cabeceras es el escenario ideal para XSS",
+      "recomendacion": "Aplicar las cabeceras de seguridad a todas las respuestas, no solo a la portada",
+      "evidencia": {
+        "faltan": [
+          "content-security-policy",
+          "x-content-type-options"
+        ]
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 76,
+      "id": "TEC-01",
+      "titulo": "Tecnologia detectada: WordPress",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "tecnologia",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Firma encontrada: 'wp-content'",
+      "recomendacion": "Mantener la version al dia y revisar sus CVE conocidos",
+      "evidencia": {
+        "tecnologia": "WordPress",
+        "firma": "wp-content"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 77,
+      "id": "TEC-05",
+      "titulo": "Tecnologia detectada: Next.js",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "tecnologia",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Firma encontrada: '_next/static'",
+      "recomendacion": "Mantener la version al dia y revisar sus CVE conocidos",
+      "evidencia": {
+        "tecnologia": "Next.js",
+        "firma": "_next/static"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 78,
+      "id": "TEC-06",
+      "titulo": "Tecnologia detectada: React",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "tecnologia",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Firma encontrada: 'data-reactroot'",
+      "recomendacion": "Mantener la version al dia y revisar sus CVE conocidos",
+      "evidencia": {
+        "tecnologia": "React",
+        "firma": "data-reactroot"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    },
+    {
+      "n": 79,
+      "id": "TEC-11",
+      "titulo": "Tecnologia detectada: Ruby on Rails",
+      "severidad": "info",
+      "confianza": "",
+      "categoria": "tecnologia",
+      "modulo": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "parametro": "",
+      "detalle": "Firma encontrada: 'x-runtime'",
+      "recomendacion": "Mantener la version al dia y revisar sus CVE conocidos",
+      "evidencia": {
+        "tecnologia": "Ruby on Rails",
+        "firma": "x-runtime"
+      },
+      "cvss": {},
+      "nivel_cvss": "",
+      "prioridad": "",
+      "motivos_confianza": "",
+      "revisar": false,
+      "motivo_revision": "",
+      "duplicados_fusionados": 0
+    }
+  ],
+  "conteo": {
+    "critico": 8,
+    "alto": 17,
+    "medio": 19,
+    "bajo": 16,
+    "info": 28
+  },
+  "resultados": [
+    {
+      "id": "HDR-01",
+      "nombre": "Falta la cabecera strict-transport-security",
+      "categoria": "cabeceras",
+      "severidad": "alto",
+      "estado": "omitido",
+      "detalle": "solo aplica sobre HTTPS",
+      "cwe": "CWE-319",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-02",
+      "nombre": "Falta la cabecera content-security-policy",
+      "categoria": "cabeceras",
+      "severidad": "alto",
+      "estado": "fallo",
+      "detalle": "Sin CSP no hay defensa en profundidad contra XSS ni control de origenes",
+      "hallazgo": {
+        "titulo": "Falta la cabecera content-security-policy",
+        "detalle": "Sin CSP no hay defensa en profundidad contra XSS ni control de origenes",
+        "recomendacion": "default-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'self'",
+        "evidencia": {
+          "cabecera_ausente": "content-security-policy"
+        },
+        "severidad": "alto",
+        "id_check": "HDR-02",
+        "categoria": "cabeceras",
+        "cwe": "CWE-1021",
+        "owasp": "A05:2021",
+        "tipo": "cabeceras",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-1021",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-03",
+      "nombre": "Falta la cabecera x-content-type-options",
+      "categoria": "cabeceras",
+      "severidad": "medio",
+      "estado": "fallo",
+      "detalle": "Sin nosniff el navegador puede interpretar un fichero con otro tipo MIME",
+      "hallazgo": {
+        "titulo": "Falta la cabecera x-content-type-options",
+        "detalle": "Sin nosniff el navegador puede interpretar un fichero con otro tipo MIME",
+        "recomendacion": "X-Content-Type-Options: nosniff",
+        "evidencia": {
+          "cabecera_ausente": "x-content-type-options"
+        },
+        "severidad": "medio",
+        "id_check": "HDR-03",
+        "categoria": "cabeceras",
+        "cwe": "CWE-436",
+        "owasp": "A05:2021",
+        "tipo": "cabeceras",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-436",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-04",
+      "nombre": "Falta la cabecera x-frame-options",
+      "categoria": "cabeceras",
+      "severidad": "medio",
+      "estado": "fallo",
+      "detalle": "Sin proteccion de framing la pagina es embebible y vulnerable a clickjacking",
+      "hallazgo": {
+        "titulo": "Falta la cabecera x-frame-options",
+        "detalle": "Sin proteccion de framing la pagina es embebible y vulnerable a clickjacking",
+        "recomendacion": "X-Frame-Options: DENY (o CSP frame-ancestors 'none')",
+        "evidencia": {
+          "cabecera_ausente": "x-frame-options"
+        },
+        "severidad": "medio",
+        "id_check": "HDR-04",
+        "categoria": "cabeceras",
+        "cwe": "CWE-1021",
+        "owasp": "A05:2021",
+        "tipo": "cabeceras",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-1021",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-05",
+      "nombre": "Falta la cabecera referrer-policy",
+      "categoria": "cabeceras",
+      "severidad": "bajo",
+      "estado": "fallo",
+      "detalle": "Sin Referrer-Policy se filtran URLs completas a terceros",
+      "hallazgo": {
+        "titulo": "Falta la cabecera referrer-policy",
+        "detalle": "Sin Referrer-Policy se filtran URLs completas a terceros",
+        "recomendacion": "Referrer-Policy: strict-origin-when-cross-origin",
+        "evidencia": {
+          "cabecera_ausente": "referrer-policy"
+        },
+        "severidad": "bajo",
+        "id_check": "HDR-05",
+        "categoria": "cabeceras",
+        "cwe": "CWE-200",
+        "owasp": "A01:2021",
+        "tipo": "cabeceras",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-06",
+      "nombre": "Falta la cabecera permissions-policy",
+      "categoria": "cabeceras",
+      "severidad": "bajo",
+      "estado": "fallo",
+      "detalle": "Sin Permissions-Policy las APIs del navegador quedan sin restringir",
+      "hallazgo": {
+        "titulo": "Falta la cabecera permissions-policy",
+        "detalle": "Sin Permissions-Policy las APIs del navegador quedan sin restringir",
+        "recomendacion": "Permissions-Policy: geolocation=(), microphone=(), camera=()",
+        "evidencia": {
+          "cabecera_ausente": "permissions-policy"
+        },
+        "severidad": "bajo",
+        "id_check": "HDR-06",
+        "categoria": "cabeceras",
+        "cwe": "CWE-693",
+        "owasp": "A05:2021",
+        "tipo": "cabeceras",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-693",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-07",
+      "nombre": "Falta la cabecera cross-origin-opener-policy",
+      "categoria": "cabeceras",
+      "severidad": "bajo",
+      "estado": "fallo",
+      "detalle": "Sin COOP la ventana puede ser referenciada desde otro origen",
+      "hallazgo": {
+        "titulo": "Falta la cabecera cross-origin-opener-policy",
+        "detalle": "Sin COOP la ventana puede ser referenciada desde otro origen",
+        "recomendacion": "Cross-Origin-Opener-Policy: same-origin",
+        "evidencia": {
+          "cabecera_ausente": "cross-origin-opener-policy"
+        },
+        "severidad": "bajo",
+        "id_check": "HDR-07",
+        "categoria": "cabeceras",
+        "cwe": "CWE-346",
+        "owasp": "A05:2021",
+        "tipo": "cabeceras",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-346",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-08",
+      "nombre": "Falta la cabecera cross-origin-resource-policy",
+      "categoria": "cabeceras",
+      "severidad": "bajo",
+      "estado": "fallo",
+      "detalle": "Sin CORP los recursos pueden ser embebidos desde otros origenes",
+      "hallazgo": {
+        "titulo": "Falta la cabecera cross-origin-resource-policy",
+        "detalle": "Sin CORP los recursos pueden ser embebidos desde otros origenes",
+        "recomendacion": "Cross-Origin-Resource-Policy: same-origin",
+        "evidencia": {
+          "cabecera_ausente": "cross-origin-resource-policy"
+        },
+        "severidad": "bajo",
+        "id_check": "HDR-08",
+        "categoria": "cabeceras",
+        "cwe": "CWE-346",
+        "owasp": "A05:2021",
+        "tipo": "cabeceras",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-346",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-09",
+      "nombre": "Falta la cabecera cross-origin-embedder-policy",
+      "categoria": "cabeceras",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Sin COEP no se aisla el contexto de ejecucion",
+      "hallazgo": {
+        "titulo": "Falta la cabecera cross-origin-embedder-policy",
+        "detalle": "Sin COEP no se aisla el contexto de ejecucion",
+        "recomendacion": "Cross-Origin-Embedder-Policy: require-corp",
+        "evidencia": {
+          "cabecera_ausente": "cross-origin-embedder-policy"
+        },
+        "severidad": "info",
+        "id_check": "HDR-09",
+        "categoria": "cabeceras",
+        "cwe": "CWE-346",
+        "owasp": "A05:2021",
+        "tipo": "cabeceras",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-346",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-10",
+      "nombre": "Falta la cabecera x-permitted-cross-domain-policies",
+      "categoria": "cabeceras",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Sin esta cabecera los plugins de Adobe pueden cargar contenido cruzado",
+      "hallazgo": {
+        "titulo": "Falta la cabecera x-permitted-cross-domain-policies",
+        "detalle": "Sin esta cabecera los plugins de Adobe pueden cargar contenido cruzado",
+        "recomendacion": "X-Permitted-Cross-Domain-Policies: none",
+        "evidencia": {
+          "cabecera_ausente": "x-permitted-cross-domain-policies"
+        },
+        "severidad": "info",
+        "id_check": "HDR-10",
+        "categoria": "cabeceras",
+        "cwe": "CWE-346",
+        "owasp": "A05:2021",
+        "tipo": "cabeceras",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-346",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-11",
+      "nombre": "Falta la cabecera x-dns-prefetch-control",
+      "categoria": "cabeceras",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Sin control de prefetch DNS se filtran dominios a terceros",
+      "hallazgo": {
+        "titulo": "Falta la cabecera x-dns-prefetch-control",
+        "detalle": "Sin control de prefetch DNS se filtran dominios a terceros",
+        "recomendacion": "X-DNS-Prefetch-Control: off",
+        "evidencia": {
+          "cabecera_ausente": "x-dns-prefetch-control"
+        },
+        "severidad": "info",
+        "id_check": "HDR-11",
+        "categoria": "cabeceras",
+        "cwe": "CWE-200",
+        "owasp": "A01:2021",
+        "tipo": "cabeceras",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-12",
+      "nombre": "Falta la cabecera x-download-options",
+      "categoria": "cabeceras",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Sin X-Download-Options los ficheros descargados pueden ejecutarse en contexto del sitio",
+      "hallazgo": {
+        "titulo": "Falta la cabecera x-download-options",
+        "detalle": "Sin X-Download-Options los ficheros descargados pueden ejecutarse en contexto del sitio",
+        "recomendacion": "X-Download-Options: noopen",
+        "evidencia": {
+          "cabecera_ausente": "x-download-options"
+        },
+        "severidad": "info",
+        "id_check": "HDR-12",
+        "categoria": "cabeceras",
+        "cwe": "CWE-436",
+        "owasp": "A05:2021",
+        "tipo": "cabeceras",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-436",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-13",
+      "nombre": "Falta la cabecera clear-site-data",
+      "categoria": "cabeceras",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Sin Clear-Site-Data no se limpian los datos del sitio al cerrar sesion",
+      "hallazgo": {
+        "titulo": "Falta la cabecera clear-site-data",
+        "detalle": "Sin Clear-Site-Data no se limpian los datos del sitio al cerrar sesion",
+        "recomendacion": "Clear-Site-Data: \"cache\", \"cookies\"",
+        "evidencia": {
+          "cabecera_ausente": "clear-site-data"
+        },
+        "severidad": "info",
+        "id_check": "HDR-13",
+        "categoria": "cabeceras",
+        "cwe": "CWE-613",
+        "owasp": "A07:2021",
+        "tipo": "cabeceras",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-613",
+      "owasp": "A07:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-14",
+      "nombre": "HSTS con max-age corto",
+      "categoria": "cabeceras",
+      "severidad": "medio",
+      "estado": "omitido",
+      "detalle": "solo aplica sobre HTTPS",
+      "cwe": "CWE-319",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-15",
+      "nombre": "HSTS sin includeSubDomains",
+      "categoria": "cabeceras",
+      "severidad": "bajo",
+      "estado": "omitido",
+      "detalle": "solo aplica sobre HTTPS",
+      "cwe": "CWE-319",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-16",
+      "nombre": "HSTS sin preload",
+      "categoria": "cabeceras",
+      "severidad": "info",
+      "estado": "omitido",
+      "detalle": "solo aplica sobre HTTPS",
+      "cwe": "CWE-319",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-17",
+      "nombre": "CSP sin default-src",
+      "categoria": "cabeceras",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1021",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-18",
+      "nombre": "CSP sin object-src",
+      "categoria": "cabeceras",
+      "severidad": "bajo",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1021",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-19",
+      "nombre": "CSP sin base-uri",
+      "categoria": "cabeceras",
+      "severidad": "bajo",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1021",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-20",
+      "nombre": "CSP sin frame-ancestors",
+      "categoria": "cabeceras",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1021",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-21",
+      "nombre": "CSP con unsafe-inline",
+      "categoria": "cabeceras",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1021",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-22",
+      "nombre": "CSP con unsafe-eval",
+      "categoria": "cabeceras",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1021",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-23",
+      "nombre": "CSP con comodin *",
+      "categoria": "cabeceras",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1021",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-24",
+      "nombre": "CSP permite data: en scripts",
+      "categoria": "cabeceras",
+      "severidad": "bajo",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1021",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-25",
+      "nombre": "CSP sin form-action",
+      "categoria": "cabeceras",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1021",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-26",
+      "nombre": "CSP sin upgrade-insecure-requests",
+      "categoria": "cabeceras",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-319",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-27",
+      "nombre": "CSP sin reporte de violaciones",
+      "categoria": "cabeceras",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-693",
+      "owasp": "A09:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-28",
+      "nombre": "X-Content-Type-Options con valor invalido",
+      "categoria": "cabeceras",
+      "severidad": "bajo",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-436",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-29",
+      "nombre": "X-Frame-Options con valor invalido",
+      "categoria": "cabeceras",
+      "severidad": "bajo",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1021",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-30",
+      "nombre": "X-Frame-Options ALLOW-FROM obsoleto",
+      "categoria": "cabeceras",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1021",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-31",
+      "nombre": "Referrer-Policy insegura",
+      "categoria": "cabeceras",
+      "severidad": "bajo",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-32",
+      "nombre": "Permissions-Policy ausente con Feature-Policy",
+      "categoria": "cabeceras",
+      "severidad": "bajo",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-693",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-33",
+      "nombre": "X-XSS-Protection presente (obsoleta)",
+      "categoria": "cabeceras",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-693",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-34",
+      "nombre": "Cache-Control sin no-store",
+      "categoria": "cabeceras",
+      "severidad": "bajo",
+      "estado": "fallo",
+      "detalle": "El contenido puede quedar en cache de proxies intermedios o del navegador",
+      "hallazgo": {
+        "titulo": "Sin cabecera Cache-Control",
+        "detalle": "El contenido puede quedar en cache de proxies intermedios o del navegador",
+        "recomendacion": "Cache-Control: no-store en respuestas autenticadas o sensibles",
+        "evidencia": {
+          "cache_control": ""
+        },
+        "severidad": "bajo",
+        "id_check": "HDR-34",
+        "categoria": "cabeceras",
+        "cwe": "CWE-525",
+        "owasp": "A04:2021",
+        "tipo": "cabeceras",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-525",
+      "owasp": "A04:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-35",
+      "nombre": "Cabeceras Pragma/Expires obsoletas",
+      "categoria": "cabeceras",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-525",
+      "owasp": "A04:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-36",
+      "nombre": "Server revela version",
+      "categoria": "cabeceras",
+      "severidad": "bajo",
+      "estado": "fallo",
+      "detalle": "Facilita elegir exploits concretos para esa version",
+      "hallazgo": {
+        "titulo": "La cabecera Server revela version",
+        "detalle": "Facilita elegir exploits concretos para esa version",
+        "recomendacion": "Ocultar la version (ServerTokens Prod, server_tokens off)",
+        "evidencia": {
+          "server": "Apache/2.4.49 (Unix)"
+        },
+        "severidad": "bajo",
+        "id_check": "HDR-36",
+        "categoria": "cabeceras",
+        "cwe": "CWE-200",
+        "owasp": "A05:2021",
+        "tipo": "cabeceras",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-37",
+      "nombre": "X-Powered-By revela tecnologia",
+      "categoria": "cabeceras",
+      "severidad": "bajo",
+      "estado": "fallo",
+      "detalle": "Expone el lenguaje y a veces la version exacta",
+      "hallazgo": {
+        "titulo": "X-Powered-By revela la tecnologia",
+        "detalle": "Expone el lenguaje y a veces la version exacta",
+        "recomendacion": "Eliminar la cabecera",
+        "evidencia": {
+          "x_powered_by": "PHP/8.1.2"
+        },
+        "severidad": "bajo",
+        "id_check": "HDR-37",
+        "categoria": "cabeceras",
+        "cwe": "CWE-200",
+        "owasp": "A05:2021",
+        "tipo": "cabeceras",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-38",
+      "nombre": "Otras cabeceras revelan el stack",
+      "categoria": "cabeceras",
+      "severidad": "bajo",
+      "estado": "fallo",
+      "detalle": "Revelan servidores intermedios, frameworks o versiones internas",
+      "hallazgo": {
+        "titulo": "Cabeceras que revelan infraestructura (2)",
+        "detalle": "Revelan servidores intermedios, frameworks o versiones internas",
+        "recomendacion": "Eliminar o minimizar estas cabeceras",
+        "evidencia": {
+          "x-runtime": "0.0412",
+          "via": "1.1 hunterbug-proxy"
+        },
+        "severidad": "bajo",
+        "id_check": "HDR-38",
+        "categoria": "cabeceras",
+        "cwe": "CWE-200",
+        "owasp": "A05:2021",
+        "tipo": "cabeceras",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-39",
+      "nombre": "Sin cabecera Vary",
+      "categoria": "cabeceras",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-436",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "HDR-40",
+      "nombre": "Sin politica de contenido en el idioma declarado",
+      "categoria": "cabeceras",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Afecta a accesibilidad y a la interpretacion del contenido por herramientas automaticas",
+      "hallazgo": {
+        "titulo": "El documento no declara idioma (lang)",
+        "detalle": "Afecta a accesibilidad y a la interpretacion del contenido por herramientas automaticas",
+        "recomendacion": "Anadir lang al elemento html",
+        "evidencia": {
+          "extracto": "<!doctype html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scal"
+        },
+        "severidad": "info",
+        "id_check": "HDR-40",
+        "categoria": "cabeceras",
+        "cwe": "CWE-1059",
+        "owasp": "A05:2021",
+        "tipo": "cabeceras",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-1059",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CKI-01",
+      "nombre": "Cookie sin secure",
+      "categoria": "cookies",
+      "severidad": "alto",
+      "estado": "fallo",
+      "detalle": "La cookie viaja tambien por HTTP sin cifrar y puede ser interceptada",
+      "hallazgo": {
+        "titulo": "1 cookie(s) sin secure",
+        "detalle": "La cookie viaja tambien por HTTP sin cifrar y puede ser interceptada",
+        "recomendacion": "Anadir el atributo Secure a todas las cookies de sesion",
+        "evidencia": {
+          "cookies": [
+            "PHPSESSID=abc123; Path=/"
+          ]
+        },
+        "severidad": "alto",
+        "id_check": "CKI-01",
+        "categoria": "cookies",
+        "cwe": "CWE-614",
+        "owasp": "A05:2021",
+        "tipo": "cookies",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-614",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CKI-02",
+      "nombre": "Cookie sin httponly",
+      "categoria": "cookies",
+      "severidad": "alto",
+      "estado": "fallo",
+      "detalle": "Sin HttpOnly el JavaScript de la pagina puede leer la cookie, lo que convierte cualquier XSS en robo de sesion",
+      "hallazgo": {
+        "titulo": "1 cookie(s) sin httponly",
+        "detalle": "Sin HttpOnly el JavaScript de la pagina puede leer la cookie, lo que convierte cualquier XSS en robo de sesion",
+        "recomendacion": "Anadir HttpOnly a las cookies de sesion",
+        "evidencia": {
+          "cookies": [
+            "PHPSESSID=abc123; Path=/"
+          ]
+        },
+        "severidad": "alto",
+        "id_check": "CKI-02",
+        "categoria": "cookies",
+        "cwe": "CWE-1004",
+        "owasp": "A05:2021",
+        "tipo": "cookies",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-1004",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CKI-03",
+      "nombre": "Cookie sin samesite",
+      "categoria": "cookies",
+      "severidad": "medio",
+      "estado": "fallo",
+      "detalle": "Sin SameSite el navegador envia la cookie en peticiones cruzadas, lo que facilita CSRF",
+      "hallazgo": {
+        "titulo": "1 cookie(s) sin samesite",
+        "detalle": "Sin SameSite el navegador envia la cookie en peticiones cruzadas, lo que facilita CSRF",
+        "recomendacion": "Anadir SameSite=Lax o Strict",
+        "evidencia": {
+          "cookies": [
+            "PHPSESSID=abc123; Path=/"
+          ]
+        },
+        "severidad": "medio",
+        "id_check": "CKI-03",
+        "categoria": "cookies",
+        "cwe": "CWE-1275",
+        "owasp": "A01:2021",
+        "tipo": "cookies",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-1275",
+      "owasp": "A01:2021",
+      "activo": false
+    },
+    {
+      "id": "CKI-04",
+      "nombre": "SameSite=None sin Secure",
+      "categoria": "cookies",
+      "severidad": "alto",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1275",
+      "owasp": "A01:2021",
+      "activo": false
+    },
+    {
+      "id": "CKI-05",
+      "nombre": "Prefijo __Host- mal aplicado",
+      "categoria": "cookies",
+      "severidad": "bajo",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-565",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CKI-06",
+      "nombre": "Prefijo __Secure- mal aplicado",
+      "categoria": "cookies",
+      "severidad": "bajo",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-565",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CKI-07",
+      "nombre": "Nombre de cookie de sesion por defecto",
+      "categoria": "cookies",
+      "severidad": "bajo",
+      "estado": "fallo",
+      "detalle": "Revela el framework (PHP) sin necesidad de fingerprint",
+      "hallazgo": {
+        "titulo": "Cookie de sesion con nombre por defecto (PHPSESSID)",
+        "detalle": "Revela el framework (PHP) sin necesidad de fingerprint",
+        "recomendacion": "Renombrar la cookie de sesion",
+        "evidencia": {
+          "cookie": "PHPSESSID=abc123; Path=/",
+          "framework": "PHP"
+        },
+        "severidad": "bajo",
+        "id_check": "CKI-07",
+        "categoria": "cookies",
+        "cwe": "CWE-200",
+        "owasp": "A05:2021",
+        "tipo": "cookies",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CKI-08",
+      "nombre": "Cookie de sesion con valor corto",
+      "categoria": "cookies",
+      "severidad": "medio",
+      "estado": "fallo",
+      "detalle": "Un identificador corto es adivinable por fuerza bruta",
+      "hallazgo": {
+        "titulo": "Identificador de sesion corto (6 caracteres)",
+        "detalle": "Un identificador corto es adivinable por fuerza bruta",
+        "recomendacion": "Usar al menos 128 bits de entropia",
+        "evidencia": {
+          "cookie": "PHPSESSID",
+          "longitud": 6
+        },
+        "severidad": "medio",
+        "id_check": "CKI-08",
+        "categoria": "cookies",
+        "cwe": "CWE-330",
+        "owasp": "A02:2021",
+        "tipo": "cookies",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-330",
+      "owasp": "A02:2021",
+      "activo": false
+    },
+    {
+      "id": "CKI-09",
+      "nombre": "Cookie de sesion persistente",
+      "categoria": "cookies",
+      "severidad": "bajo",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-539",
+      "owasp": "A07:2021",
+      "activo": false
+    },
+    {
+      "id": "CKI-10",
+      "nombre": "Cookie con Domain demasiado amplio",
+      "categoria": "cookies",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-565",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CKI-11",
+      "nombre": "Cookie sin Path",
+      "categoria": "cookies",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-565",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CKI-12",
+      "nombre": "Sin cookies de sesion con proteccion completa",
+      "categoria": "cookies",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Se han visto 1 cookie(s) y ninguna reune las tres protecciones",
+      "hallazgo": {
+        "titulo": "Ninguna cookie cumple Secure + HttpOnly + SameSite",
+        "detalle": "Se han visto 1 cookie(s) y ninguna reune las tres protecciones",
+        "recomendacion": "Aplicar las tres a todas las cookies",
+        "evidencia": {
+          "total_cookies": 1,
+          "cookies": [
+            "PHPSESSID=abc123; Path=/"
+          ]
+        },
+        "severidad": "info",
+        "id_check": "CKI-12",
+        "categoria": "cookies",
+        "cwe": "CWE-614",
+        "owasp": "A05:2021",
+        "tipo": "cookies",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-614",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CRS-01",
+      "nombre": "CORS con comodin",
+      "categoria": "cors",
+      "severidad": "medio",
+      "estado": "fallo",
+      "detalle": "Cualquier web puede leer la respuesta desde el navegador de la victima",
+      "hallazgo": {
+        "titulo": "CORS permite cualquier origen (*)",
+        "detalle": "Cualquier web puede leer la respuesta desde el navegador de la victima",
+        "recomendacion": "Lista blanca de origenes concretos",
+        "evidencia": {
+          "acao": "*"
+        },
+        "severidad": "medio",
+        "id_check": "CRS-01",
+        "categoria": "cors",
+        "cwe": "CWE-942",
+        "owasp": "A05:2021",
+        "tipo": "cors",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-942",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CRS-02",
+      "nombre": "CORS refleja el origen recibido",
+      "categoria": "cors",
+      "severidad": "alto",
+      "estado": "fallo",
+      "detalle": "El servidor devuelve el origen solicitado sin validarlo, lo que permite leer respuestas desde cualquier web",
+      "hallazgo": {
+        "titulo": "CORS refleja cualquier Origin enviado",
+        "detalle": "El servidor devuelve el origen solicitado sin validarlo, lo que permite leer respuestas desde cualquier web",
+        "recomendacion": "Validar el Origin contra una lista blanca",
+        "evidencia": {
+          "origin_enviado": "https://hunterbug-prueba.invalid",
+          "acao_devuelto": "https://hunterbug-prueba.invalid"
+        },
+        "severidad": "alto",
+        "id_check": "CRS-02",
+        "categoria": "cors",
+        "cwe": "CWE-942",
+        "owasp": "A05:2021",
+        "tipo": "cors",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-942",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CRS-03",
+      "nombre": "CORS refleja origen con credenciales",
+      "categoria": "cors",
+      "severidad": "critico",
+      "estado": "fallo",
+      "detalle": "Con Allow-Credentials true y el Origin reflejado, cualquier web puede leer respuestas con la sesion del usuario",
+      "hallazgo": {
+        "titulo": "CORS con credenciales y origen reflejado",
+        "detalle": "Con Allow-Credentials true y el Origin reflejado, cualquier web puede leer respuestas con la sesion del usuario",
+        "recomendacion": "Lista blanca estricta de origenes y Vary: Origin",
+        "evidencia": {
+          "origin_enviado": "https://hunterbug-prueba.invalid",
+          "acao": "https://hunterbug-prueba.invalid",
+          "acac": "true"
+        },
+        "severidad": "critico",
+        "id_check": "CRS-03",
+        "categoria": "cors",
+        "cwe": "CWE-942",
+        "owasp": "A05:2021",
+        "tipo": "cors",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-942",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CRS-04",
+      "nombre": "CORS acepta origen null",
+      "categoria": "cors",
+      "severidad": "alto",
+      "estado": "fallo",
+      "detalle": "El origen null procede de iframes sandbox o ficheros locales y no deberia autorizarse",
+      "hallazgo": {
+        "titulo": "CORS acepta el origen null",
+        "detalle": "El origen null procede de iframes sandbox o ficheros locales y no deberia autorizarse",
+        "recomendacion": "Rechazar explicitamente el origen null",
+        "evidencia": {
+          "acao": "null"
+        },
+        "severidad": "alto",
+        "id_check": "CRS-04",
+        "categoria": "cors",
+        "cwe": "CWE-942",
+        "owasp": "A05:2021",
+        "tipo": "cors",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-942",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CRS-05",
+      "nombre": "CORS con comodin y credenciales",
+      "categoria": "cors",
+      "severidad": "alto",
+      "estado": "fallo",
+      "detalle": "Combinacion contradictoria que algunos proxies resuelven reflejando el origen",
+      "hallazgo": {
+        "titulo": "CORS con comodin y credenciales",
+        "detalle": "Combinacion contradictoria que algunos proxies resuelven reflejando el origen",
+        "recomendacion": "Eliminar el comodin cuando se usan credenciales",
+        "evidencia": {
+          "acao": "*",
+          "acac": "true"
+        },
+        "severidad": "alto",
+        "id_check": "CRS-05",
+        "categoria": "cors",
+        "cwe": "CWE-942",
+        "owasp": "A05:2021",
+        "tipo": "cors",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-942",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CRS-06",
+      "nombre": "Sin Vary: Origin en respuesta CORS",
+      "categoria": "cors",
+      "severidad": "bajo",
+      "estado": "fallo",
+      "detalle": "Una cache intermedia puede servir la cabecera CORS de un origen a otro",
+      "hallazgo": {
+        "titulo": "Respuesta CORS sin Vary: Origin",
+        "detalle": "Una cache intermedia puede servir la cabecera CORS de un origen a otro",
+        "recomendacion": "Anadir Vary: Origin",
+        "evidencia": {
+          "vary": ""
+        },
+        "severidad": "bajo",
+        "id_check": "CRS-06",
+        "categoria": "cors",
+        "cwe": "CWE-436",
+        "owasp": "A05:2021",
+        "tipo": "cors",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-436",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CRS-07",
+      "nombre": "CORS expone cabeceras sensibles",
+      "categoria": "cors",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Expose-Headers incluye cabeceras de autenticacion",
+      "hallazgo": {
+        "titulo": "CORS expone cabeceras sensibles al JavaScript",
+        "detalle": "Expose-Headers incluye cabeceras de autenticacion",
+        "recomendacion": "Exponer solo las cabeceras necesarias",
+        "evidencia": {
+          "expose_headers": "Authorization"
+        },
+        "severidad": "info",
+        "id_check": "CRS-07",
+        "categoria": "cors",
+        "cwe": "CWE-200",
+        "owasp": "A05:2021",
+        "tipo": "cors",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "MTH-01",
+      "nombre": "TRACE habilitado",
+      "categoria": "metodos",
+      "severidad": "medio",
+      "estado": "fallo",
+      "detalle": "TRACE devuelve la peticion completa y facilita Cross-Site Tracing",
+      "hallazgo": {
+        "titulo": "Metodo TRACE habilitado",
+        "detalle": "TRACE devuelve la peticion completa y facilita Cross-Site Tracing",
+        "recomendacion": "Deshabilitar TRACE (TraceEnable off)",
+        "evidencia": {
+          "status": 200,
+          "cuerpo": "TRACE / HTTP/1.1\r\nHost: 127.0.0.1:8080\r\n\r\n"
+        },
+        "severidad": "medio",
+        "id_check": "MTH-01",
+        "categoria": "metodos",
+        "cwe": "CWE-693",
+        "owasp": "A05:2021",
+        "tipo": "metodos",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-693",
+      "owasp": "A05:2021",
+      "activo": true
+    },
+    {
+      "id": "MTH-02",
+      "nombre": "OPTIONS revela metodos de escritura",
+      "categoria": "metodos",
+      "severidad": "medio",
+      "estado": "fallo",
+      "detalle": "El servidor declara: GET, HEAD, POST, PUT, DELETE, PATCH, PROPFIND, TRACE",
+      "hallazgo": {
+        "titulo": "OPTIONS anuncia metodos de escritura",
+        "detalle": "El servidor declara: GET, HEAD, POST, PUT, DELETE, PATCH, PROPFIND, TRACE",
+        "recomendacion": "Deshabilitar los metodos no usados",
+        "evidencia": {
+          "allow": "GET, HEAD, POST, PUT, DELETE, PATCH, PROPFIND, TRACE",
+          "peligrosos": [
+            "PUT",
+            "DELETE",
+            "PATCH"
+          ]
+        },
+        "severidad": "medio",
+        "id_check": "MTH-02",
+        "categoria": "metodos",
+        "cwe": "CWE-650",
+        "owasp": "A05:2021",
+        "tipo": "metodos",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-650",
+      "owasp": "A05:2021",
+      "activo": true
+    },
+    {
+      "id": "MTH-03",
+      "nombre": "PUT no rechazado",
+      "categoria": "metodos",
+      "severidad": "alto",
+      "estado": "fallo",
+      "detalle": "PUT sobre una ruta inexistente devolvio 201: puede permitir subir contenido",
+      "hallazgo": {
+        "titulo": "El servidor acepta PUT",
+        "detalle": "PUT sobre una ruta inexistente devolvio 201: puede permitir subir contenido",
+        "recomendacion": "Rechazar PUT con 405 salvo donde sea necesario",
+        "evidencia": {
+          "status": 201,
+          "ruta": "http://127.0.0.1:8080/hunterbug-sonda-1792961860"
+        },
+        "severidad": "alto",
+        "id_check": "MTH-03",
+        "categoria": "metodos",
+        "cwe": "CWE-650",
+        "owasp": "A05:2021",
+        "tipo": "metodos",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-650",
+      "owasp": "A05:2021",
+      "activo": true
+    },
+    {
+      "id": "MTH-04",
+      "nombre": "DELETE no rechazado",
+      "categoria": "metodos",
+      "severidad": "alto",
+      "estado": "fallo",
+      "detalle": "DELETE sobre una ruta inexistente devolvio 204",
+      "hallazgo": {
+        "titulo": "El servidor acepta DELETE",
+        "detalle": "DELETE sobre una ruta inexistente devolvio 204",
+        "recomendacion": "Rechazar DELETE con 405 salvo donde sea necesario",
+        "evidencia": {
+          "status": 204,
+          "ruta": "http://127.0.0.1:8080/hunterbug-sonda-1792961860"
+        },
+        "severidad": "alto",
+        "id_check": "MTH-04",
+        "categoria": "metodos",
+        "cwe": "CWE-650",
+        "owasp": "A05:2021",
+        "tipo": "metodos",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-650",
+      "owasp": "A05:2021",
+      "activo": true
+    },
+    {
+      "id": "MTH-05",
+      "nombre": "Metodo arbitrario no rechazado",
+      "categoria": "metodos",
+      "severidad": "bajo",
+      "estado": "fallo",
+      "detalle": "El metodo HUNTERBUG devolvio 200 en lugar de 405/501",
+      "hallazgo": {
+        "titulo": "Un metodo no estandar no es rechazado",
+        "detalle": "El metodo HUNTERBUG devolvio 200 en lugar de 405/501",
+        "recomendacion": "Rechazar metodos no implementados",
+        "evidencia": {
+          "status": 200
+        },
+        "severidad": "bajo",
+        "id_check": "MTH-05",
+        "categoria": "metodos",
+        "cwe": "CWE-650",
+        "owasp": "A05:2021",
+        "tipo": "metodos",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-650",
+      "owasp": "A05:2021",
+      "activo": true
+    },
+    {
+      "id": "MTH-06",
+      "nombre": "Sin cabecera Allow en OPTIONS",
+      "categoria": "metodos",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1059",
+      "owasp": "A05:2021",
+      "activo": true
+    },
+    {
+      "id": "MTH-07",
+      "nombre": "Metodos de escritura anunciados en Allow",
+      "categoria": "metodos",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-650",
+      "owasp": "A05:2021",
+      "activo": true
+    },
+    {
+      "id": "MTH-08",
+      "nombre": "WebDAV anunciado",
+      "categoria": "metodos",
+      "severidad": "medio",
+      "estado": "fallo",
+      "detalle": "Anuncia: PROPFIND",
+      "hallazgo": {
+        "titulo": "WebDAV habilitado",
+        "detalle": "Anuncia: PROPFIND",
+        "recomendacion": "Deshabilitar WebDAV si no se usa",
+        "evidencia": {
+          "metodos_dav": [
+            "PROPFIND"
+          ]
+        },
+        "severidad": "medio",
+        "id_check": "MTH-08",
+        "categoria": "metodos",
+        "cwe": "CWE-650",
+        "owasp": "A05:2021",
+        "tipo": "metodos",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-650",
+      "owasp": "A05:2021",
+      "activo": true
+    },
+    {
+      "id": "TLS-01",
+      "nombre": "TLS 1.0 aceptado",
+      "categoria": "tls",
+      "severidad": "alto",
+      "estado": "omitido",
+      "detalle": "solo aplica sobre HTTPS",
+      "cwe": "CWE-326",
+      "owasp": "A02:2021",
+      "activo": false
+    },
+    {
+      "id": "TLS-02",
+      "nombre": "TLS 1.1 aceptado",
+      "categoria": "tls",
+      "severidad": "medio",
+      "estado": "omitido",
+      "detalle": "solo aplica sobre HTTPS",
+      "cwe": "CWE-326",
+      "owasp": "A02:2021",
+      "activo": false
+    },
+    {
+      "id": "TLS-03",
+      "nombre": "Sin TLS 1.3",
+      "categoria": "tls",
+      "severidad": "bajo",
+      "estado": "omitido",
+      "detalle": "solo aplica sobre HTTPS",
+      "cwe": "CWE-326",
+      "owasp": "A02:2021",
+      "activo": false
+    },
+    {
+      "id": "TLS-04",
+      "nombre": "Solo TLS 1.2 o inferior",
+      "categoria": "tls",
+      "severidad": "info",
+      "estado": "omitido",
+      "detalle": "solo aplica sobre HTTPS",
+      "cwe": "CWE-326",
+      "owasp": "A02:2021",
+      "activo": false
+    },
+    {
+      "id": "TLS-05",
+      "nombre": "Certificado caducado",
+      "categoria": "tls",
+      "severidad": "alto",
+      "estado": "omitido",
+      "detalle": "solo aplica sobre HTTPS",
+      "cwe": "CWE-298",
+      "owasp": "A02:2021",
+      "activo": false
+    },
+    {
+      "id": "TLS-06",
+      "nombre": "Certificado caduca pronto",
+      "categoria": "tls",
+      "severidad": "bajo",
+      "estado": "omitido",
+      "detalle": "solo aplica sobre HTTPS",
+      "cwe": "CWE-298",
+      "owasp": "A02:2021",
+      "activo": false
+    },
+    {
+      "id": "TLS-07",
+      "nombre": "Certificado autofirmado",
+      "categoria": "tls",
+      "severidad": "medio",
+      "estado": "omitido",
+      "detalle": "solo aplica sobre HTTPS",
+      "cwe": "CWE-295",
+      "owasp": "A02:2021",
+      "activo": false
+    },
+    {
+      "id": "TLS-08",
+      "nombre": "Firma del certificado con SHA-1",
+      "categoria": "tls",
+      "severidad": "alto",
+      "estado": "omitido",
+      "detalle": "solo aplica sobre HTTPS",
+      "cwe": "CWE-327",
+      "owasp": "A02:2021",
+      "activo": false
+    },
+    {
+      "id": "TLS-09",
+      "nombre": "Clave RSA menor de 2048 bits",
+      "categoria": "tls",
+      "severidad": "alto",
+      "estado": "omitido",
+      "detalle": "solo aplica sobre HTTPS",
+      "cwe": "CWE-326",
+      "owasp": "A02:2021",
+      "activo": false
+    },
+    {
+      "id": "TLS-10",
+      "nombre": "Cifrado sin forward secrecy",
+      "categoria": "tls",
+      "severidad": "medio",
+      "estado": "omitido",
+      "detalle": "solo aplica sobre HTTPS",
+      "cwe": "CWE-326",
+      "owasp": "A02:2021",
+      "activo": false
+    },
+    {
+      "id": "TLS-11",
+      "nombre": "Cifrado debil (RC4/3DES/CBC)",
+      "categoria": "tls",
+      "severidad": "alto",
+      "estado": "omitido",
+      "detalle": "solo aplica sobre HTTPS",
+      "cwe": "CWE-327",
+      "owasp": "A02:2021",
+      "activo": false
+    },
+    {
+      "id": "TLS-12",
+      "nombre": "Sin datos del certificado",
+      "categoria": "tls",
+      "severidad": "info",
+      "estado": "omitido",
+      "detalle": "solo aplica sobre HTTPS",
+      "cwe": "CWE-295",
+      "owasp": "A02:2021",
+      "activo": false
+    },
+    {
+      "id": "TLS-13",
+      "nombre": "Emisor desconocido",
+      "categoria": "tls",
+      "severidad": "info",
+      "estado": "omitido",
+      "detalle": "solo aplica sobre HTTPS",
+      "cwe": "CWE-295",
+      "owasp": "A02:2021",
+      "activo": false
+    },
+    {
+      "id": "TLS-14",
+      "nombre": "Sin sujeto legible en el certificado",
+      "categoria": "tls",
+      "severidad": "info",
+      "estado": "omitido",
+      "detalle": "solo aplica sobre HTTPS",
+      "cwe": "CWE-295",
+      "owasp": "A02:2021",
+      "activo": false
+    },
+    {
+      "id": "RSP-01",
+      "nombre": "Respuesta lenta",
+      "categoria": "respuesta",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1059",
+      "owasp": "A04:2021",
+      "activo": false
+    },
+    {
+      "id": "RSP-02",
+      "nombre": "Sin compresion",
+      "categoria": "respuesta",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1059",
+      "owasp": "A04:2021",
+      "activo": false
+    },
+    {
+      "id": "RSP-03",
+      "nombre": "Compresion con datos sensibles",
+      "categoria": "respuesta",
+      "severidad": "bajo",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-310",
+      "owasp": "A02:2021",
+      "activo": false
+    },
+    {
+      "id": "RSP-04",
+      "nombre": "Sin cabecera Content-Type",
+      "categoria": "respuesta",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-436",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "RSP-05",
+      "nombre": "Sin charset declarado",
+      "categoria": "respuesta",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-436",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "RSP-06",
+      "nombre": "Sin cabecera Date",
+      "categoria": "respuesta",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1059",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "RSP-07",
+      "nombre": "Sin Content-Length ni chunked",
+      "categoria": "respuesta",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1059",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "RSP-08",
+      "nombre": "HTTP/1.0 soportado",
+      "categoria": "respuesta",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1059",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "RSP-09",
+      "nombre": "Cabeceras duplicadas",
+      "categoria": "respuesta",
+      "severidad": "bajo",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-436",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "RSP-10",
+      "nombre": "Redireccion a otro dominio",
+      "categoria": "respuesta",
+      "severidad": "bajo",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-601",
+      "owasp": "A01:2021",
+      "activo": false
+    },
+    {
+      "id": "RSP-11",
+      "nombre": "Redireccion en cadena larga",
+      "categoria": "respuesta",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-601",
+      "owasp": "A01:2021",
+      "activo": false
+    },
+    {
+      "id": "RSP-12",
+      "nombre": "Cuerpo de error con detalles internos",
+      "categoria": "respuesta",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-209",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-01",
+      "nombre": "Comentarios HTML con informacion sensible",
+      "categoria": "contenido",
+      "severidad": "bajo",
+      "estado": "fallo",
+      "detalle": "Los comentarios viajan al cliente y revelan notas internas, credenciales o rutas",
+      "hallazgo": {
+        "titulo": "2 comentario(s) HTML con informacion sensible",
+        "detalle": "Los comentarios viajan al cliente y revelan notas internas, credenciales o rutas",
+        "recomendacion": "Eliminar los comentarios en produccion",
+        "evidencia": {
+          "comentarios": [
+            "TODO: quitar el usuario admin / password: Sup3rS3cret0 antes de publicar",
+            "FIXME: la api key de produccion es api_key = \"AKIAIOSFODNN7EXAMPLE1\""
+          ]
+        },
+        "severidad": "bajo",
+        "id_check": "CON-01",
+        "categoria": "contenido",
+        "cwe": "CWE-615",
+        "owasp": "A05:2021",
+        "tipo": "contenido",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-615",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-02",
+      "nombre": "Source maps expuestos",
+      "categoria": "contenido",
+      "severidad": "medio",
+      "estado": "fallo",
+      "detalle": "Los ficheros .map permiten reconstruir el codigo fuente original",
+      "hallazgo": {
+        "titulo": "El codigo referencia source maps",
+        "detalle": "Los ficheros .map permiten reconstruir el codigo fuente original",
+        "recomendacion": "No publicar los .map en produccion",
+        "evidencia": {
+          "referencias": [
+            "/app.js.map-->"
+          ]
+        },
+        "severidad": "medio",
+        "id_check": "CON-02",
+        "categoria": "contenido",
+        "cwe": "CWE-540",
+        "owasp": "A05:2021",
+        "tipo": "contenido",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-540",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-03",
+      "nombre": "Secretos en el codigo del cliente",
+      "categoria": "contenido",
+      "severidad": "alto",
+      "estado": "fallo",
+      "detalle": "Claves o tokens embebidos en el HTML o el JS son visibles para cualquiera",
+      "hallazgo": {
+        "titulo": "2 posible(s) secreto(s) en el cliente",
+        "detalle": "Claves o tokens embebidos en el HTML o el JS son visibles para cualquiera",
+        "recomendacion": "Mover los secretos al servidor y rotarlos",
+        "evidencia": {
+          "hallazgos": [
+            "api_key = \"AKIAIOSFODNN7EXAMPLE1\" = AKIAIOSF...",
+            "AWS key: AKIAIOSFODNN..."
+          ]
+        },
+        "severidad": "alto",
+        "id_check": "CON-03",
+        "categoria": "contenido",
+        "cwe": "CWE-798",
+        "owasp": "A05:2021",
+        "tipo": "contenido",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-798",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-04",
+      "nombre": "Direcciones de correo expuestas",
+      "categoria": "contenido",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Facilitan campanas de phishing y enumeracion",
+      "hallazgo": {
+        "titulo": "2 direccion(es) de correo en el cuerpo",
+        "detalle": "Facilitan campanas de phishing y enumeracion",
+        "recomendacion": "Ofuscar o eliminar los correos publicos",
+        "evidencia": {
+          "correos": [
+            "admin@ejemplo.test",
+            "soporte@ejemplo.test"
+          ]
+        },
+        "severidad": "info",
+        "id_check": "CON-04",
+        "categoria": "contenido",
+        "cwe": "CWE-200",
+        "owasp": "A01:2021",
+        "tipo": "contenido",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-05",
+      "nombre": "Direcciones IP internas expuestas",
+      "categoria": "contenido",
+      "severidad": "medio",
+      "estado": "fallo",
+      "detalle": "Revelan la topologia interna de la red",
+      "hallazgo": {
+        "titulo": "2 direccion(es) IP privada(s) en el cuerpo",
+        "detalle": "Revelan la topologia interna de la red",
+        "recomendacion": "Eliminar las referencias a la red interna",
+        "evidencia": {
+          "ips": [
+            "10.20.30.40",
+            "192.168.1.10"
+          ]
+        },
+        "severidad": "medio",
+        "id_check": "CON-05",
+        "categoria": "contenido",
+        "cwe": "CWE-200",
+        "owasp": "A01:2021",
+        "tipo": "contenido",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-06",
+      "nombre": "Rutas absolutas del servidor",
+      "categoria": "contenido",
+      "severidad": "medio",
+      "estado": "fallo",
+      "detalle": "Revelan la estructura de directorios del servidor",
+      "hallazgo": {
+        "titulo": "Rutas absolutas del sistema en el cuerpo",
+        "detalle": "Revelan la estructura de directorios del servidor",
+        "recomendacion": "Usar rutas relativas y errores genericos",
+        "evidencia": {
+          "rutas": [
+            "/var/www"
+          ]
+        },
+        "severidad": "medio",
+        "id_check": "CON-06",
+        "categoria": "contenido",
+        "cwe": "CWE-200",
+        "owasp": "A05:2021",
+        "tipo": "contenido",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-07",
+      "nombre": "Contenido mixto (http:// en https)",
+      "categoria": "contenido",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-311",
+      "owasp": "A02:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-08",
+      "nombre": "Scripts externos sin integrity (SRI)",
+      "categoria": "contenido",
+      "severidad": "bajo",
+      "estado": "fallo",
+      "detalle": "Si el CDN se compromete, el script se ejecuta sin que nadie lo detecte",
+      "hallazgo": {
+        "titulo": "2 script(s) sin Subresource Integrity",
+        "detalle": "Si el CDN se compromete, el script se ejecuta sin que nadie lo detecte",
+        "recomendacion": "Anadir integrity y crossorigin a los scripts de terceros",
+        "evidencia": {
+          "scripts": [
+            "<script src=\"https://cdn.ejemplo.invalid/lib.js\">",
+            "<script src=\"/app.js\">"
+          ]
+        },
+        "severidad": "bajo",
+        "id_check": "CON-08",
+        "categoria": "contenido",
+        "cwe": "CWE-353",
+        "owasp": "A08:2021",
+        "tipo": "contenido",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-353",
+      "owasp": "A08:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-09",
+      "nombre": "Formulario envia a un dominio externo",
+      "categoria": "contenido",
+      "severidad": "medio",
+      "estado": "fallo",
+      "detalle": "Los datos del usuario salen del sitio",
+      "hallazgo": {
+        "titulo": "Formulario que envia datos a otro dominio",
+        "detalle": "Los datos del usuario salen del sitio",
+        "recomendacion": "Enviar los formularios al propio dominio",
+        "evidencia": {
+          "acciones": [
+            "https://recolector.invalid/recoger"
+          ]
+        },
+        "severidad": "medio",
+        "id_check": "CON-09",
+        "categoria": "contenido",
+        "cwe": "CWE-346",
+        "owasp": "A01:2021",
+        "tipo": "contenido",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-346",
+      "owasp": "A01:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-10",
+      "nombre": "Formulario con contrasena por GET",
+      "categoria": "contenido",
+      "severidad": "alto",
+      "estado": "fallo",
+      "detalle": "La contrasena queda en la URL, en el historial y en los registros del servidor",
+      "hallazgo": {
+        "titulo": "Formulario de contrasena con method=GET",
+        "detalle": "La contrasena queda en la URL, en el historial y en los registros del servidor",
+        "recomendacion": "Usar POST sobre HTTPS",
+        "evidencia": {
+          "formulario": "<form action=\"/login\" method=\"get\"> <input type=\"text\" name=\"usuario\"> <input type=\"password\" name=\"clave\"> <input type=\"submit\"> </form>"
+        },
+        "severidad": "alto",
+        "id_check": "CON-10",
+        "categoria": "contenido",
+        "cwe": "CWE-598",
+        "owasp": "A04:2021",
+        "tipo": "contenido",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-598",
+      "owasp": "A04:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-11",
+      "nombre": "Campo de contrasena sin autocomplete off",
+      "categoria": "contenido",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "El navegador puede almacenar la contrasena en equipos compartidos",
+      "hallazgo": {
+        "titulo": "Campo de contrasena sin autocomplete",
+        "detalle": "El navegador puede almacenar la contrasena en equipos compartidos",
+        "recomendacion": "autocomplete=\"current-password\" o \"off\"",
+        "evidencia": {
+          "input": "<input type=\"password\" name=\"clave\">"
+        },
+        "severidad": "info",
+        "id_check": "CON-11",
+        "categoria": "contenido",
+        "cwe": "CWE-522",
+        "owasp": "A07:2021",
+        "tipo": "contenido",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-522",
+      "owasp": "A07:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-12",
+      "nombre": "Formulario POST sin token CSRF",
+      "categoria": "contenido",
+      "severidad": "medio",
+      "estado": "fallo",
+      "detalle": "Sin token, otra web puede enviar el formulario en nombre del usuario",
+      "hallazgo": {
+        "titulo": "2 formulario(s) POST sin token anti-CSRF",
+        "detalle": "Sin token, otra web puede enviar el formulario en nombre del usuario",
+        "recomendacion": "Token por sesion y validacion SameSite",
+        "evidencia": {
+          "formularios": [
+            "<form action=\"https://recolector.invalid/recoger\" method=\"post\"> <input type=\"text\" name=\"usuario\"> </form>",
+            "<form action=\"/perfil\" method=\"post\"> <input type=\"text\" name=\"nombre\"> <input type=\"submit\"> </form>"
+          ]
+        },
+        "severidad": "medio",
+        "id_check": "CON-12",
+        "categoria": "contenido",
+        "cwe": "CWE-352",
+        "owasp": "A01:2021",
+        "tipo": "contenido",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-352",
+      "owasp": "A01:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-13",
+      "nombre": "Enlaces target=_blank sin noopener",
+      "categoria": "contenido",
+      "severidad": "bajo",
+      "estado": "fallo",
+      "detalle": "La pagina destino puede manipular la ventana de origen mediante window.opener",
+      "hallazgo": {
+        "titulo": "1 enlace(s) _blank sin rel=noopener",
+        "detalle": "La pagina destino puede manipular la ventana de origen mediante window.opener",
+        "recomendacion": "Anadir rel=\"noopener noreferrer\"",
+        "evidencia": {
+          "enlaces": [
+            "<a href=\"https://externo.invalid\" target=\"_blank\">"
+          ]
+        },
+        "severidad": "bajo",
+        "id_check": "CON-13",
+        "categoria": "contenido",
+        "cwe": "CWE-1022",
+        "owasp": "A05:2021",
+        "tipo": "contenido",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-1022",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-14",
+      "nombre": "iframe sin sandbox",
+      "categoria": "contenido",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "El contenido embebido se ejecuta con los permisos de la pagina",
+      "hallazgo": {
+        "titulo": "1 iframe(s) sin atributo sandbox",
+        "detalle": "El contenido embebido se ejecuta con los permisos de la pagina",
+        "recomendacion": "Anadir sandbox a los iframes de terceros",
+        "evidencia": {
+          "iframes": [
+            "<iframe src=\"https://externo.invalid/widget\">"
+          ]
+        },
+        "severidad": "info",
+        "id_check": "CON-14",
+        "categoria": "contenido",
+        "cwe": "CWE-1021",
+        "owasp": "A05:2021",
+        "tipo": "contenido",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-1021",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-15",
+      "nombre": "Meta generator con version",
+      "categoria": "contenido",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "<meta name=\"generator\" content=\"PanelCMS 3.1.4\">",
+      "hallazgo": {
+        "titulo": "Meta generator revela el CMS y su version",
+        "detalle": "<meta name=\"generator\" content=\"PanelCMS 3.1.4\">",
+        "recomendacion": "Eliminar la etiqueta generator",
+        "evidencia": {
+          "meta": "<meta name=\"generator\" content=\"PanelCMS 3.1.4\">"
+        },
+        "severidad": "info",
+        "id_check": "CON-15",
+        "categoria": "contenido",
+        "cwe": "CWE-200",
+        "owasp": "A05:2021",
+        "tipo": "contenido",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-16",
+      "nombre": "Modo depuracion visible",
+      "categoria": "contenido",
+      "severidad": "alto",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-489",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-17",
+      "nombre": "Traza de pila en la respuesta",
+      "categoria": "contenido",
+      "severidad": "alto",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-209",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-18",
+      "nombre": "Error de base de datos visible",
+      "categoria": "contenido",
+      "severidad": "alto",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-209",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-19",
+      "nombre": "Referencias a almacenamiento en la nube",
+      "categoria": "contenido",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Los buckets mal configurados son una fuga de datos habitual",
+      "hallazgo": {
+        "titulo": "1 referencia(s) a almacenamiento externo",
+        "detalle": "Los buckets mal configurados son una fuga de datos habitual",
+        "recomendacion": "Revisar las politicas del bucket",
+        "evidencia": {
+          "buckets": [
+            "https://panel-datos.s3.amazonaws.com"
+          ]
+        },
+        "severidad": "info",
+        "id_check": "CON-19",
+        "categoria": "contenido",
+        "cwe": "CWE-200",
+        "owasp": "A05:2021",
+        "tipo": "contenido",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-20",
+      "nombre": "Endpoints de API listados en el HTML",
+      "categoria": "contenido",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Amplia la superficie de ataque conocida",
+      "hallazgo": {
+        "titulo": "2 endpoint(s) de API referenciados",
+        "detalle": "Amplia la superficie de ataque conocida",
+        "recomendacion": "Revisar que cada endpoint comprueba autorizacion",
+        "evidencia": {
+          "endpoints": [
+            "/api/v1/facturas",
+            "/api/v1/usuarios"
+          ]
+        },
+        "severidad": "info",
+        "id_check": "CON-20",
+        "categoria": "contenido",
+        "cwe": "CWE-200",
+        "owasp": "A01:2021",
+        "tipo": "contenido",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-21",
+      "nombre": "Rutas de administracion enlazadas",
+      "categoria": "contenido",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Facilita localizar la zona privilegiada",
+      "hallazgo": {
+        "titulo": "El HTML enlaza paneles de administracion",
+        "detalle": "Facilita localizar la zona privilegiada",
+        "recomendacion": "Restringir el acceso por red o autenticacion fuerte",
+        "evidencia": {
+          "rutas": [
+            "/admin/panel"
+          ]
+        },
+        "severidad": "info",
+        "id_check": "CON-21",
+        "categoria": "contenido",
+        "cwe": "CWE-200",
+        "owasp": "A01:2021",
+        "tipo": "contenido",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-22",
+      "nombre": "Token o credencial en la URL",
+      "categoria": "contenido",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-598",
+      "owasp": "A04:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-23",
+      "nombre": "Version del producto en el cuerpo",
+      "categoria": "contenido",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Version visible: 3.1.4",
+      "hallazgo": {
+        "titulo": "El cuerpo declara un numero de version",
+        "detalle": "Version visible: 3.1.4",
+        "recomendacion": "Ocultar las versiones de los componentes",
+        "evidencia": {
+          "version": "3.1.4"
+        },
+        "severidad": "info",
+        "id_check": "CON-23",
+        "categoria": "contenido",
+        "cwe": "CWE-200",
+        "owasp": "A05:2021",
+        "tipo": "contenido",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-24",
+      "nombre": "Copyright antiguo",
+      "categoria": "contenido",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Suele indicar un sitio sin mantenimiento, con componentes antiguos",
+      "hallazgo": {
+        "titulo": "Copyright de 2019 (hace 7 anos)",
+        "detalle": "Suele indicar un sitio sin mantenimiento, con componentes antiguos",
+        "recomendacion": "Actualizar y revisar dependencias",
+        "evidencia": {
+          "anios": [
+            2019
+          ]
+        },
+        "severidad": "info",
+        "id_check": "CON-24",
+        "categoria": "contenido",
+        "cwe": "CWE-1059",
+        "owasp": "A05:2021",
+        "tipo": "contenido",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-1059",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-25",
+      "nombre": "Sin declaracion de viewport",
+      "categoria": "contenido",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1059",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-26",
+      "nombre": "Sin meta charset",
+      "categoria": "contenido",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-436",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-27",
+      "nombre": "Pagina de error por defecto del servidor",
+      "categoria": "contenido",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "CON-28",
+      "nombre": "Tecnologias declaradas en el cuerpo",
+      "categoria": "contenido",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Detectadas: WordPress, Next.js, React",
+      "hallazgo": {
+        "titulo": "3 tecnologias identificadas por el contenido",
+        "detalle": "Detectadas: WordPress, Next.js, React",
+        "recomendacion": "Minimizar las huellas del stack",
+        "evidencia": {
+          "tecnologias": [
+            "WordPress",
+            "Next.js",
+            "React"
+          ]
+        },
+        "severidad": "info",
+        "id_check": "CON-28",
+        "categoria": "contenido",
+        "cwe": "CWE-200",
+        "owasp": "A05:2021",
+        "tipo": "contenido",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "FUG-01",
+      "nombre": "Repositorio Git expuesto",
+      "categoria": "rutas",
+      "severidad": "critico",
+      "estado": "fallo",
+      "detalle": "Permite reconstruir el codigo fuente completo",
+      "hallazgo": {
+        "titulo": "Repositorio Git expuesto accesible",
+        "detalle": "Permite reconstruir el codigo fuente completo",
+        "recomendacion": "Bloquear el acceso a .git desde el servidor web",
+        "url": "http://127.0.0.1/.git/config",
+        "evidencia": {
+          "ruta": "/.git/config",
+          "status": 200,
+          "bytes": 107,
+          "extracto": "[core]\n\trepositoryformatversion = 0\n\tfilemode = true\n[remote \"origin\"]\n\turl = https://git.interno/panel.git"
+        },
+        "severidad": "critico",
+        "id_check": "FUG-01",
+        "categoria": "rutas",
+        "cwe": "CWE-538",
+        "owasp": "A01:2021",
+        "tipo": "rutas"
+      },
+      "cwe": "CWE-538",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "FUG-02",
+      "nombre": "Fichero .env expuesto",
+      "categoria": "rutas",
+      "severidad": "critico",
+      "estado": "fallo",
+      "detalle": "Contiene credenciales, claves y configuracion de la aplicacion",
+      "hallazgo": {
+        "titulo": "Fichero .env expuesto accesible",
+        "detalle": "Contiene credenciales, claves y configuracion de la aplicacion",
+        "recomendacion": "Sacar el .env del directorio publico",
+        "url": "http://127.0.0.1/.env",
+        "evidencia": {
+          "ruta": "/.env",
+          "status": 200,
+          "bytes": 74,
+          "extracto": "APP_ENV=production\nDB_PASSWORD=Sup3rS3cret0\nAWS_SECRET_ACCESS_KEY=abcd1234"
+        },
+        "severidad": "critico",
+        "id_check": "FUG-02",
+        "categoria": "rutas",
+        "cwe": "CWE-538",
+        "owasp": "A01:2021",
+        "tipo": "rutas"
+      },
+      "cwe": "CWE-538",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "FUG-03",
+      "nombre": "Metadatos SVN expuestos",
+      "categoria": "rutas",
+      "severidad": "alto",
+      "estado": "fallo",
+      "detalle": "Revela el historial de versiones y el codigo fuente",
+      "hallazgo": {
+        "titulo": "Metadatos SVN expuestos accesible",
+        "detalle": "Revela el historial de versiones y el codigo fuente",
+        "recomendacion": "Bloquear el acceso a .svn",
+        "url": "http://127.0.0.1/.svn/entries",
+        "evidencia": {
+          "ruta": "/.svn/entries",
+          "status": 200,
+          "bytes": 15,
+          "extracto": "12\n\ndir\n/trunk\n"
+        },
+        "severidad": "alto",
+        "id_check": "FUG-03",
+        "categoria": "rutas",
+        "cwe": "CWE-538",
+        "owasp": "A01:2021",
+        "tipo": "rutas"
+      },
+      "cwe": "CWE-538",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "FUG-04",
+      "nombre": "Fichero .DS_Store expuesto",
+      "categoria": "rutas",
+      "severidad": "bajo",
+      "estado": "fallo",
+      "detalle": "Revela nombres de ficheros y estructura de directorios",
+      "hallazgo": {
+        "titulo": "Fichero .DS_Store expuesto accesible",
+        "detalle": "Revela nombres de ficheros y estructura de directorios",
+        "recomendacion": "Bloquear el acceso a .DS_Store",
+        "url": "http://127.0.0.1/.DS_Store",
+        "evidencia": {
+          "ruta": "/.DS_Store",
+          "status": 200,
+          "bytes": 22,
+          "extracto": "Bud1\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000index.html"
+        },
+        "severidad": "bajo",
+        "id_check": "FUG-04",
+        "categoria": "rutas",
+        "cwe": "CWE-538",
+        "owasp": "A01:2021",
+        "tipo": "rutas"
+      },
+      "cwe": "CWE-538",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "FUG-05",
+      "nombre": "Estado del servidor expuesto",
+      "categoria": "rutas",
+      "severidad": "medio",
+      "estado": "fallo",
+      "detalle": "Revela peticiones en curso, clientes y carga del servidor",
+      "hallazgo": {
+        "titulo": "Estado del servidor expuesto accesible",
+        "detalle": "Revela peticiones en curso, clientes y carga del servidor",
+        "recomendacion": "Restringir /server-status a la red local",
+        "url": "http://127.0.0.1/server-status",
+        "evidencia": {
+          "ruta": "/server-status",
+          "status": 200,
+          "bytes": 120,
+          "extracto": "<html><title>Apache Server Status</title><h1>Apache Server Status for 127.0.0.1</h1>Current Time: now\nTotal accesses: 12"
+        },
+        "severidad": "medio",
+        "id_check": "FUG-05",
+        "categoria": "rutas",
+        "cwe": "CWE-200",
+        "owasp": "A01:2021",
+        "tipo": "rutas"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "FUG-06",
+      "nombre": "phpinfo() expuesto",
+      "categoria": "rutas",
+      "severidad": "alto",
+      "estado": "fallo",
+      "detalle": "Expone la configuracion completa de PHP",
+      "hallazgo": {
+        "titulo": "phpinfo() expuesto accesible",
+        "detalle": "Expone la configuracion completa de PHP",
+        "recomendacion": "Eliminar phpinfo() de produccion",
+        "url": "http://127.0.0.1/phpinfo.php",
+        "evidencia": {
+          "ruta": "/phpinfo.php",
+          "status": 200,
+          "bytes": 56,
+          "extracto": "<html><title>phpinfo()</title><h1>PHP Version 8.1.2</h1>"
+        },
+        "severidad": "alto",
+        "id_check": "FUG-06",
+        "categoria": "rutas",
+        "cwe": "CWE-200",
+        "owasp": "A01:2021",
+        "tipo": "rutas"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "FUG-07",
+      "nombre": "Spring Boot Actuator expuesto",
+      "categoria": "rutas",
+      "severidad": "alto",
+      "estado": "fallo",
+      "detalle": "Los endpoints de gestion pueden filtrar configuracion y permitir cambios",
+      "hallazgo": {
+        "titulo": "Spring Boot Actuator expuesto accesible",
+        "detalle": "Los endpoints de gestion pueden filtrar configuracion y permitir cambios",
+        "recomendacion": "Proteger /actuator con autenticacion",
+        "url": "http://127.0.0.1/actuator",
+        "evidencia": {
+          "ruta": "/actuator",
+          "status": 200,
+          "bytes": 46,
+          "extracto": "{\"_links\": {\"env\": {\"href\": \"/actuator/env\"}}}"
+        },
+        "severidad": "alto",
+        "id_check": "FUG-07",
+        "categoria": "rutas",
+        "cwe": "CWE-200",
+        "owasp": "A01:2021",
+        "tipo": "rutas"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "FUG-08",
+      "nombre": "Actuator /env expuesto",
+      "categoria": "rutas",
+      "severidad": "critico",
+      "estado": "fallo",
+      "detalle": "Muestra variables de entorno, incluidas credenciales",
+      "hallazgo": {
+        "titulo": "Actuator /env expuesto accesible",
+        "detalle": "Muestra variables de entorno, incluidas credenciales",
+        "recomendacion": "Deshabilitar o proteger el endpoint env",
+        "url": "http://127.0.0.1/actuator/env",
+        "evidencia": {
+          "ruta": "/actuator/env",
+          "status": 200,
+          "bytes": 127,
+          "extracto": "{\"activeProfiles\": [\"prod\"], \"propertySources\": [{\"name\": \"systemEnvironment\", \"properties\": {\"DB_PASSWORD\": {\"value\": \"x\"}}}]}"
+        },
+        "severidad": "critico",
+        "id_check": "FUG-08",
+        "categoria": "rutas",
+        "cwe": "CWE-200",
+        "owasp": "A01:2021",
+        "tipo": "rutas"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "FUG-09",
+      "nombre": "Endpoint de depuracion expuesto",
+      "categoria": "rutas",
+      "severidad": "alto",
+      "estado": "fallo",
+      "detalle": "Suele permitir ejecutar codigo o volcar el estado interno",
+      "hallazgo": {
+        "titulo": "Endpoint de depuracion expuesto accesible",
+        "detalle": "Suele permitir ejecutar codigo o volcar el estado interno",
+        "recomendacion": "Eliminar los endpoints de depuracion",
+        "url": "http://127.0.0.1/debug",
+        "evidencia": {
+          "ruta": "/debug",
+          "status": 200,
+          "bytes": 44,
+          "extracto": "<h1>Debug console</h1><p>ejecutar codigo</p>"
+        },
+        "severidad": "alto",
+        "id_check": "FUG-09",
+        "categoria": "rutas",
+        "cwe": "CWE-489",
+        "owasp": "A01:2021",
+        "tipo": "rutas"
+      },
+      "cwe": "CWE-489",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "FUG-10",
+      "nombre": "Consola expuesta",
+      "categoria": "rutas",
+      "severidad": "critico",
+      "estado": "fallo",
+      "detalle": "Una consola interactiva expuesta permite ejecucion de codigo",
+      "hallazgo": {
+        "titulo": "Consola expuesta accesible",
+        "detalle": "Una consola interactiva expuesta permite ejecucion de codigo",
+        "recomendacion": "Eliminar o proteger la consola",
+        "url": "http://127.0.0.1/console",
+        "evidencia": {
+          "ruta": "/console",
+          "status": 200,
+          "bytes": 28,
+          "extracto": "<h1>Consola interactiva</h1>"
+        },
+        "severidad": "critico",
+        "id_check": "FUG-10",
+        "categoria": "rutas",
+        "cwe": "CWE-489",
+        "owasp": "A01:2021",
+        "tipo": "rutas"
+      },
+      "cwe": "CWE-489",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "FUG-11",
+      "nombre": "Documentacion de API expuesta",
+      "categoria": "rutas",
+      "severidad": "medio",
+      "estado": "fallo",
+      "detalle": "Describe todos los endpoints y sus esquemas, incluidos los internos",
+      "hallazgo": {
+        "titulo": "Documentacion de API expuesta accesible",
+        "detalle": "Describe todos los endpoints y sus esquemas, incluidos los internos",
+        "recomendacion": "Proteger la documentacion en produccion",
+        "url": "http://127.0.0.1/swagger-ui.html",
+        "evidencia": {
+          "ruta": "/swagger-ui.html",
+          "status": 200,
+          "bytes": 45,
+          "extracto": "<html><title>Swagger UI</title><p>swagger</p>"
+        },
+        "severidad": "medio",
+        "id_check": "FUG-11",
+        "categoria": "rutas",
+        "cwe": "CWE-200",
+        "owasp": "A01:2021",
+        "tipo": "rutas"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "FUG-12",
+      "nombre": "Especificacion de API expuesta",
+      "categoria": "rutas",
+      "severidad": "medio",
+      "estado": "fallo",
+      "detalle": "Facilita la enumeracion completa de la API",
+      "hallazgo": {
+        "titulo": "Especificacion de API expuesta accesible",
+        "detalle": "Facilita la enumeracion completa de la API",
+        "recomendacion": "Restringir el acceso a la especificacion",
+        "url": "http://127.0.0.1/api-docs",
+        "evidencia": {
+          "ruta": "/api-docs",
+          "status": 200,
+          "bytes": 55,
+          "extracto": "{\"openapi\": \"3.0.0\", \"paths\": {\"/api/v1/usuarios\": {}}}"
+        },
+        "severidad": "medio",
+        "id_check": "FUG-12",
+        "categoria": "rutas",
+        "cwe": "CWE-200",
+        "owasp": "A01:2021",
+        "tipo": "rutas"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "FUG-13",
+      "nombre": "GraphQL con introspeccion habilitada",
+      "categoria": "fugas",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "FUG-14",
+      "nombre": "robots.txt revela rutas sensibles",
+      "categoria": "fugas",
+      "severidad": "bajo",
+      "estado": "fallo",
+      "detalle": "Rutas listadas: /admin/, /backup/, /config/",
+      "hallazgo": {
+        "titulo": "robots.txt expone rutas internas",
+        "detalle": "Rutas listadas: /admin/, /backup/, /config/",
+        "recomendacion": "No listar rutas privadas en robots.txt",
+        "evidencia": {
+          "rutas": [
+            "/admin/",
+            "/backup/",
+            "/config/"
+          ]
+        },
+        "severidad": "bajo",
+        "id_check": "FUG-14",
+        "categoria": "fugas",
+        "cwe": "CWE-200",
+        "owasp": "A01:2021",
+        "tipo": "fugas",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "FUG-15",
+      "nombre": "Sin security.txt",
+      "categoria": "fugas",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Sin canal declarado de reporte de vulnerabilidades",
+      "hallazgo": {
+        "titulo": "No publica /.well-known/security.txt",
+        "detalle": "Sin canal declarado de reporte de vulnerabilidades",
+        "recomendacion": "Publicar security.txt con un contacto de seguridad",
+        "evidencia": {
+          "status": 404
+        },
+        "severidad": "info",
+        "id_check": "FUG-15",
+        "categoria": "fugas",
+        "cwe": "CWE-1059",
+        "owasp": "A05:2021",
+        "tipo": "fugas",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-1059",
+      "owasp": "A05:2021",
+      "activo": true
+    },
+    {
+      "id": "FUG-16",
+      "nombre": "sitemap.xml accesible",
+      "categoria": "fugas",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Facilita el inventario de URLs del sitio",
+      "hallazgo": {
+        "titulo": "sitemap.xml accesible",
+        "detalle": "Facilita el inventario de URLs del sitio",
+        "recomendacion": "Revisar si el sitemap debe ser publico",
+        "evidencia": {
+          "bytes": 66
+        },
+        "severidad": "info",
+        "id_check": "FUG-16",
+        "categoria": "fugas",
+        "cwe": "CWE-200",
+        "owasp": "A01:2021",
+        "tipo": "fugas",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "FUG-17",
+      "nombre": "Backup comprimido accesible",
+      "categoria": "fugas",
+      "severidad": "critico",
+      "estado": "fallo",
+      "detalle": "Una copia descargable entrega el codigo o la base de datos completa",
+      "hallazgo": {
+        "titulo": "Copia de seguridad accesible (/backup.zip)",
+        "detalle": "Una copia descargable entrega el codigo o la base de datos completa",
+        "recomendacion": "Retirar las copias del directorio web",
+        "evidencia": {
+          "ruta": "/backup.zip",
+          "bytes": 504
+        },
+        "severidad": "critico",
+        "id_check": "FUG-17",
+        "categoria": "fugas",
+        "cwe": "CWE-530",
+        "owasp": "A05:2021",
+        "tipo": "fugas",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-530",
+      "owasp": "A05:2021",
+      "activo": true
+    },
+    {
+      "id": "FUG-18",
+      "nombre": "Listado de directorios habilitado",
+      "categoria": "fugas",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-548",
+      "owasp": "A05:2021",
+      "activo": true
+    },
+    {
+      "id": "FUG-19",
+      "nombre": "Panel de administracion conocido",
+      "categoria": "fugas",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Expone la interfaz de gestion del CMS",
+      "hallazgo": {
+        "titulo": "Panel de administracion accesible (/admin/)",
+        "detalle": "Expone la interfaz de gestion del CMS",
+        "recomendacion": "Restringir por IP o autenticacion adicional",
+        "evidencia": {
+          "ruta": "/admin/",
+          "status": 200
+        },
+        "severidad": "info",
+        "id_check": "FUG-19",
+        "categoria": "fugas",
+        "cwe": "CWE-200",
+        "owasp": "A01:2021",
+        "tipo": "fugas",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "FUG-20",
+      "nombre": "Fichero de entorno alternativo",
+      "categoria": "fugas",
+      "severidad": "alto",
+      "estado": "fallo",
+      "detalle": "Suele contener credenciales o hashes",
+      "hallazgo": {
+        "titulo": "Fichero sensible accesible (/.env.local)",
+        "detalle": "Suele contener credenciales o hashes",
+        "recomendacion": "Eliminar copias y ficheros de configuracion del directorio publico",
+        "evidencia": {
+          "ruta": "/.env.local",
+          "bytes": 32
+        },
+        "severidad": "alto",
+        "id_check": "FUG-20",
+        "categoria": "fugas",
+        "cwe": "CWE-538",
+        "owasp": "A05:2021",
+        "tipo": "fugas",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-538",
+      "owasp": "A05:2021",
+      "activo": true
+    },
+    {
+      "id": "FUG-21",
+      "nombre": "Metodos de depuracion de framework",
+      "categoria": "fugas",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-489",
+      "owasp": "A05:2021",
+      "activo": true
+    },
+    {
+      "id": "FUG-22",
+      "nombre": "Version en la ruta de error 404",
+      "categoria": "fugas",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Firma encontrada: Apache/2.4.49",
+      "hallazgo": {
+        "titulo": "La pagina 404 revela el servidor y su version",
+        "detalle": "Firma encontrada: Apache/2.4.49",
+        "recomendacion": "Pagina 404 personalizada",
+        "evidencia": {
+          "firma": "Apache/2.4.49",
+          "extracto": "<html><head><title>404 Not Found</title></head><body><h1>Not Found</h1><address>Apache/2.4.49 (Unix) Server at 127.0.0.1 Port 8080</address></body></html>"
+        },
+        "severidad": "info",
+        "id_check": "FUG-22",
+        "categoria": "fugas",
+        "cwe": "CWE-200",
+        "owasp": "A05:2021",
+        "tipo": "fugas",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": true
+    },
+    {
+      "id": "TEC-01",
+      "nombre": "Tecnologia detectada: WordPress",
+      "categoria": "tecnologia",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Firma encontrada: 'wp-content'",
+      "hallazgo": {
+        "titulo": "Tecnologia detectada: WordPress",
+        "detalle": "Firma encontrada: 'wp-content'",
+        "recomendacion": "Mantener la version al dia y revisar sus CVE conocidos",
+        "evidencia": {
+          "tecnologia": "WordPress",
+          "firma": "wp-content"
+        },
+        "severidad": "info",
+        "id_check": "TEC-01",
+        "categoria": "tecnologia",
+        "cwe": "CWE-200",
+        "owasp": "A05:2021",
+        "tipo": "tecnologia",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "TEC-02",
+      "nombre": "Tecnologia detectada: Drupal",
+      "categoria": "tecnologia",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "TEC-03",
+      "nombre": "Tecnologia detectada: Joomla",
+      "categoria": "tecnologia",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "TEC-04",
+      "nombre": "Tecnologia detectada: Shopify",
+      "categoria": "tecnologia",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "TEC-05",
+      "nombre": "Tecnologia detectada: Next.js",
+      "categoria": "tecnologia",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Firma encontrada: '_next/static'",
+      "hallazgo": {
+        "titulo": "Tecnologia detectada: Next.js",
+        "detalle": "Firma encontrada: '_next/static'",
+        "recomendacion": "Mantener la version al dia y revisar sus CVE conocidos",
+        "evidencia": {
+          "tecnologia": "Next.js",
+          "firma": "_next/static"
+        },
+        "severidad": "info",
+        "id_check": "TEC-05",
+        "categoria": "tecnologia",
+        "cwe": "CWE-200",
+        "owasp": "A05:2021",
+        "tipo": "tecnologia",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "TEC-06",
+      "nombre": "Tecnologia detectada: React",
+      "categoria": "tecnologia",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Firma encontrada: 'data-reactroot'",
+      "hallazgo": {
+        "titulo": "Tecnologia detectada: React",
+        "detalle": "Firma encontrada: 'data-reactroot'",
+        "recomendacion": "Mantener la version al dia y revisar sus CVE conocidos",
+        "evidencia": {
+          "tecnologia": "React",
+          "firma": "data-reactroot"
+        },
+        "severidad": "info",
+        "id_check": "TEC-06",
+        "categoria": "tecnologia",
+        "cwe": "CWE-200",
+        "owasp": "A05:2021",
+        "tipo": "tecnologia",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "TEC-07",
+      "nombre": "Tecnologia detectada: Vue.js",
+      "categoria": "tecnologia",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "TEC-08",
+      "nombre": "Tecnologia detectada: Angular",
+      "categoria": "tecnologia",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "TEC-09",
+      "nombre": "Tecnologia detectada: Laravel",
+      "categoria": "tecnologia",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "TEC-10",
+      "nombre": "Tecnologia detectada: Django",
+      "categoria": "tecnologia",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "TEC-11",
+      "nombre": "Tecnologia detectada: Ruby on Rails",
+      "categoria": "tecnologia",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Firma encontrada: 'x-runtime'",
+      "hallazgo": {
+        "titulo": "Tecnologia detectada: Ruby on Rails",
+        "detalle": "Firma encontrada: 'x-runtime'",
+        "recomendacion": "Mantener la version al dia y revisar sus CVE conocidos",
+        "evidencia": {
+          "tecnologia": "Ruby on Rails",
+          "firma": "x-runtime"
+        },
+        "severidad": "info",
+        "id_check": "TEC-11",
+        "categoria": "tecnologia",
+        "cwe": "CWE-200",
+        "owasp": "A05:2021",
+        "tipo": "tecnologia",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "TEC-12",
+      "nombre": "Tecnologia detectada: Spring",
+      "categoria": "tecnologia",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "TEC-13",
+      "nombre": "Tecnologia detectada: ASP.NET",
+      "categoria": "tecnologia",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "TEC-14",
+      "nombre": "Tecnologia detectada: PHP",
+      "categoria": "tecnologia",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "TEC-15",
+      "nombre": "Tecnologia detectada: Apache Tomcat",
+      "categoria": "tecnologia",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "TEC-16",
+      "nombre": "Tecnologia detectada: nginx",
+      "categoria": "tecnologia",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "TEC-17",
+      "nombre": "Tecnologia detectada: Apache",
+      "categoria": "tecnologia",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "TEC-18",
+      "nombre": "Tecnologia detectada: IIS",
+      "categoria": "tecnologia",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "TEC-19",
+      "nombre": "Tecnologia detectada: Cloudflare",
+      "categoria": "tecnologia",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "TEC-20",
+      "nombre": "Tecnologia detectada: Vercel",
+      "categoria": "tecnologia",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-200",
+      "owasp": "A05:2021",
+      "activo": false
+    },
+    {
+      "id": "PAR-01",
+      "nombre": "SQLi basada en errores",
+      "categoria": "parametros",
+      "severidad": "critico",
+      "estado": "fallo",
+      "detalle": "El parametro 'q' refleja un error de MySQL al inyectar \"'\"",
+      "hallazgo": {
+        "titulo": "Inyeccion SQL (basada en errores) en 'q'",
+        "detalle": "El parametro 'q' refleja un error de MySQL al inyectar \"'\"",
+        "recomendacion": "Usar consultas parametrizadas (prepared statements) y validacion estricta de entrada.",
+        "parametro": "q",
+        "evidencia": {
+          "payload": "'",
+          "motor": "MySQL",
+          "fragmento": "<h1>Error</h1>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to u"
+        },
+        "severidad": "critico",
+        "id_check": "PAR-01",
+        "categoria": "parametros",
+        "cwe": "CWE-89",
+        "owasp": "A03:2021",
+        "tipo": "parametros",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-89",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-02",
+      "nombre": "SQLi por diferencial booleano",
+      "categoria": "parametros",
+      "severidad": "alto",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-89",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-03",
+      "nombre": "SQLi en cabecera User-Agent",
+      "categoria": "parametros",
+      "severidad": "alto",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-89",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-04",
+      "nombre": "SQLi en cabecera Referer",
+      "categoria": "parametros",
+      "severidad": "alto",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-89",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-05",
+      "nombre": "SQLi en cookie",
+      "categoria": "parametros",
+      "severidad": "alto",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-89",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-06",
+      "nombre": "XSS reflejado en el cuerpo",
+      "categoria": "parametros",
+      "severidad": "alto",
+      "estado": "fallo",
+      "detalle": "El payload vuelve sin escapar en el cuerpo de la respuesta del parametro 'q'",
+      "hallazgo": {
+        "titulo": "XSS reflejado en 'q'",
+        "detalle": "El payload vuelve sin escapar en el cuerpo de la respuesta del parametro 'q'",
+        "recomendacion": "Escapar la salida segun contexto, aplicar CSP estricta y validar la entrada.",
+        "parametro": "q",
+        "evidencia": {
+          "payload": "<hbmkhbiotuty>",
+          "fragmento": "ic en la raiz</p> <h2>Resultados para <hbmkhbiotuty></h2> </body> </html>"
+        },
+        "severidad": "alto",
+        "id_check": "PAR-06",
+        "categoria": "parametros",
+        "cwe": "CWE-79",
+        "owasp": "A03:2021",
+        "tipo": "parametros",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-79",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-07",
+      "nombre": "XSS reflejado (posible, escapado)",
+      "categoria": "parametros",
+      "severidad": "bajo",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-79",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-08",
+      "nombre": "XSS en cabecera reflejada",
+      "categoria": "parametros",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-79",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-09",
+      "nombre": "Inyeccion HTML (sin script)",
+      "categoria": "parametros",
+      "severidad": "medio",
+      "estado": "fallo",
+      "detalle": "Se pueden inyectar etiquetas HTML arbitrarias; con un navegador puede escalarse a XSS",
+      "hallazgo": {
+        "titulo": "Inyeccion HTML en 'q'",
+        "detalle": "Se pueden inyectar etiquetas HTML arbitrarias; con un navegador puede escalarse a XSS",
+        "recomendacion": "Escapar la salida segun contexto",
+        "parametro": "q",
+        "evidencia": {
+          "payload": "<hbmk-hbfs3u5q>x</hbmk-hbfs3u5q>"
+        },
+        "severidad": "medio",
+        "id_check": "PAR-09",
+        "categoria": "parametros",
+        "cwe": "CWE-79",
+        "owasp": "A03:2021",
+        "tipo": "parametros",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-79",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-10",
+      "nombre": "SSTI con {{7*7}}",
+      "categoria": "parametros",
+      "severidad": "critico",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1336",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-11",
+      "nombre": "SSTI con ${7*7}",
+      "categoria": "parametros",
+      "severidad": "critico",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1336",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-12",
+      "nombre": "Inyeccion CRLF",
+      "categoria": "parametros",
+      "severidad": "alto",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-93",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-13",
+      "nombre": "Path traversal",
+      "categoria": "parametros",
+      "severidad": "alto",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-22",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-14",
+      "nombre": "Inclusion local de ficheros",
+      "categoria": "parametros",
+      "severidad": "alto",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-98",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-15",
+      "nombre": "Redireccion abierta",
+      "categoria": "parametros",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-601",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-16",
+      "nombre": "SSRF en parametro de URL",
+      "categoria": "parametros",
+      "severidad": "alto",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-918",
+      "owasp": "A10:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-17",
+      "nombre": "Inyeccion de comandos (indicador)",
+      "categoria": "parametros",
+      "severidad": "critico",
+      "estado": "fallo",
+      "detalle": "El comando enviado aparece en la salida",
+      "hallazgo": {
+        "titulo": "Inyeccion de comandos en 'q'",
+        "detalle": "El comando enviado aparece en la salida",
+        "recomendacion": "No construir comandos con entrada del usuario; usar APIs del sistema",
+        "parametro": "q",
+        "evidencia": {
+          "payload": ";echo hunterbug_probe"
+        },
+        "severidad": "critico",
+        "id_check": "PAR-17",
+        "categoria": "parametros",
+        "cwe": "CWE-78",
+        "owasp": "A03:2021",
+        "tipo": "parametros",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-78",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-18",
+      "nombre": "Inyeccion LDAP",
+      "categoria": "parametros",
+      "severidad": "alto",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-90",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-19",
+      "nombre": "Inyeccion XPath",
+      "categoria": "parametros",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-643",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-20",
+      "nombre": "Inyeccion NoSQL ($ne)",
+      "categoria": "parametros",
+      "severidad": "alto",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-943",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-21",
+      "nombre": "Inyeccion NoSQL ($gt)",
+      "categoria": "parametros",
+      "severidad": "alto",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-943",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-22",
+      "nombre": "XML externo (XXE)",
+      "categoria": "parametros",
+      "severidad": "critico",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-611",
+      "owasp": "A05:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-23",
+      "nombre": "Contaminacion de parametros HTTP (HPP)",
+      "categoria": "parametros",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-235",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-24",
+      "nombre": "Asignacion masiva (mass assignment)",
+      "categoria": "parametros",
+      "severidad": "alto",
+      "estado": "fallo",
+      "detalle": "El servidor acepto campos de privilegio enviados por el cliente",
+      "hallazgo": {
+        "titulo": "Posible asignacion masiva en /api/perfil",
+        "detalle": "El servidor acepto campos de privilegio enviados por el cliente",
+        "recomendacion": "Lista blanca de campos asignables",
+        "evidencia": {
+          "ruta": "/api/perfil",
+          "status": 200,
+          "extracto": "{\"role\":\"admin\",\"is_admin\":true,\"admin\":true}"
+        },
+        "severidad": "alto",
+        "id_check": "PAR-24",
+        "categoria": "parametros",
+        "cwe": "CWE-915",
+        "owasp": "A01:2021",
+        "tipo": "parametros",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-915",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-25",
+      "nombre": "IDOR",
+      "categoria": "parametros",
+      "severidad": "alto",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-639",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-26",
+      "nombre": "BOLA",
+      "categoria": "parametros",
+      "severidad": "alto",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-639",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-27",
+      "nombre": "Sin limite de peticiones",
+      "categoria": "parametros",
+      "severidad": "medio",
+      "estado": "fallo",
+      "detalle": "12 peticiones seguidas devolvieron siempre 200, sin 429 ni bloqueo",
+      "hallazgo": {
+        "titulo": "No se observa limite de peticiones",
+        "detalle": "12 peticiones seguidas devolvieron siempre 200, sin 429 ni bloqueo",
+        "recomendacion": "Aplicar limite por IP y por cuenta en endpoints sensibles",
+        "evidencia": {
+          "peticiones": 12,
+          "codigos": [
+            200
+          ]
+        },
+        "severidad": "medio",
+        "id_check": "PAR-27",
+        "categoria": "parametros",
+        "cwe": "CWE-770",
+        "owasp": "A04:2021",
+        "tipo": "parametros",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-770",
+      "owasp": "A04:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-28",
+      "nombre": "Enumeracion de usuarios",
+      "categoria": "parametros",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-204",
+      "owasp": "A07:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-29",
+      "nombre": "Identificadores secuenciales predecibles",
+      "categoria": "parametros",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-340",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-30",
+      "nombre": "Valor negativo aceptado",
+      "categoria": "parametros",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-20",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-31",
+      "nombre": "Desbordamiento de entero aceptado",
+      "categoria": "parametros",
+      "severidad": "info",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-190",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-32",
+      "nombre": "Inyeccion de plantilla en JSON",
+      "categoria": "parametros",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1336",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-33",
+      "nombre": "Prototype pollution (__proto__)",
+      "categoria": "parametros",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1321",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-34",
+      "nombre": "Content-Type no validado",
+      "categoria": "parametros",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "No se valida el tipo de contenido declarado",
+      "hallazgo": {
+        "titulo": "El endpoint acepta text/plain en un cuerpo JSON",
+        "detalle": "No se valida el tipo de contenido declarado",
+        "recomendacion": "Rechazar tipos no esperados con 415",
+        "evidencia": {
+          "status": 200
+        },
+        "severidad": "info",
+        "id_check": "PAR-34",
+        "categoria": "parametros",
+        "cwe": "CWE-436",
+        "owasp": "A03:2021",
+        "tipo": "parametros",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-436",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-35",
+      "nombre": "Cabecera de suplantacion aceptada",
+      "categoria": "parametros",
+      "severidad": "alto",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-290",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-36",
+      "nombre": "Inyeccion de plantilla en cabecera",
+      "categoria": "parametros",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-1336",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-37",
+      "nombre": "Respuesta refleja entrada sin escapar (contexto JS)",
+      "categoria": "parametros",
+      "severidad": "medio",
+      "estado": "fallo",
+      "detalle": "El valor vuelve sin escapar en un contexto de script, lo que permite romper la cadena",
+      "hallazgo": {
+        "titulo": "Entrada reflejada dentro de JavaScript (q)",
+        "detalle": "El valor vuelve sin escapar en un contexto de script, lo que permite romper la cadena",
+        "recomendacion": "Escapar segun contexto JS y usar JSON.stringify",
+        "parametro": "q",
+        "evidencia": {
+          "payload": "'+hbx6644j+'"
+        },
+        "severidad": "medio",
+        "id_check": "PAR-37",
+        "categoria": "parametros",
+        "cwe": "CWE-79",
+        "owasp": "A03:2021",
+        "tipo": "parametros",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-79",
+      "owasp": "A03:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-38",
+      "nombre": "Redireccion a esquema peligroso",
+      "categoria": "parametros",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-601",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-39",
+      "nombre": "Parametro de fichero sin validar",
+      "categoria": "parametros",
+      "severidad": "medio",
+      "estado": "ok",
+      "detalle": "",
+      "cwe": "CWE-73",
+      "owasp": "A01:2021",
+      "activo": true
+    },
+    {
+      "id": "PAR-40",
+      "nombre": "Sin cabecera de seguridad en la respuesta dinamica",
+      "categoria": "parametros",
+      "severidad": "info",
+      "estado": "fallo",
+      "detalle": "Una respuesta dinamica sin estas cabeceras es el escenario ideal para XSS",
+      "hallazgo": {
+        "titulo": "La respuesta con parametros no aplica CSP ni nosniff",
+        "detalle": "Una respuesta dinamica sin estas cabeceras es el escenario ideal para XSS",
+        "recomendacion": "Aplicar las cabeceras de seguridad a todas las respuestas, no solo a la portada",
+        "evidencia": {
+          "faltan": [
+            "content-security-policy",
+            "x-content-type-options"
+          ]
+        },
+        "severidad": "info",
+        "id_check": "PAR-40",
+        "categoria": "parametros",
+        "cwe": "CWE-693",
+        "owasp": "A05:2021",
+        "tipo": "parametros",
+        "url": "http://127.0.0.1:8080/buscar?q=test"
+      },
+      "cwe": "CWE-693",
+      "owasp": "A05:2021",
+      "activo": true
+    }
+  ],
+  "superficie": {
+    "dns": {
+      "A": [
+        "127.0.0.1"
+      ]
+    },
+    "ips": [
+      "127.0.0.1"
+    ],
+    "puertos": [
+      {
+        "puerto": 8080,
+        "servicio": "http",
+        "banner": "Apache/2.4.49"
+      }
+    ],
+    "tecnologias": {
+      "Apache": "cabecera Server",
+      "PHP": "X-Powered-By"
+    },
+    "cves": []
+  },
+  "trafico": [
+    {
+      "url": "http://127.0.0.1:8080/buscar?q=test",
+      "metodo": "GET",
+      "status": 200,
+      "peticion": "GET /buscar?q=test HTTP/1.1\r\nHost: 127.0.0.1:8080\r\nUser-Agent: HunterBug/1.0 (+authorized-security-testing)\r\nAccept: */*\r\nAccept-Encoding: gzip, deflate\r\nConnection: close\r\n\r\n",
+      "respuesta": "HTTP/1.1 200 OK\r\nServer: Apache/2.4.49 (Unix)\r\nDate: Sun, 25 Oct 2026 20:57:42 GMT\r\nContent-Type: text/html; charset=utf-8\r\nX-Powered-By: PHP/8.1.2\r\nX-Runtime: 0.0412\r\nVia: 1.1 hunterbug-proxy\r\nContent-Length: 1653\r\nSet-Cookie: PHPSESSID=abc123; Path=/\r\nAccess-Control-Allow-Origin: *\r\nAccess-Control-Allow-Credentials: true\r\nAccess-Control-Expose-Headers: Authorization\r\n\r\n<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta name=\"generator\" content=\"PanelCMS 3.1.4\">\n  <title>Panel de prueba</title>\n  <!-- TODO: quitar el usuario admin / password: Sup3rS3cret0 antes de publicar -->\n  <!-- FIXME: la api key de produccion es api_key = \"AKIAIOSFODNN7EXAMPLE1\" -->\n  <script src=\"https://cdn.ejemplo.invalid/lib.js\"></script>\n  <script src=\"/app.js\"></script>\n  <!--//# sourceMappingURL=/app.js.map-->\n  <link rel=\"stylesheet\" href=\"http://insecure.ejemplo.invalid/estilo.css\">\n</head>\n<body>\n  <h1>Panel interno version 3.1.4</h1>\n  <p>Contacto: soporte@ejemplo.test y admin@ejemplo.test</p>\n  <p>Servidor interno: 10.20.30.40 y 192.168.1.10</p>\n  <p>Ruta del despliegue: /var/www/panel/public</p>\n  <a href=\"https://externo.invalid\" target=\"_blank\">Documentacion</a>\n  <iframe src=\"https://externo.invalid/widget\"></iframe>\n  <form action=\"https://recolector.invalid/recoger\" method=\"post\">\n    <input type=\"text\" name=\"usuario\">\n  </form>\n  <form action=\"/login\" method=\"get\">\n    <input type=\"text\" name=\"usuario\">\n    <input type=\"password\" name=\"clave\">\n    <input type=\"submit\">\n  </form>\n  <form action=\"/perfil\" method=\"post\">\n    <input type=\"text\" name=\"nombre\">\n    <input type=\"submit\">\n  </form>\n  <p>Bucket: https://panel-datos.s3.amazonaws.com/export/</p>\n  <p>Endpoints: \"/api/v1/usuarios\" y \"/api/v1/facturas\"</p>\n  <p>Panel de gestion en \"/admin/panel\"</p>\n  <p>&copy; 2019 Panel S.L.</p>\n  <div id=\"app\" data-reactroot=\"\"></div>\n  <p>wp-content y __next/static en la raiz</p>\n  <h2>Resultados para test</h2>\n</body>\n</html>\n",
+      "ms": 15.597820281982422,
+      "ip": "127.0.0.1"
+    }
+  ]
+}

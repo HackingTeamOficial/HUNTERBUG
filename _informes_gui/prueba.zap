@@ -1,0 +1,2317 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<OWASPZAPReport version="2.14.0" generated="Sun, 25 Oct 2026 21:59:18">
+<site name="http://127.0.0.1:8080/buscar?q=test" host="127.0.0.1" port="8080" ssl="false">
+<alerts>
+<alertitem>
+<pluginid>90001</pluginid>
+<alertRef>90001</alertRef>
+<alert><![CDATA[CORS con credenciales y origen reflejado]]></alert>
+<name><![CDATA[CORS con credenciales y origen reflejado]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Con Allow-Credentials true y el Origin reflejado, cualquier web puede leer respuestas con la sesion del usuario</p><p>Categoría: cors</p><p>CWE: CWE-942</p><p><strong>Evidencia</strong></p><ul><li>origin_enviado: https://hunterbug-prueba.invalid</li><li>acao: https://hunterbug-prueba.invalid</li><li>acac: true</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[https://hunterbug-prueba.invalid]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Lista blanca estricta de origenes y Vary: Origin</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CRS-03]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>942</cweid>
+<wascid>0</wascid>
+<sourceid>1</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90002</pluginid>
+<alertRef>90002</alertRef>
+<alert><![CDATA[Repositorio Git expuesto accesible]]></alert>
+<name><![CDATA[Repositorio Git expuesto accesible]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Permite reconstruir el codigo fuente completo</p><p>Categoría: rutas</p><p>CWE: CWE-538</p><p><strong>Evidencia</strong></p><ul><li>ruta: /.git/config</li><li>status: 200</li><li>bytes: 107</li><li>extracto: [core]
+	repositoryformatversion = 0
+	filemode = true
+[remote &quot;origin&quot;]
+	url = https://git.interno/panel.git</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1/.git/config]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[/.git/config]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Bloquear el acceso a .git desde el servidor web</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: FUG-01]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>538</cweid>
+<wascid>0</wascid>
+<sourceid>2</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90003</pluginid>
+<alertRef>90003</alertRef>
+<alert><![CDATA[Fichero .env expuesto accesible]]></alert>
+<name><![CDATA[Fichero .env expuesto accesible]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Contiene credenciales, claves y configuracion de la aplicacion</p><p>Categoría: rutas</p><p>CWE: CWE-538</p><p><strong>Evidencia</strong></p><ul><li>ruta: /.env</li><li>status: 200</li><li>bytes: 74</li><li>extracto: APP_ENV=production
+DB_PASSWORD=Sup3rS3cret0
+AWS_SECRET_ACCESS_KEY=abcd1234</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1/.env]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[/.env]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Sacar el .env del directorio publico</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: FUG-02]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>538</cweid>
+<wascid>0</wascid>
+<sourceid>3</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90004</pluginid>
+<alertRef>90004</alertRef>
+<alert><![CDATA[Actuator /env expuesto accesible]]></alert>
+<name><![CDATA[Actuator /env expuesto accesible]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Muestra variables de entorno, incluidas credenciales</p><p>Categoría: rutas</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>ruta: /actuator/env</li><li>status: 200</li><li>bytes: 127</li><li>extracto: {&quot;activeProfiles&quot;: [&quot;prod&quot;], &quot;propertySources&quot;: [{&quot;name&quot;: &quot;systemEnvironment&quot;, &quot;properties&quot;: {&quot;DB_PASSWORD&quot;: {&quot;value&quot;: &quot;x&quot;}}}]}</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1/actuator/env]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[/actuator/env]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Deshabilitar o proteger el endpoint env</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: FUG-08]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>4</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90005</pluginid>
+<alertRef>90005</alertRef>
+<alert><![CDATA[Consola expuesta accesible]]></alert>
+<name><![CDATA[Consola expuesta accesible]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Una consola interactiva expuesta permite ejecucion de codigo</p><p>Categoría: rutas</p><p>CWE: CWE-489</p><p><strong>Evidencia</strong></p><ul><li>ruta: /console</li><li>status: 200</li><li>bytes: 28</li><li>extracto: &lt;h1&gt;Consola interactiva&lt;/h1&gt;</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1/console]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[/console]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Eliminar o proteger la consola</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: FUG-10]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>489</cweid>
+<wascid>0</wascid>
+<sourceid>5</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90006</pluginid>
+<alertRef>90006</alertRef>
+<alert><![CDATA[Copia de seguridad accesible (/backup.zip)]]></alert>
+<name><![CDATA[Copia de seguridad accesible (/backup.zip)]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Una copia descargable entrega el codigo o la base de datos completa</p><p>Categoría: fugas</p><p>CWE: CWE-530</p><p><strong>Evidencia</strong></p><ul><li>ruta: /backup.zip</li><li>bytes: 504</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[/backup.zip]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Retirar las copias del directorio web</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: FUG-17]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>530</cweid>
+<wascid>0</wascid>
+<sourceid>6</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90007</pluginid>
+<alertRef>90007</alertRef>
+<alert><![CDATA[Inyeccion SQL (basada en errores) en 'q']]></alert>
+<name><![CDATA[Inyeccion SQL (basada en errores) en 'q']]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>El parametro &#x27;q&#x27; refleja un error de MySQL al inyectar &quot;&#x27;&quot;</p><p>Categoría: parametros</p><p>CWE: CWE-89</p><p><strong>Evidencia</strong></p><ul><li>payload: &#x27;</li><li>motor: MySQL</li><li>fragmento: &lt;h1&gt;Error&lt;/h1&gt;You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to u</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[q]]></param>
+<evidence><![CDATA[']]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Usar consultas parametrizadas (prepared statements) y validacion estricta de entrada.</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: PAR-01]]></otherinfo>
+<reference><![CDATA[A03:2021]]></reference>
+<cweid>89</cweid>
+<wascid>0</wascid>
+<sourceid>7</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90008</pluginid>
+<alertRef>90008</alertRef>
+<alert><![CDATA[Inyeccion de comandos en 'q']]></alert>
+<name><![CDATA[Inyeccion de comandos en 'q']]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>El comando enviado aparece en la salida</p><p>Categoría: parametros</p><p>CWE: CWE-78</p><p><strong>Evidencia</strong></p><ul><li>payload: ;echo hunterbug_probe</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[q]]></param>
+<evidence><![CDATA[;echo hunterbug_probe]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>No construir comandos con entrada del usuario; usar APIs del sistema</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: PAR-17]]></otherinfo>
+<reference><![CDATA[A03:2021]]></reference>
+<cweid>78</cweid>
+<wascid>0</wascid>
+<sourceid>8</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90009</pluginid>
+<alertRef>90009</alertRef>
+<alert><![CDATA[1 cookie(s) sin secure]]></alert>
+<name><![CDATA[1 cookie(s) sin secure]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>La cookie viaja tambien por HTTP sin cifrar y puede ser interceptada</p><p>Categoría: cookies</p><p>CWE: CWE-614</p><p><strong>Evidencia</strong></p><ul><li>cookies: PHPSESSID=abc123; Path=/</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[['PHPSESSID=abc123; Path=/']]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Anadir el atributo Secure a todas las cookies de sesion</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CKI-01]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>614</cweid>
+<wascid>0</wascid>
+<sourceid>9</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90010</pluginid>
+<alertRef>90010</alertRef>
+<alert><![CDATA[1 cookie(s) sin httponly]]></alert>
+<name><![CDATA[1 cookie(s) sin httponly]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Sin HttpOnly el JavaScript de la pagina puede leer la cookie, lo que convierte cualquier XSS en robo de sesion</p><p>Categoría: cookies</p><p>CWE: CWE-1004</p><p><strong>Evidencia</strong></p><ul><li>cookies: PHPSESSID=abc123; Path=/</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[['PHPSESSID=abc123; Path=/']]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Anadir HttpOnly a las cookies de sesion</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CKI-02]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>1004</cweid>
+<wascid>0</wascid>
+<sourceid>10</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90011</pluginid>
+<alertRef>90011</alertRef>
+<alert><![CDATA[2 posible(s) secreto(s) en el cliente]]></alert>
+<name><![CDATA[2 posible(s) secreto(s) en el cliente]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Claves o tokens embebidos en el HTML o el JS son visibles para cualquiera</p><p>Categoría: contenido</p><p>CWE: CWE-798</p><p><strong>Evidencia</strong></p><ul><li>hallazgos: api_key = &quot;AKIAIOSFODNN7EXAMPLE1&quot; = AKIAIOSF..., AWS key: AKIAIOSFODNN...</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[['api_key = "AKIAIOSFODNN7EXAMPLE1" = AKIAIOSF...', 'AWS key: AKIAIOSFODNN...']]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Mover los secretos al servidor y rotarlos</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CON-03]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>798</cweid>
+<wascid>0</wascid>
+<sourceid>11</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90012</pluginid>
+<alertRef>90012</alertRef>
+<alert><![CDATA[Formulario de contrasena con method=GET]]></alert>
+<name><![CDATA[Formulario de contrasena con method=GET]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>La contrasena queda en la URL, en el historial y en los registros del servidor</p><p>Categoría: contenido</p><p>CWE: CWE-598</p><p><strong>Evidencia</strong></p><ul><li>formulario: &lt;form action=&quot;/login&quot; method=&quot;get&quot;&gt; &lt;input type=&quot;text&quot; name=&quot;usuario&quot;&gt; &lt;input type=&quot;password&quot; name=&quot;clave&quot;&gt; &lt;input type=&quot;submit&quot;&gt; &lt;/form&gt;</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[<form action="/login" method="get"> <input type="text" name="usuario"> <input type="password" name="clave"> <input type="submit"> </form>]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Usar POST sobre HTTPS</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CON-10]]></otherinfo>
+<reference><![CDATA[A04:2021]]></reference>
+<cweid>598</cweid>
+<wascid>0</wascid>
+<sourceid>12</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90013</pluginid>
+<alertRef>90013</alertRef>
+<alert><![CDATA[CORS refleja cualquier Origin enviado]]></alert>
+<name><![CDATA[CORS refleja cualquier Origin enviado]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>El servidor devuelve el origen solicitado sin validarlo, lo que permite leer respuestas desde cualquier web</p><p>Categoría: cors</p><p>CWE: CWE-942</p><p><strong>Evidencia</strong></p><ul><li>origin_enviado: https://hunterbug-prueba.invalid</li><li>acao_devuelto: https://hunterbug-prueba.invalid</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[https://hunterbug-prueba.invalid]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Validar el Origin contra una lista blanca</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CRS-02]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>942</cweid>
+<wascid>0</wascid>
+<sourceid>13</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90014</pluginid>
+<alertRef>90014</alertRef>
+<alert><![CDATA[CORS acepta el origen null]]></alert>
+<name><![CDATA[CORS acepta el origen null]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>El origen null procede de iframes sandbox o ficheros locales y no deberia autorizarse</p><p>Categoría: cors</p><p>CWE: CWE-942</p><p><strong>Evidencia</strong></p><ul><li>acao: null</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[null]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Rechazar explicitamente el origen null</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CRS-04]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>942</cweid>
+<wascid>0</wascid>
+<sourceid>14</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90015</pluginid>
+<alertRef>90015</alertRef>
+<alert><![CDATA[CORS con comodin y credenciales]]></alert>
+<name><![CDATA[CORS con comodin y credenciales]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Combinacion contradictoria que algunos proxies resuelven reflejando el origen</p><p>Categoría: cors</p><p>CWE: CWE-942</p><p><strong>Evidencia</strong></p><ul><li>acao: *</li><li>acac: true</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[*]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Eliminar el comodin cuando se usan credenciales</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CRS-05]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>942</cweid>
+<wascid>0</wascid>
+<sourceid>15</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90016</pluginid>
+<alertRef>90016</alertRef>
+<alert><![CDATA[Metadatos SVN expuestos accesible]]></alert>
+<name><![CDATA[Metadatos SVN expuestos accesible]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Revela el historial de versiones y el codigo fuente</p><p>Categoría: rutas</p><p>CWE: CWE-538</p><p><strong>Evidencia</strong></p><ul><li>ruta: /.svn/entries</li><li>status: 200</li><li>bytes: 15</li><li>extracto: 12
+
+dir
+/trunk
+</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1/.svn/entries]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[/.svn/entries]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Bloquear el acceso a .svn</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: FUG-03]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>538</cweid>
+<wascid>0</wascid>
+<sourceid>16</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90017</pluginid>
+<alertRef>90017</alertRef>
+<alert><![CDATA[phpinfo() expuesto accesible]]></alert>
+<name><![CDATA[phpinfo() expuesto accesible]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Expone la configuracion completa de PHP</p><p>Categoría: rutas</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>ruta: /phpinfo.php</li><li>status: 200</li><li>bytes: 56</li><li>extracto: &lt;html&gt;&lt;title&gt;phpinfo()&lt;/title&gt;&lt;h1&gt;PHP Version 8.1.2&lt;/h1&gt;</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1/phpinfo.php]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[/phpinfo.php]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Eliminar phpinfo() de produccion</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: FUG-06]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>17</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90018</pluginid>
+<alertRef>90018</alertRef>
+<alert><![CDATA[Spring Boot Actuator expuesto accesible]]></alert>
+<name><![CDATA[Spring Boot Actuator expuesto accesible]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Los endpoints de gestion pueden filtrar configuracion y permitir cambios</p><p>Categoría: rutas</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>ruta: /actuator</li><li>status: 200</li><li>bytes: 46</li><li>extracto: {&quot;_links&quot;: {&quot;env&quot;: {&quot;href&quot;: &quot;/actuator/env&quot;}}}</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1/actuator]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[/actuator]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Proteger /actuator con autenticacion</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: FUG-07]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>18</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90019</pluginid>
+<alertRef>90019</alertRef>
+<alert><![CDATA[Endpoint de depuracion expuesto accesible]]></alert>
+<name><![CDATA[Endpoint de depuracion expuesto accesible]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Suele permitir ejecutar codigo o volcar el estado interno</p><p>Categoría: rutas</p><p>CWE: CWE-489</p><p><strong>Evidencia</strong></p><ul><li>ruta: /debug</li><li>status: 200</li><li>bytes: 44</li><li>extracto: &lt;h1&gt;Debug console&lt;/h1&gt;&lt;p&gt;ejecutar codigo&lt;/p&gt;</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1/debug]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[/debug]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Eliminar los endpoints de depuracion</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: FUG-09]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>489</cweid>
+<wascid>0</wascid>
+<sourceid>19</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90020</pluginid>
+<alertRef>90020</alertRef>
+<alert><![CDATA[Fichero sensible accesible (/.env.local)]]></alert>
+<name><![CDATA[Fichero sensible accesible (/.env.local)]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Suele contener credenciales o hashes</p><p>Categoría: fugas</p><p>CWE: CWE-538</p><p><strong>Evidencia</strong></p><ul><li>ruta: /.env.local</li><li>bytes: 32</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[/.env.local]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Eliminar copias y ficheros de configuracion del directorio publico</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: FUG-20]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>538</cweid>
+<wascid>0</wascid>
+<sourceid>20</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90021</pluginid>
+<alertRef>90021</alertRef>
+<alert><![CDATA[Falta la cabecera content-security-policy]]></alert>
+<name><![CDATA[Falta la cabecera content-security-policy]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Sin CSP no hay defensa en profundidad contra XSS ni control de origenes</p><p>Categoría: cabeceras</p><p>CWE: CWE-1021</p><p><strong>Evidencia</strong></p><ul><li>cabecera_ausente: content-security-policy</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[content-security-policy]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>default-src &#x27;self&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; frame-ancestors &#x27;self&#x27;</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: HDR-02]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>1021</cweid>
+<wascid>0</wascid>
+<sourceid>21</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90022</pluginid>
+<alertRef>90022</alertRef>
+<alert><![CDATA[El servidor acepta PUT]]></alert>
+<name><![CDATA[El servidor acepta PUT]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>PUT sobre una ruta inexistente devolvio 201: puede permitir subir contenido</p><p>Categoría: metodos</p><p>CWE: CWE-650</p><p><strong>Evidencia</strong></p><ul><li>status: 201</li><li>ruta: http://127.0.0.1:8080/hunterbug-sonda-1792961946</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[201]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Rechazar PUT con 405 salvo donde sea necesario</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: MTH-03]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>650</cweid>
+<wascid>0</wascid>
+<sourceid>22</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90023</pluginid>
+<alertRef>90023</alertRef>
+<alert><![CDATA[El servidor acepta DELETE]]></alert>
+<name><![CDATA[El servidor acepta DELETE]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>DELETE sobre una ruta inexistente devolvio 204</p><p>Categoría: metodos</p><p>CWE: CWE-650</p><p><strong>Evidencia</strong></p><ul><li>status: 204</li><li>ruta: http://127.0.0.1:8080/hunterbug-sonda-1792961946</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[204]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Rechazar DELETE con 405 salvo donde sea necesario</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: MTH-04]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>650</cweid>
+<wascid>0</wascid>
+<sourceid>23</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90024</pluginid>
+<alertRef>90024</alertRef>
+<alert><![CDATA[XSS reflejado en 'q']]></alert>
+<name><![CDATA[XSS reflejado en 'q']]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>El payload vuelve sin escapar en el cuerpo de la respuesta del parametro &#x27;q&#x27;</p><p>Categoría: parametros</p><p>CWE: CWE-79</p><p><strong>Evidencia</strong></p><ul><li>payload: &lt;hbmkhb109f5v&gt;</li><li>fragmento: ic en la raiz&lt;/p&gt; &lt;h2&gt;Resultados para &lt;hbmkhb109f5v&gt;&lt;/h2&gt; &lt;/body&gt; &lt;/html&gt;</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[q]]></param>
+<evidence><![CDATA[<hbmkhb109f5v>]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Escapar la salida segun contexto, aplicar CSP estricta y validar la entrada.</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: PAR-06]]></otherinfo>
+<reference><![CDATA[A03:2021]]></reference>
+<cweid>79</cweid>
+<wascid>0</wascid>
+<sourceid>24</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90025</pluginid>
+<alertRef>90025</alertRef>
+<alert><![CDATA[Posible asignacion masiva en /api/perfil]]></alert>
+<name><![CDATA[Posible asignacion masiva en /api/perfil]]></name>
+<riskcode>3</riskcode>
+<confidence>3</confidence>
+<riskdesc>High (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>El servidor acepto campos de privilegio enviados por el cliente</p><p>Categoría: parametros</p><p>CWE: CWE-915</p><p><strong>Evidencia</strong></p><ul><li>ruta: /api/perfil</li><li>status: 200</li><li>extracto: {&quot;role&quot;:&quot;admin&quot;,&quot;is_admin&quot;:true,&quot;admin&quot;:true}</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[/api/perfil]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Lista blanca de campos asignables</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: PAR-24]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>915</cweid>
+<wascid>0</wascid>
+<sourceid>25</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90026</pluginid>
+<alertRef>90026</alertRef>
+<alert><![CDATA[1 cookie(s) sin samesite]]></alert>
+<name><![CDATA[1 cookie(s) sin samesite]]></name>
+<riskcode>2</riskcode>
+<confidence>2</confidence>
+<riskdesc>Medium (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Sin SameSite el navegador envia la cookie en peticiones cruzadas, lo que facilita CSRF</p><p>Categoría: cookies</p><p>CWE: CWE-1275</p><p><strong>Evidencia</strong></p><ul><li>cookies: PHPSESSID=abc123; Path=/</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[['PHPSESSID=abc123; Path=/']]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Anadir SameSite=Lax o Strict</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CKI-03]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>1275</cweid>
+<wascid>0</wascid>
+<sourceid>26</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90027</pluginid>
+<alertRef>90027</alertRef>
+<alert><![CDATA[Identificador de sesion corto (6 caracteres)]]></alert>
+<name><![CDATA[Identificador de sesion corto (6 caracteres)]]></name>
+<riskcode>2</riskcode>
+<confidence>2</confidence>
+<riskdesc>Medium (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Un identificador corto es adivinable por fuerza bruta</p><p>Categoría: cookies</p><p>CWE: CWE-330</p><p><strong>Evidencia</strong></p><ul><li>cookie: PHPSESSID</li><li>longitud: 6</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[PHPSESSID]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Usar al menos 128 bits de entropia</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CKI-08]]></otherinfo>
+<reference><![CDATA[A02:2021]]></reference>
+<cweid>330</cweid>
+<wascid>0</wascid>
+<sourceid>27</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90028</pluginid>
+<alertRef>90028</alertRef>
+<alert><![CDATA[El codigo referencia source maps]]></alert>
+<name><![CDATA[El codigo referencia source maps]]></name>
+<riskcode>2</riskcode>
+<confidence>2</confidence>
+<riskdesc>Medium (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Los ficheros .map permiten reconstruir el codigo fuente original</p><p>Categoría: contenido</p><p>CWE: CWE-540</p><p><strong>Evidencia</strong></p><ul><li>referencias: /app.js.map--&gt;</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[['/app.js.map-->']]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>No publicar los .map en produccion</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CON-02]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>540</cweid>
+<wascid>0</wascid>
+<sourceid>28</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90029</pluginid>
+<alertRef>90029</alertRef>
+<alert><![CDATA[2 direccion(es) IP privada(s) en el cuerpo]]></alert>
+<name><![CDATA[2 direccion(es) IP privada(s) en el cuerpo]]></name>
+<riskcode>2</riskcode>
+<confidence>2</confidence>
+<riskdesc>Medium (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Revelan la topologia interna de la red</p><p>Categoría: contenido</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>ips: 10.20.30.40, 192.168.1.10</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[['10.20.30.40', '192.168.1.10']]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Eliminar las referencias a la red interna</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CON-05]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>29</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90030</pluginid>
+<alertRef>90030</alertRef>
+<alert><![CDATA[Rutas absolutas del sistema en el cuerpo]]></alert>
+<name><![CDATA[Rutas absolutas del sistema en el cuerpo]]></name>
+<riskcode>2</riskcode>
+<confidence>2</confidence>
+<riskdesc>Medium (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Revelan la estructura de directorios del servidor</p><p>Categoría: contenido</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>rutas: /var/www</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[['/var/www']]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Usar rutas relativas y errores genericos</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CON-06]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>30</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90031</pluginid>
+<alertRef>90031</alertRef>
+<alert><![CDATA[Formulario que envia datos a otro dominio]]></alert>
+<name><![CDATA[Formulario que envia datos a otro dominio]]></name>
+<riskcode>2</riskcode>
+<confidence>2</confidence>
+<riskdesc>Medium (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Los datos del usuario salen del sitio</p><p>Categoría: contenido</p><p>CWE: CWE-346</p><p><strong>Evidencia</strong></p><ul><li>acciones: https://recolector.invalid/recoger</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[['https://recolector.invalid/recoger']]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Enviar los formularios al propio dominio</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CON-09]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>346</cweid>
+<wascid>0</wascid>
+<sourceid>31</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90032</pluginid>
+<alertRef>90032</alertRef>
+<alert><![CDATA[2 formulario(s) POST sin token anti-CSRF]]></alert>
+<name><![CDATA[2 formulario(s) POST sin token anti-CSRF]]></name>
+<riskcode>2</riskcode>
+<confidence>2</confidence>
+<riskdesc>Medium (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Sin token, otra web puede enviar el formulario en nombre del usuario</p><p>Categoría: contenido</p><p>CWE: CWE-352</p><p><strong>Evidencia</strong></p><ul><li>formularios: &lt;form action=&quot;https://recolector.invalid/recoger&quot; method=&quot;post&quot;&gt; &lt;input type=&quot;text&quot; name=&quot;usuario&quot;&gt; &lt;/form&gt;, &lt;form action=&quot;/perfil&quot; method=&quot;post&quot;&gt; &lt;input type=&quot;text&quot; name=&quot;nombre&quot;&gt; &lt;input type=&quot;submit&quot;&gt; &lt;/form&gt;</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[['<form action="https://recolector.invalid/recoger" method="post"> <input type="text" name="usuario"> </form>', '<form action="/perfil" method="post"> <input type="text" name="nombre"> <input type="su]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Token por sesion y validacion SameSite</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CON-12]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>352</cweid>
+<wascid>0</wascid>
+<sourceid>32</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90033</pluginid>
+<alertRef>90033</alertRef>
+<alert><![CDATA[CORS permite cualquier origen (*)]]></alert>
+<name><![CDATA[CORS permite cualquier origen (*)]]></name>
+<riskcode>2</riskcode>
+<confidence>2</confidence>
+<riskdesc>Medium (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Cualquier web puede leer la respuesta desde el navegador de la victima</p><p>Categoría: cors</p><p>CWE: CWE-942</p><p><strong>Evidencia</strong></p><ul><li>acao: *</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[*]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Lista blanca de origenes concretos</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CRS-01]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>942</cweid>
+<wascid>0</wascid>
+<sourceid>33</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90034</pluginid>
+<alertRef>90034</alertRef>
+<alert><![CDATA[Estado del servidor expuesto accesible]]></alert>
+<name><![CDATA[Estado del servidor expuesto accesible]]></name>
+<riskcode>2</riskcode>
+<confidence>2</confidence>
+<riskdesc>Medium (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Revela peticiones en curso, clientes y carga del servidor</p><p>Categoría: rutas</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>ruta: /server-status</li><li>status: 200</li><li>bytes: 120</li><li>extracto: &lt;html&gt;&lt;title&gt;Apache Server Status&lt;/title&gt;&lt;h1&gt;Apache Server Status for 127.0.0.1&lt;/h1&gt;Current Time: now
+Total accesses: 12</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1/server-status]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[/server-status]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Restringir /server-status a la red local</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: FUG-05]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>34</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90035</pluginid>
+<alertRef>90035</alertRef>
+<alert><![CDATA[Documentacion de API expuesta accesible]]></alert>
+<name><![CDATA[Documentacion de API expuesta accesible]]></name>
+<riskcode>2</riskcode>
+<confidence>2</confidence>
+<riskdesc>Medium (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Describe todos los endpoints y sus esquemas, incluidos los internos</p><p>Categoría: rutas</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>ruta: /swagger-ui.html</li><li>status: 200</li><li>bytes: 45</li><li>extracto: &lt;html&gt;&lt;title&gt;Swagger UI&lt;/title&gt;&lt;p&gt;swagger&lt;/p&gt;</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1/swagger-ui.html]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[/swagger-ui.html]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Proteger la documentacion en produccion</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: FUG-11]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>35</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90036</pluginid>
+<alertRef>90036</alertRef>
+<alert><![CDATA[Especificacion de API expuesta accesible]]></alert>
+<name><![CDATA[Especificacion de API expuesta accesible]]></name>
+<riskcode>2</riskcode>
+<confidence>2</confidence>
+<riskdesc>Medium (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Facilita la enumeracion completa de la API</p><p>Categoría: rutas</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>ruta: /api-docs</li><li>status: 200</li><li>bytes: 55</li><li>extracto: {&quot;openapi&quot;: &quot;3.0.0&quot;, &quot;paths&quot;: {&quot;/api/v1/usuarios&quot;: {}}}</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1/api-docs]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[/api-docs]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Restringir el acceso a la especificacion</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: FUG-12]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>36</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90037</pluginid>
+<alertRef>90037</alertRef>
+<alert><![CDATA[Falta la cabecera x-content-type-options]]></alert>
+<name><![CDATA[Falta la cabecera x-content-type-options]]></name>
+<riskcode>2</riskcode>
+<confidence>2</confidence>
+<riskdesc>Medium (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Sin nosniff el navegador puede interpretar un fichero con otro tipo MIME</p><p>Categoría: cabeceras</p><p>CWE: CWE-436</p><p><strong>Evidencia</strong></p><ul><li>cabecera_ausente: x-content-type-options</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[x-content-type-options]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>X-Content-Type-Options: nosniff</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: HDR-03]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>436</cweid>
+<wascid>0</wascid>
+<sourceid>37</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90038</pluginid>
+<alertRef>90038</alertRef>
+<alert><![CDATA[Falta la cabecera x-frame-options]]></alert>
+<name><![CDATA[Falta la cabecera x-frame-options]]></name>
+<riskcode>2</riskcode>
+<confidence>2</confidence>
+<riskdesc>Medium (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Sin proteccion de framing la pagina es embebible y vulnerable a clickjacking</p><p>Categoría: cabeceras</p><p>CWE: CWE-1021</p><p><strong>Evidencia</strong></p><ul><li>cabecera_ausente: x-frame-options</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[x-frame-options]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>X-Frame-Options: DENY (o CSP frame-ancestors &#x27;none&#x27;)</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: HDR-04]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>1021</cweid>
+<wascid>0</wascid>
+<sourceid>38</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90039</pluginid>
+<alertRef>90039</alertRef>
+<alert><![CDATA[Metodo TRACE habilitado]]></alert>
+<name><![CDATA[Metodo TRACE habilitado]]></name>
+<riskcode>2</riskcode>
+<confidence>2</confidence>
+<riskdesc>Medium (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>TRACE devuelve la peticion completa y facilita Cross-Site Tracing</p><p>Categoría: metodos</p><p>CWE: CWE-693</p><p><strong>Evidencia</strong></p><ul><li>status: 200</li><li>cuerpo: TRACE / HTTP/1.1
+Host: 127.0.0.1:8080
+
+</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[200]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Deshabilitar TRACE (TraceEnable off)</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: MTH-01]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>693</cweid>
+<wascid>0</wascid>
+<sourceid>39</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90040</pluginid>
+<alertRef>90040</alertRef>
+<alert><![CDATA[OPTIONS anuncia metodos de escritura]]></alert>
+<name><![CDATA[OPTIONS anuncia metodos de escritura]]></name>
+<riskcode>2</riskcode>
+<confidence>2</confidence>
+<riskdesc>Medium (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>El servidor declara: GET, HEAD, POST, PUT, DELETE, PATCH, PROPFIND, TRACE</p><p>Categoría: metodos</p><p>CWE: CWE-650</p><p><strong>Evidencia</strong></p><ul><li>allow: GET, HEAD, POST, PUT, DELETE, PATCH, PROPFIND, TRACE</li><li>peligrosos: PUT, DELETE, PATCH</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[GET, HEAD, POST, PUT, DELETE, PATCH, PROPFIND, TRACE]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Deshabilitar los metodos no usados</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: MTH-02]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>650</cweid>
+<wascid>0</wascid>
+<sourceid>40</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90041</pluginid>
+<alertRef>90041</alertRef>
+<alert><![CDATA[WebDAV habilitado]]></alert>
+<name><![CDATA[WebDAV habilitado]]></name>
+<riskcode>2</riskcode>
+<confidence>2</confidence>
+<riskdesc>Medium (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Anuncia: PROPFIND</p><p>Categoría: metodos</p><p>CWE: CWE-650</p><p><strong>Evidencia</strong></p><ul><li>metodos_dav: PROPFIND</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[['PROPFIND']]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Deshabilitar WebDAV si no se usa</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: MTH-08]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>650</cweid>
+<wascid>0</wascid>
+<sourceid>41</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90042</pluginid>
+<alertRef>90042</alertRef>
+<alert><![CDATA[Inyeccion HTML en 'q']]></alert>
+<name><![CDATA[Inyeccion HTML en 'q']]></name>
+<riskcode>2</riskcode>
+<confidence>2</confidence>
+<riskdesc>Medium (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Se pueden inyectar etiquetas HTML arbitrarias; con un navegador puede escalarse a XSS</p><p>Categoría: parametros</p><p>CWE: CWE-79</p><p><strong>Evidencia</strong></p><ul><li>payload: &lt;hbmk-hbpa7w7d&gt;x&lt;/hbmk-hbpa7w7d&gt;</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[q]]></param>
+<evidence><![CDATA[<hbmk-hbpa7w7d>x</hbmk-hbpa7w7d>]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Escapar la salida segun contexto</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: PAR-09]]></otherinfo>
+<reference><![CDATA[A03:2021]]></reference>
+<cweid>79</cweid>
+<wascid>0</wascid>
+<sourceid>42</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90043</pluginid>
+<alertRef>90043</alertRef>
+<alert><![CDATA[No se observa limite de peticiones]]></alert>
+<name><![CDATA[No se observa limite de peticiones]]></name>
+<riskcode>2</riskcode>
+<confidence>2</confidence>
+<riskdesc>Medium (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>12 peticiones seguidas devolvieron siempre 200, sin 429 ni bloqueo</p><p>Categoría: parametros</p><p>CWE: CWE-770</p><p><strong>Evidencia</strong></p><ul><li>peticiones: 12</li><li>codigos: 200</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[12]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Aplicar limite por IP y por cuenta en endpoints sensibles</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: PAR-27]]></otherinfo>
+<reference><![CDATA[A04:2021]]></reference>
+<cweid>770</cweid>
+<wascid>0</wascid>
+<sourceid>43</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90044</pluginid>
+<alertRef>90044</alertRef>
+<alert><![CDATA[Entrada reflejada dentro de JavaScript (q)]]></alert>
+<name><![CDATA[Entrada reflejada dentro de JavaScript (q)]]></name>
+<riskcode>2</riskcode>
+<confidence>2</confidence>
+<riskdesc>Medium (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>El valor vuelve sin escapar en un contexto de script, lo que permite romper la cadena</p><p>Categoría: parametros</p><p>CWE: CWE-79</p><p><strong>Evidencia</strong></p><ul><li>payload: &#x27;+hbjlx7kw+&#x27;</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[q]]></param>
+<evidence><![CDATA['+hbjlx7kw+']]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Escapar segun contexto JS y usar JSON.stringify</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: PAR-37]]></otherinfo>
+<reference><![CDATA[A03:2021]]></reference>
+<cweid>79</cweid>
+<wascid>0</wascid>
+<sourceid>44</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90045</pluginid>
+<alertRef>90045</alertRef>
+<alert><![CDATA[Cookie de sesion con nombre por defecto (PHPSESSID)]]></alert>
+<name><![CDATA[Cookie de sesion con nombre por defecto (PHPSESSID)]]></name>
+<riskcode>1</riskcode>
+<confidence>2</confidence>
+<riskdesc>Low (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Revela el framework (PHP) sin necesidad de fingerprint</p><p>Categoría: cookies</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>cookie: PHPSESSID=abc123; Path=/</li><li>framework: PHP</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[PHPSESSID=abc123; Path=/]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Renombrar la cookie de sesion</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CKI-07]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>45</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90046</pluginid>
+<alertRef>90046</alertRef>
+<alert><![CDATA[2 comentario(s) HTML con informacion sensible]]></alert>
+<name><![CDATA[2 comentario(s) HTML con informacion sensible]]></name>
+<riskcode>1</riskcode>
+<confidence>2</confidence>
+<riskdesc>Low (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Los comentarios viajan al cliente y revelan notas internas, credenciales o rutas</p><p>Categoría: contenido</p><p>CWE: CWE-615</p><p><strong>Evidencia</strong></p><ul><li>comentarios: TODO: quitar el usuario admin / password: Sup3rS3cret0 antes de publicar, FIXME: la api key de produccion es api_key = &quot;AKIAIOSFODNN7EXAMPLE1&quot;</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[['TODO: quitar el usuario admin / password: Sup3rS3cret0 antes de publicar', 'FIXME: la api key de produccion es api_key = "AKIAIOSFODNN7EXAMPLE1"']]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Eliminar los comentarios en produccion</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CON-01]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>615</cweid>
+<wascid>0</wascid>
+<sourceid>46</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90047</pluginid>
+<alertRef>90047</alertRef>
+<alert><![CDATA[2 script(s) sin Subresource Integrity]]></alert>
+<name><![CDATA[2 script(s) sin Subresource Integrity]]></name>
+<riskcode>1</riskcode>
+<confidence>2</confidence>
+<riskdesc>Low (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Si el CDN se compromete, el script se ejecuta sin que nadie lo detecte</p><p>Categoría: contenido</p><p>CWE: CWE-353</p><p><strong>Evidencia</strong></p><ul><li>scripts: &lt;script src=&quot;https://cdn.ejemplo.invalid/lib.js&quot;&gt;, &lt;script src=&quot;/app.js&quot;&gt;</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[['<script src="https://cdn.ejemplo.invalid/lib.js">', '<script src="/app.js">']]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Anadir integrity y crossorigin a los scripts de terceros</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CON-08]]></otherinfo>
+<reference><![CDATA[A08:2021]]></reference>
+<cweid>353</cweid>
+<wascid>0</wascid>
+<sourceid>47</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90048</pluginid>
+<alertRef>90048</alertRef>
+<alert><![CDATA[1 enlace(s) _blank sin rel=noopener]]></alert>
+<name><![CDATA[1 enlace(s) _blank sin rel=noopener]]></name>
+<riskcode>1</riskcode>
+<confidence>2</confidence>
+<riskdesc>Low (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>La pagina destino puede manipular la ventana de origen mediante window.opener</p><p>Categoría: contenido</p><p>CWE: CWE-1022</p><p><strong>Evidencia</strong></p><ul><li>enlaces: &lt;a href=&quot;https://externo.invalid&quot; target=&quot;_blank&quot;&gt;</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[['<a href="https://externo.invalid" target="_blank">']]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Anadir rel=&quot;noopener noreferrer&quot;</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CON-13]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>1022</cweid>
+<wascid>0</wascid>
+<sourceid>48</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90049</pluginid>
+<alertRef>90049</alertRef>
+<alert><![CDATA[Respuesta CORS sin Vary: Origin]]></alert>
+<name><![CDATA[Respuesta CORS sin Vary: Origin]]></name>
+<riskcode>1</riskcode>
+<confidence>2</confidence>
+<riskdesc>Low (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Una cache intermedia puede servir la cabecera CORS de un origen a otro</p><p>Categoría: cors</p><p>CWE: CWE-436</p><p><strong>Evidencia</strong></p><ul><li>vary: </li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Anadir Vary: Origin</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CRS-06]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>436</cweid>
+<wascid>0</wascid>
+<sourceid>49</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90050</pluginid>
+<alertRef>90050</alertRef>
+<alert><![CDATA[Fichero .DS_Store expuesto accesible]]></alert>
+<name><![CDATA[Fichero .DS_Store expuesto accesible]]></name>
+<riskcode>1</riskcode>
+<confidence>2</confidence>
+<riskdesc>Low (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Revela nombres de ficheros y estructura de directorios</p><p>Categoría: rutas</p><p>CWE: CWE-538</p><p><strong>Evidencia</strong></p><ul><li>ruta: /.DS_Store</li><li>status: 200</li><li>bytes: 22</li><li>extracto: Bud1index.html</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1/.DS_Store]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[/.DS_Store]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Bloquear el acceso a .DS_Store</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: FUG-04]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>538</cweid>
+<wascid>0</wascid>
+<sourceid>50</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90051</pluginid>
+<alertRef>90051</alertRef>
+<alert><![CDATA[robots.txt expone rutas internas]]></alert>
+<name><![CDATA[robots.txt expone rutas internas]]></name>
+<riskcode>1</riskcode>
+<confidence>2</confidence>
+<riskdesc>Low (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Rutas listadas: /admin/, /backup/, /config/</p><p>Categoría: fugas</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>rutas: /admin/, /backup/, /config/</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[['/admin/', '/backup/', '/config/']]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>No listar rutas privadas en robots.txt</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: FUG-14]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>51</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90052</pluginid>
+<alertRef>90052</alertRef>
+<alert><![CDATA[Falta la cabecera referrer-policy]]></alert>
+<name><![CDATA[Falta la cabecera referrer-policy]]></name>
+<riskcode>1</riskcode>
+<confidence>2</confidence>
+<riskdesc>Low (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Sin Referrer-Policy se filtran URLs completas a terceros</p><p>Categoría: cabeceras</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>cabecera_ausente: referrer-policy</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[referrer-policy]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Referrer-Policy: strict-origin-when-cross-origin</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: HDR-05]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>52</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90053</pluginid>
+<alertRef>90053</alertRef>
+<alert><![CDATA[Falta la cabecera permissions-policy]]></alert>
+<name><![CDATA[Falta la cabecera permissions-policy]]></name>
+<riskcode>1</riskcode>
+<confidence>2</confidence>
+<riskdesc>Low (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Sin Permissions-Policy las APIs del navegador quedan sin restringir</p><p>Categoría: cabeceras</p><p>CWE: CWE-693</p><p><strong>Evidencia</strong></p><ul><li>cabecera_ausente: permissions-policy</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[permissions-policy]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Permissions-Policy: geolocation=(), microphone=(), camera=()</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: HDR-06]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>693</cweid>
+<wascid>0</wascid>
+<sourceid>53</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90054</pluginid>
+<alertRef>90054</alertRef>
+<alert><![CDATA[Falta la cabecera cross-origin-opener-policy]]></alert>
+<name><![CDATA[Falta la cabecera cross-origin-opener-policy]]></name>
+<riskcode>1</riskcode>
+<confidence>2</confidence>
+<riskdesc>Low (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Sin COOP la ventana puede ser referenciada desde otro origen</p><p>Categoría: cabeceras</p><p>CWE: CWE-346</p><p><strong>Evidencia</strong></p><ul><li>cabecera_ausente: cross-origin-opener-policy</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[cross-origin-opener-policy]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Cross-Origin-Opener-Policy: same-origin</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: HDR-07]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>346</cweid>
+<wascid>0</wascid>
+<sourceid>54</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90055</pluginid>
+<alertRef>90055</alertRef>
+<alert><![CDATA[Falta la cabecera cross-origin-resource-policy]]></alert>
+<name><![CDATA[Falta la cabecera cross-origin-resource-policy]]></name>
+<riskcode>1</riskcode>
+<confidence>2</confidence>
+<riskdesc>Low (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Sin CORP los recursos pueden ser embebidos desde otros origenes</p><p>Categoría: cabeceras</p><p>CWE: CWE-346</p><p><strong>Evidencia</strong></p><ul><li>cabecera_ausente: cross-origin-resource-policy</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[cross-origin-resource-policy]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Cross-Origin-Resource-Policy: same-origin</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: HDR-08]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>346</cweid>
+<wascid>0</wascid>
+<sourceid>55</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90056</pluginid>
+<alertRef>90056</alertRef>
+<alert><![CDATA[Sin cabecera Cache-Control]]></alert>
+<name><![CDATA[Sin cabecera Cache-Control]]></name>
+<riskcode>1</riskcode>
+<confidence>2</confidence>
+<riskdesc>Low (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>El contenido puede quedar en cache de proxies intermedios o del navegador</p><p>Categoría: cabeceras</p><p>CWE: CWE-525</p><p><strong>Evidencia</strong></p><ul><li>cache_control: </li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Cache-Control: no-store en respuestas autenticadas o sensibles</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: HDR-34]]></otherinfo>
+<reference><![CDATA[A04:2021]]></reference>
+<cweid>525</cweid>
+<wascid>0</wascid>
+<sourceid>56</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90057</pluginid>
+<alertRef>90057</alertRef>
+<alert><![CDATA[La cabecera Server revela version]]></alert>
+<name><![CDATA[La cabecera Server revela version]]></name>
+<riskcode>1</riskcode>
+<confidence>2</confidence>
+<riskdesc>Low (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Facilita elegir exploits concretos para esa version</p><p>Categoría: cabeceras</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>server: Apache/2.4.49 (Unix)</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[Apache/2.4.49 (Unix)]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Ocultar la version (ServerTokens Prod, server_tokens off)</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: HDR-36]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>57</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90058</pluginid>
+<alertRef>90058</alertRef>
+<alert><![CDATA[X-Powered-By revela la tecnologia]]></alert>
+<name><![CDATA[X-Powered-By revela la tecnologia]]></name>
+<riskcode>1</riskcode>
+<confidence>2</confidence>
+<riskdesc>Low (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Expone el lenguaje y a veces la version exacta</p><p>Categoría: cabeceras</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>x_powered_by: PHP/8.1.2</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[PHP/8.1.2]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Eliminar la cabecera</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: HDR-37]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>58</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90059</pluginid>
+<alertRef>90059</alertRef>
+<alert><![CDATA[Cabeceras que revelan infraestructura (2)]]></alert>
+<name><![CDATA[Cabeceras que revelan infraestructura (2)]]></name>
+<riskcode>1</riskcode>
+<confidence>2</confidence>
+<riskdesc>Low (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>Revelan servidores intermedios, frameworks o versiones internas</p><p>Categoría: cabeceras</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>x-runtime: 0.0412</li><li>via: 1.1 hunterbug-proxy</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[0.0412]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Eliminar o minimizar estas cabeceras</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: HDR-38]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>59</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90060</pluginid>
+<alertRef>90060</alertRef>
+<alert><![CDATA[Un metodo no estandar no es rechazado]]></alert>
+<name><![CDATA[Un metodo no estandar no es rechazado]]></name>
+<riskcode>1</riskcode>
+<confidence>2</confidence>
+<riskdesc>Low (Medium)</riskdesc>
+<confidencedesc>Medium</confidencedesc>
+<desc><![CDATA[<p>El metodo HUNTERBUG devolvio 200 en lugar de 405/501</p><p>Categoría: metodos</p><p>CWE: CWE-650</p><p><strong>Evidencia</strong></p><ul><li>status: 200</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[200]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Rechazar metodos no implementados</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: MTH-05]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>650</cweid>
+<wascid>0</wascid>
+<sourceid>60</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90061</pluginid>
+<alertRef>90061</alertRef>
+<alert><![CDATA[Ninguna cookie cumple Secure + HttpOnly + SameSite]]></alert>
+<name><![CDATA[Ninguna cookie cumple Secure + HttpOnly + SameSite]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Se han visto 1 cookie(s) y ninguna reune las tres protecciones</p><p>Categoría: cookies</p><p>CWE: CWE-614</p><p><strong>Evidencia</strong></p><ul><li>total_cookies: 1</li><li>cookies: PHPSESSID=abc123; Path=/</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[1]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Aplicar las tres a todas las cookies</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CKI-12]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>614</cweid>
+<wascid>0</wascid>
+<sourceid>61</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90062</pluginid>
+<alertRef>90062</alertRef>
+<alert><![CDATA[2 direccion(es) de correo en el cuerpo]]></alert>
+<name><![CDATA[2 direccion(es) de correo en el cuerpo]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Facilitan campanas de phishing y enumeracion</p><p>Categoría: contenido</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>correos: admin@ejemplo.test, soporte@ejemplo.test</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[['admin@ejemplo.test', 'soporte@ejemplo.test']]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Ofuscar o eliminar los correos publicos</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CON-04]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>62</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90063</pluginid>
+<alertRef>90063</alertRef>
+<alert><![CDATA[Campo de contrasena sin autocomplete]]></alert>
+<name><![CDATA[Campo de contrasena sin autocomplete]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>El navegador puede almacenar la contrasena en equipos compartidos</p><p>Categoría: contenido</p><p>CWE: CWE-522</p><p><strong>Evidencia</strong></p><ul><li>input: &lt;input type=&quot;password&quot; name=&quot;clave&quot;&gt;</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[<input type="password" name="clave">]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>autocomplete=&quot;current-password&quot; o &quot;off&quot;</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CON-11]]></otherinfo>
+<reference><![CDATA[A07:2021]]></reference>
+<cweid>522</cweid>
+<wascid>0</wascid>
+<sourceid>63</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90064</pluginid>
+<alertRef>90064</alertRef>
+<alert><![CDATA[1 iframe(s) sin atributo sandbox]]></alert>
+<name><![CDATA[1 iframe(s) sin atributo sandbox]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>El contenido embebido se ejecuta con los permisos de la pagina</p><p>Categoría: contenido</p><p>CWE: CWE-1021</p><p><strong>Evidencia</strong></p><ul><li>iframes: &lt;iframe src=&quot;https://externo.invalid/widget&quot;&gt;</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[['<iframe src="https://externo.invalid/widget">']]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Anadir sandbox a los iframes de terceros</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CON-14]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>1021</cweid>
+<wascid>0</wascid>
+<sourceid>64</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90065</pluginid>
+<alertRef>90065</alertRef>
+<alert><![CDATA[Meta generator revela el CMS y su version]]></alert>
+<name><![CDATA[Meta generator revela el CMS y su version]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>&lt;meta name=&quot;generator&quot; content=&quot;PanelCMS 3.1.4&quot;&gt;</p><p>Categoría: contenido</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>meta: &lt;meta name=&quot;generator&quot; content=&quot;PanelCMS 3.1.4&quot;&gt;</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[<meta name="generator" content="PanelCMS 3.1.4">]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Eliminar la etiqueta generator</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CON-15]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>65</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90066</pluginid>
+<alertRef>90066</alertRef>
+<alert><![CDATA[1 referencia(s) a almacenamiento externo]]></alert>
+<name><![CDATA[1 referencia(s) a almacenamiento externo]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Los buckets mal configurados son una fuga de datos habitual</p><p>Categoría: contenido</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>buckets: https://panel-datos.s3.amazonaws.com</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[['https://panel-datos.s3.amazonaws.com']]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Revisar las politicas del bucket</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CON-19]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>66</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90067</pluginid>
+<alertRef>90067</alertRef>
+<alert><![CDATA[2 endpoint(s) de API referenciados]]></alert>
+<name><![CDATA[2 endpoint(s) de API referenciados]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Amplia la superficie de ataque conocida</p><p>Categoría: contenido</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>endpoints: /api/v1/facturas, /api/v1/usuarios</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[['/api/v1/facturas', '/api/v1/usuarios']]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Revisar que cada endpoint comprueba autorizacion</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CON-20]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>67</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90068</pluginid>
+<alertRef>90068</alertRef>
+<alert><![CDATA[El HTML enlaza paneles de administracion]]></alert>
+<name><![CDATA[El HTML enlaza paneles de administracion]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Facilita localizar la zona privilegiada</p><p>Categoría: contenido</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>rutas: /admin/panel</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[['/admin/panel']]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Restringir el acceso por red o autenticacion fuerte</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CON-21]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>68</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90069</pluginid>
+<alertRef>90069</alertRef>
+<alert><![CDATA[El cuerpo declara un numero de version]]></alert>
+<name><![CDATA[El cuerpo declara un numero de version]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Version visible: 3.1.4</p><p>Categoría: contenido</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>version: 3.1.4</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[3.1.4]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Ocultar las versiones de los componentes</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CON-23]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>69</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90070</pluginid>
+<alertRef>90070</alertRef>
+<alert><![CDATA[Copyright de 2019 (hace 7 anos)]]></alert>
+<name><![CDATA[Copyright de 2019 (hace 7 anos)]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Suele indicar un sitio sin mantenimiento, con componentes antiguos</p><p>Categoría: contenido</p><p>CWE: CWE-1059</p><p><strong>Evidencia</strong></p><ul><li>anios: 2019</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[[2019]]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Actualizar y revisar dependencias</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CON-24]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>1059</cweid>
+<wascid>0</wascid>
+<sourceid>70</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90071</pluginid>
+<alertRef>90071</alertRef>
+<alert><![CDATA[3 tecnologias identificadas por el contenido]]></alert>
+<name><![CDATA[3 tecnologias identificadas por el contenido]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Detectadas: WordPress, Next.js, React</p><p>Categoría: contenido</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>tecnologias: WordPress, Next.js, React</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[['WordPress', 'Next.js', 'React']]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Minimizar las huellas del stack</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CON-28]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>71</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90072</pluginid>
+<alertRef>90072</alertRef>
+<alert><![CDATA[CORS expone cabeceras sensibles al JavaScript]]></alert>
+<name><![CDATA[CORS expone cabeceras sensibles al JavaScript]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Expose-Headers incluye cabeceras de autenticacion</p><p>Categoría: cors</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>expose_headers: Authorization</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[Authorization]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Exponer solo las cabeceras necesarias</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: CRS-07]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>72</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90073</pluginid>
+<alertRef>90073</alertRef>
+<alert><![CDATA[No publica /.well-known/security.txt]]></alert>
+<name><![CDATA[No publica /.well-known/security.txt]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Sin canal declarado de reporte de vulnerabilidades</p><p>Categoría: fugas</p><p>CWE: CWE-1059</p><p><strong>Evidencia</strong></p><ul><li>status: 404</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[404]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Publicar security.txt con un contacto de seguridad</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: FUG-15]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>1059</cweid>
+<wascid>0</wascid>
+<sourceid>73</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90074</pluginid>
+<alertRef>90074</alertRef>
+<alert><![CDATA[sitemap.xml accesible]]></alert>
+<name><![CDATA[sitemap.xml accesible]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Facilita el inventario de URLs del sitio</p><p>Categoría: fugas</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>bytes: 66</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[66]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Revisar si el sitemap debe ser publico</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: FUG-16]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>74</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90075</pluginid>
+<alertRef>90075</alertRef>
+<alert><![CDATA[Panel de administracion accesible (/admin/)]]></alert>
+<name><![CDATA[Panel de administracion accesible (/admin/)]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Expone la interfaz de gestion del CMS</p><p>Categoría: fugas</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>ruta: /admin/</li><li>status: 200</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[/admin/]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Restringir por IP o autenticacion adicional</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: FUG-19]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>75</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90076</pluginid>
+<alertRef>90076</alertRef>
+<alert><![CDATA[La pagina 404 revela el servidor y su version]]></alert>
+<name><![CDATA[La pagina 404 revela el servidor y su version]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Firma encontrada: Apache/2.4.49</p><p>Categoría: fugas</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>firma: Apache/2.4.49</li><li>extracto: &lt;html&gt;&lt;head&gt;&lt;title&gt;404 Not Found&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Not Found&lt;/h1&gt;&lt;address&gt;Apache/2.4.49 (Unix) Server at 127.0.0.1 Port 8080&lt;/address&gt;&lt;/body&gt;&lt;/html&gt;</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[Apache/2.4.49]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Pagina 404 personalizada</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: FUG-22]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>76</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90077</pluginid>
+<alertRef>90077</alertRef>
+<alert><![CDATA[Falta la cabecera cross-origin-embedder-policy]]></alert>
+<name><![CDATA[Falta la cabecera cross-origin-embedder-policy]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Sin COEP no se aisla el contexto de ejecucion</p><p>Categoría: cabeceras</p><p>CWE: CWE-346</p><p><strong>Evidencia</strong></p><ul><li>cabecera_ausente: cross-origin-embedder-policy</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[cross-origin-embedder-policy]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Cross-Origin-Embedder-Policy: require-corp</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: HDR-09]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>346</cweid>
+<wascid>0</wascid>
+<sourceid>77</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90078</pluginid>
+<alertRef>90078</alertRef>
+<alert><![CDATA[Falta la cabecera x-permitted-cross-domain-policies]]></alert>
+<name><![CDATA[Falta la cabecera x-permitted-cross-domain-policies]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Sin esta cabecera los plugins de Adobe pueden cargar contenido cruzado</p><p>Categoría: cabeceras</p><p>CWE: CWE-346</p><p><strong>Evidencia</strong></p><ul><li>cabecera_ausente: x-permitted-cross-domain-policies</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[x-permitted-cross-domain-policies]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>X-Permitted-Cross-Domain-Policies: none</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: HDR-10]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>346</cweid>
+<wascid>0</wascid>
+<sourceid>78</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90079</pluginid>
+<alertRef>90079</alertRef>
+<alert><![CDATA[Falta la cabecera x-dns-prefetch-control]]></alert>
+<name><![CDATA[Falta la cabecera x-dns-prefetch-control]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Sin control de prefetch DNS se filtran dominios a terceros</p><p>Categoría: cabeceras</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>cabecera_ausente: x-dns-prefetch-control</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[x-dns-prefetch-control]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>X-DNS-Prefetch-Control: off</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: HDR-11]]></otherinfo>
+<reference><![CDATA[A01:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>79</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90080</pluginid>
+<alertRef>90080</alertRef>
+<alert><![CDATA[Falta la cabecera x-download-options]]></alert>
+<name><![CDATA[Falta la cabecera x-download-options]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Sin X-Download-Options los ficheros descargados pueden ejecutarse en contexto del sitio</p><p>Categoría: cabeceras</p><p>CWE: CWE-436</p><p><strong>Evidencia</strong></p><ul><li>cabecera_ausente: x-download-options</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[x-download-options]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>X-Download-Options: noopen</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: HDR-12]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>436</cweid>
+<wascid>0</wascid>
+<sourceid>80</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90081</pluginid>
+<alertRef>90081</alertRef>
+<alert><![CDATA[Falta la cabecera clear-site-data]]></alert>
+<name><![CDATA[Falta la cabecera clear-site-data]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Sin Clear-Site-Data no se limpian los datos del sitio al cerrar sesion</p><p>Categoría: cabeceras</p><p>CWE: CWE-613</p><p><strong>Evidencia</strong></p><ul><li>cabecera_ausente: clear-site-data</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[clear-site-data]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Clear-Site-Data: &quot;cache&quot;, &quot;cookies&quot;</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: HDR-13]]></otherinfo>
+<reference><![CDATA[A07:2021]]></reference>
+<cweid>613</cweid>
+<wascid>0</wascid>
+<sourceid>81</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90082</pluginid>
+<alertRef>90082</alertRef>
+<alert><![CDATA[El documento no declara idioma (lang)]]></alert>
+<name><![CDATA[El documento no declara idioma (lang)]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Afecta a accesibilidad y a la interpretacion del contenido por herramientas automaticas</p><p>Categoría: cabeceras</p><p>CWE: CWE-1059</p><p><strong>Evidencia</strong></p><ul><li>extracto: &lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scal</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scal]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Anadir lang al elemento html</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: HDR-40]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>1059</cweid>
+<wascid>0</wascid>
+<sourceid>82</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90083</pluginid>
+<alertRef>90083</alertRef>
+<alert><![CDATA[El endpoint acepta text/plain en un cuerpo JSON]]></alert>
+<name><![CDATA[El endpoint acepta text/plain en un cuerpo JSON]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>No se valida el tipo de contenido declarado</p><p>Categoría: parametros</p><p>CWE: CWE-436</p><p><strong>Evidencia</strong></p><ul><li>status: 200</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[200]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Rechazar tipos no esperados con 415</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: PAR-34]]></otherinfo>
+<reference><![CDATA[A03:2021]]></reference>
+<cweid>436</cweid>
+<wascid>0</wascid>
+<sourceid>83</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90084</pluginid>
+<alertRef>90084</alertRef>
+<alert><![CDATA[La respuesta con parametros no aplica CSP ni nosniff]]></alert>
+<name><![CDATA[La respuesta con parametros no aplica CSP ni nosniff]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Una respuesta dinamica sin estas cabeceras es el escenario ideal para XSS</p><p>Categoría: parametros</p><p>CWE: CWE-693</p><p><strong>Evidencia</strong></p><ul><li>faltan: content-security-policy, x-content-type-options</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[['content-security-policy', 'x-content-type-options']]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Aplicar las cabeceras de seguridad a todas las respuestas, no solo a la portada</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: PAR-40]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>693</cweid>
+<wascid>0</wascid>
+<sourceid>84</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90085</pluginid>
+<alertRef>90085</alertRef>
+<alert><![CDATA[Tecnologia detectada: WordPress]]></alert>
+<name><![CDATA[Tecnologia detectada: WordPress]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Firma encontrada: &#x27;wp-content&#x27;</p><p>Categoría: tecnologia</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>tecnologia: WordPress</li><li>firma: wp-content</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[WordPress]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Mantener la version al dia y revisar sus CVE conocidos</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: TEC-01]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>85</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90086</pluginid>
+<alertRef>90086</alertRef>
+<alert><![CDATA[Tecnologia detectada: Next.js]]></alert>
+<name><![CDATA[Tecnologia detectada: Next.js]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Firma encontrada: &#x27;_next/static&#x27;</p><p>Categoría: tecnologia</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>tecnologia: Next.js</li><li>firma: _next/static</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[Next.js]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Mantener la version al dia y revisar sus CVE conocidos</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: TEC-05]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>86</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90087</pluginid>
+<alertRef>90087</alertRef>
+<alert><![CDATA[Tecnologia detectada: React]]></alert>
+<name><![CDATA[Tecnologia detectada: React]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Firma encontrada: &#x27;data-reactroot&#x27;</p><p>Categoría: tecnologia</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>tecnologia: React</li><li>firma: data-reactroot</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[React]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Mantener la version al dia y revisar sus CVE conocidos</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: TEC-06]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>87</sourceid>
+</alertitem>
+<alertitem>
+<pluginid>90088</pluginid>
+<alertRef>90088</alertRef>
+<alert><![CDATA[Tecnologia detectada: Ruby on Rails]]></alert>
+<name><![CDATA[Tecnologia detectada: Ruby on Rails]]></name>
+<riskcode>0</riskcode>
+<confidence>3</confidence>
+<riskdesc>Informational (High)</riskdesc>
+<confidencedesc>High</confidencedesc>
+<desc><![CDATA[<p>Firma encontrada: &#x27;x-runtime&#x27;</p><p>Categoría: tecnologia</p><p>CWE: CWE-200</p><p><strong>Evidencia</strong></p><ul><li>tecnologia: Ruby on Rails</li><li>firma: x-runtime</li></ul>]]></desc>
+<instances>
+<instance>
+<uri><![CDATA[http://127.0.0.1:8080/buscar?q=test]]></uri>
+<method>GET</method>
+<param><![CDATA[]]></param>
+<evidence><![CDATA[Ruby on Rails]]></evidence>
+</instance>
+</instances>
+<count>1</count>
+<solution><![CDATA[<p>Mantener la version al dia y revisar sus CVE conocidos</p>]]></solution>
+<otherinfo><![CDATA[Identificador HunterBug: TEC-11]]></otherinfo>
+<reference><![CDATA[A05:2021]]></reference>
+<cweid>200</cweid>
+<wascid>0</wascid>
+<sourceid>88</sourceid>
+</alertitem>
+</alerts>
+</site>
+</OWASPZAPReport>

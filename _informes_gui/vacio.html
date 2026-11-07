@@ -1,0 +1,130 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Informe HunterBug — http://127.0.0.1:8080/buscar?q=test</title><style>
+:root{--tinta:#111827;--suave:#6b7280;--borde:#e5e7eb;--fondo:#ffffff;
+      --papel:#f9fafb;--acento:#0b3d2c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--papel);color:var(--tinta);
+     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,
+     Helvetica,Arial,sans-serif;font-size:14px;line-height:1.55}
+.hoja{max-width:960px;margin:0 auto;background:var(--fondo);padding:44px 52px;
+      box-shadow:0 1px 4px rgba(0,0,0,.08)}
+h1{font-size:27px;margin:0 0 6px;letter-spacing:-.4px}
+h2{font-size:19px;margin:38px 0 12px;padding-bottom:7px;
+   border-bottom:2px solid var(--acento);color:var(--acento)}
+h3{font-size:15px;margin:24px 0 8px}
+h4{font-size:13px;margin:16px 0 6px;color:#374151}
+p{margin:8px 0}
+small,.suave{color:var(--suave)}
+code,kbd{font-family:ui-monospace,Consolas,monospace;font-size:12.5px;
+     background:#f1f5f9;padding:1px 5px;border-radius:3px}
+pre{background:#0f172a;color:#e2e8f0;padding:12px 14px;border-radius:6px;
+    overflow-x:auto;font-size:12px;line-height:1.45;margin:8px 0}
+pre code{background:none;color:inherit;padding:0}
+.cabecera{border-bottom:3px solid var(--acento);padding-bottom:18px;
+          margin-bottom:26px}
+.cabecera .sub{color:var(--suave);font-size:13px}
+.rejilla{display:flex;gap:22px;flex-wrap:wrap;margin:20px 0}
+.tarjeta{flex:1 1 210px;border:1px solid var(--borde);border-radius:8px;
+         padding:14px 16px;background:var(--papel)}
+.tarjeta .etq{font-size:11px;text-transform:uppercase;letter-spacing:.6px;
+              color:var(--suave);font-weight:600}
+.tarjeta .val{font-size:23px;font-weight:700;margin-top:3px}
+.nota{font-size:22px;font-weight:700}
+.badge{display:inline-block;padding:2px 9px;border-radius:999px;
+       font-size:11px;font-weight:700;letter-spacing:.4px;color:#fff}
+.chip{display:inline-block;padding:1px 7px;border-radius:4px;font-size:11px;
+      background:#f1f5f9;color:#334155;margin-right:5px}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:13px}
+th{background:var(--acento);color:#fff;text-align:left;padding:8px 9px;
+   font-size:12px;font-weight:600}
+td{border-bottom:1px solid var(--borde);padding:7px 9px;vertical-align:top}
+tr:nth-child(even) td{background:#fbfcfd}
+.hallazgo{border:1px solid var(--borde);border-left-width:5px;border-radius:6px;
+          padding:14px 16px;margin:14px 0;background:#fff}
+.hallazgo .tit{font-size:15px;font-weight:700;margin:0 0 4px}
+.hallazgo .meta{font-size:12px;color:var(--suave);margin-bottom:8px}
+.evidencia{background:#f8fafc;border:1px solid var(--borde);border-radius:5px;
+           padding:9px 11px;margin-top:9px;font-size:12.5px}
+.evidencia dl{margin:0;display:grid;grid-template-columns:auto 1fr;
+              gap:2px 12px}
+.evidencia dt{font-weight:600;color:#374151;white-space:nowrap}
+.evidencia dd{margin:0;word-break:break-word;
+              font-family:ui-monospace,Consolas,monospace}
+.rec{background:#f0fdf4;border-left:3px solid #15803d;padding:8px 11px;
+     margin-top:9px;font-size:13px}
+.indice{columns:2;column-gap:30px;font-size:13px}
+.indice a{color:var(--acento);text-decoration:none}
+.indice a:hover{text-decoration:underline}
+.pie{margin-top:44px;padding-top:16px;border-top:1px solid var(--borde);
+     font-size:12px;color:var(--suave)}
+.aviso{background:#fffbeb;border:1px solid #fde68a;border-radius:6px;
+       padding:11px 14px;font-size:13px;margin:16px 0}
+@media print{
+  body{background:#fff;font-size:11.5px}
+  .hoja{box-shadow:none;padding:0;max-width:none}
+  h2{page-break-after:avoid}
+  .hallazgo,table,pre,.tarjeta{page-break-inside:avoid}
+  a{color:inherit;text-decoration:none}
+}
+</style></head><body><div class="hoja"><div class="cabecera"><h1>Informe de evaluación de seguridad</h1><div class="sub"><strong>Objetivo:</strong> http://127.0.0.1:8080/buscar?q=test<br><strong>Herramienta:</strong> HunterBug 1.1 &nbsp;·&nbsp; <strong>Fecha:</strong> 25/10/2026 a las 21:59 &nbsp;·&nbsp; <strong>Perfil:</strong> full</div></div><div class="rejilla"><div class="tarjeta"><div class="etq">Hallazgos</div><div class="val">0</div><div class="suave">0 críticos · 0 altos · 0 medios</div></div></div><h2>1. Resumen ejecutivo</h2><p><strong>Se han registrado 0 hallazgos sobre http://127.0.0.1:8080/buscar?q=test.</strong></p><p>No se han registrado hallazgos. Conviene recordar que la ausencia de hallazgos no equivale a ausencia de vulnerabilidades: significa que las comprobaciones automáticas de esta pasada no encontraron nada con la evidencia recogida.</p><h2>3. Hallazgos detallados</h2><p>No se registraron hallazgos.</p><h2>7. Tráfico HTTP capturado</h2><p>Peticiones y respuestas en bruto, como evidencia reproducible.</p><h3>1. GET http://127.0.0.1:8080/buscar?q=test — 200</h3><h4>Petición</h4><pre><code>GET /buscar?q=test HTTP/1.1
+Host: 127.0.0.1:8080
+User-Agent: HunterBug/1.0 (+authorized-security-testing)
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: close
+
+</code></pre><h4>Respuesta</h4><pre><code>HTTP/1.1 200 OK
+Server: Apache/2.4.49 (Unix)
+Date: Sun, 25 Oct 2026 20:59:16 GMT
+Content-Type: text/html; charset=utf-8
+X-Powered-By: PHP/8.1.2
+X-Runtime: 0.0412
+Via: 1.1 hunterbug-proxy
+Content-Length: 1653
+Set-Cookie: PHPSESSID=abc123; Path=/
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true
+Access-Control-Expose-Headers: Authorization
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;meta name=&quot;generator&quot; content=&quot;PanelCMS 3.1.4&quot;&gt;
+  &lt;title&gt;Panel de prueba&lt;/title&gt;
+  &lt;!-- TODO: quitar el usuario admin / password: Sup3rS3cret0 antes de publicar --&gt;
+  &lt;!-- FIXME: la api key de produccion es api_key = &quot;AKIAIOSFODNN7EXAMPLE1&quot; --&gt;
+  &lt;script src=&quot;https://cdn.ejemplo.invalid/lib.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;/app.js&quot;&gt;&lt;/script&gt;
+  &lt;!--//# sourceMappingURL=/app.js.map--&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;http://insecure.ejemplo.invalid/estilo.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Panel interno version 3.1.4&lt;/h1&gt;
+  &lt;p&gt;Contacto: soporte@ejemplo.test y admin@ejemplo.test&lt;/p&gt;
+  &lt;p&gt;Servidor interno: 10.20.30.40 y 192.168.1.10&lt;/p&gt;
+  &lt;p&gt;Ruta del despliegue: /var/www/panel/public&lt;/p&gt;
+  &lt;a href=&quot;https://externo.invalid&quot; target=&quot;_blank&quot;&gt;Documentacion&lt;/a&gt;
+  &lt;iframe src=&quot;https://externo.invalid/widget&quot;&gt;&lt;/iframe&gt;
+  &lt;form action=&quot;https://recolector.invalid/recoger&quot; method=&quot;post&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;usuario&quot;&gt;
+  &lt;/form&gt;
+  &lt;form action=&quot;/login&quot; method=&quot;get&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;usuario&quot;&gt;
+    &lt;input type=&quot;password&quot; name=&quot;clave&quot;&gt;
+    &lt;input type=&quot;submit&quot;&gt;
+  &lt;/form&gt;
+  &lt;form action=&quot;/perfil&quot; method=&quot;post&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;nombre&quot;&gt;
+    &lt;input type=&quot;submit&quot;&gt;
+  &lt;/form&gt;
+  &lt;p&gt;Bucket: https://panel-datos.s3.amazonaws.com/export/&lt;/p&gt;
+  &lt;p&gt;Endpoints: &quot;/api/v1/usuarios&quot; y &quot;/api/v1/facturas&quot;&lt;/p&gt;
+  &lt;p&gt;Panel de gestion en &quot;/admin/panel&quot;&lt;/p&gt;
+  &lt;p&gt;&amp;copy; 2019 Panel S.L.&lt;/p&gt;
+  &lt;div id=&quot;app&quot; data-reactroot=&quot;&quot;&gt;&lt;/div&gt;
+  &lt;p&gt;wp-content y __next/static en la raiz&lt;/p&gt;
+  &lt;h2&gt;Resultados para test&lt;/h2&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><div class="pie"><p><strong>HunterBug 1.1</strong> — informe generado automáticamente el 2026-10-25 21:59:21. Documento de uso exclusivo en pruebas autorizadas.</p><p>La ausencia de hallazgos no demuestra la ausencia de vulnerabilidades. Los resultados deben revisarse y confirmarse manualmente antes de darlos por válidos.</p></div></div></body></html>
