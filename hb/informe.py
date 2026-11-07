@@ -27,7 +27,7 @@ import urllib.parse
 from . import pdfmin
 from .informe_intercambio import limpiar_control, limpiar_profundo
 
-VERSION = "1.0"
+VERSION = "1.2"
 SEVERIDADES = ["critico", "alto", "medio", "bajo", "info"]
 
 COLOR_SEV = {
@@ -64,7 +64,8 @@ def _norm_hallazgo(h, indice=0):
         "titulo": limpiar_control(h.get("titulo") or h.get("title")
                                   or "Hallazgo sin título"),
         "severidad": sev,
-        "confianza": limpiar_control(h.get("confianza", "")),
+        "confianza": limpiar_control(h.get("confianza_calculada",
+                                           h.get("confianza", ""))),
         "categoria": limpiar_control(h.get("categoria") or h.get("tipo")
                                      or "otros"),
         "modulo": limpiar_control(h.get("modulo", "")),
@@ -76,6 +77,15 @@ def _norm_hallazgo(h, indice=0):
                                    or ""),
         "recomendacion": limpiar_control(h.get("recomendacion", "")),
         "evidencia": limpiar_profundo(h.get("evidencia") or {}),
+        # campos que aporta el modulo de validacion de 1.1
+        "cvss": limpiar_profundo(h.get("cvss") or {}),
+        "nivel_cvss": limpiar_control(h.get("nivel_cvss", "")),
+        "prioridad": limpiar_control(h.get("prioridad", "")),
+        "motivos_confianza": limpiar_control(
+            ", ".join(h.get("motivos_confianza") or [])),
+        "revisar": bool(h.get("revisar")),
+        "motivo_revision": limpiar_control(h.get("motivo_revision", "")),
+        "duplicados_fusionados": int(h.get("duplicados_fusionados") or 0),
     }
 
 

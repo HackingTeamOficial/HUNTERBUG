@@ -46,6 +46,17 @@ class Bus:
     def hallazgo(self, modulo, hallazgo):
         return self.publicar(HALLAZGO, modulo=modulo, hallazgo=hallazgo)
 
+    def hallazgos_de(self, modulo):
+        """Hallazgos publicados por un módulo. Sirve para no duplicar."""
+        return [e["hallazgo"] for e in self.historial(HALLAZGO)
+                if e.get("modulo") == modulo and
+                isinstance(e.get("hallazgo"), dict)]
+
+    def hallazgos_todos(self):
+        """Todos los hallazgos publicados hasta ahora."""
+        return [e["hallazgo"] for e in self.historial(HALLAZGO)
+                if isinstance(e.get("hallazgo"), dict)]
+
     def progreso(self, modulo, pct, texto=""):
         return self.publicar(PROGRESO, modulo=modulo, pct=int(pct), texto=texto)
 

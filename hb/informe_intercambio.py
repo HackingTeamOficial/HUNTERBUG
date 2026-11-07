@@ -25,7 +25,7 @@ import re
 import time
 import urllib.parse
 
-VERSION = "1.0"
+VERSION = "1.1"
 HERRAMIENTA = "HunterBug %s" % VERSION
 
 # Caracteres que XML 1.0 prohibe (y que el cuerpo HTTP en bruto puede traer,

@@ -5,7 +5,7 @@ import sys
 import time
 
 EXE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                   "dist", "HunterBug 1.0.exe")
+                   "dist", "HunterBug 1.2.exe")
 print("probando:", EXE)
 print("existe:", os.path.exists(EXE), "| tamano: %.1f MB"
       % (os.path.getsize(EXE) / 1048576.0))

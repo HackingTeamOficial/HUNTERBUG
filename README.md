@@ -1,4 +1,4 @@
-# HunterBug 1.0
+# HunterBug 1.2 — Bug Hunter Edition
 
 **Framework de evaluación de seguridad para bug hunters**
 
@@ -39,6 +39,36 @@ detecta, documenta y prioriza, y deja el trabajo fino en tus manos.
 | **Pentester en encargo con autorización** | Fase de reconocimiento y *low-hanging fruit* documentada con evidencia reproducible, antes de la explotación manual. |
 | **Equipo de AppSec / DevSecOps** | Comprobación periódica de cabeceras de seguridad, TLS y exposición de puertos sobre tus propios servicios. |
 | **Estudiante / jugador de CTF** | Trae un **laboratorio vulnerable incluido** (`banco_pruebas.py`) para ver cómo se comporta cada detector contra fallos reales, sin tocar nada ajeno. |
+
+---
+
+## Novedades de la 1.2
+
+La 1.1 sigue intacta: mismo catálogo, mismos módulos, mismos informes. La 1.2
+ajusta **detección de DNS** (registro CNAME ahora disponible), **mejora el
+análisis de IA** con mayor contexto, y **actualiza los informes** con mejor
+formateo.
+
+### Motores dedicados
+
+| Motor | Qué corrige frente a 1.0 |
+|---|---|
+| **`hb/sqli.py`** | Confirmación por **tiempo** con guardas (WAF, *throttling*, falsos positivos de reflejo). Una carga útil por vector en vez de disparar todas. El barrido clásico seguía marcando SQLi en parámetros que solo reflejaban el `'`. |
+| **`hb/xss.py`** | **Detección de contexto** (HTML, atributo con/sin comillas, JavaScript, comentario) y carga útil acorde a cada uno. Lo que 1.0 marcaba como XSS siendo texto escapado ahora sale como *reflejo de baja severidad*. Además analiza **CSP** y ajusta la severidad si la política lo bloquea, y detecta **DOM XSS** por fuente/sumidero. |
+| **`hb/authz.py`** | IDOR/BOLA sin patrón manual: **descubre los objetos** de la propia URL (enteros en ruta, UUID, hashes), evalúa si el identificador es **predecible** (UUID v1 lleva la marca de tiempo y el MAC) y **enumera vecinos de forma acotada** comparando con similitud. Para BOLA usa **cobertura de tokens** entre las dos credenciales, que es la señal correcta cuando B ve un superconjunto de los datos de A. |
+| **`hb/validacion.py`** | Lo que va entre "el detector dijo algo" y "esto se reporta": **confianza (0-100) con motivos**, **CVSS 3.1 estimado** por tipo, **prioridad P1-P4**, **deduplicación** de hallazgos repetidos y **revisión de falsos positivos conocidos**. |
+| **`hb/recon11.py`** | Reconocimiento pasivo: subdominios por **Certificate Transparency** (crt.sh, sin tocar el objetivo), nombres del certificado, rutas de `robots.txt` y `sitemap.xml`, **parámetros y endpoints escondidos en el JavaScript**, y formularios con sus campos. |
+| **`hb/bounty.py`** | **Comprobador de alcance** (pega el texto del programa, con comodines `*.dominio` y exclusiones `!dev.dominio`) y **reportes listos para la plataforma** con la estructura que esperan HackerOne y Bugcrowd. |
+
+### Cómo se comporta
+
+* Los motores nuevos **no sustituyen** al barrido clásico: lo complementan y
+  **evitan duplicados** (lo que el motor 1.1 confirma ya no se reporta dos veces).
+* Todo hallazgo que llega al informe pasa por `validacion.procesar`: entra
+  deduplicado, con CVSS, confianza, prioridad y el motivo de cualquier duda.
+* La pestaña **Informe** tiene una sección nueva de **BUG BOUNTY**: pega el
+  alcance, comprueba qué URLs entran antes de lanzar nada, y genera el reporte
+  de cada hallazgo en el formato de HackerOne o Bugcrowd.
 
 ---
 
@@ -359,7 +389,7 @@ python probar_exe.py            # el .exe empaquetado arranca
 
 ## Créditos
 
-**HunterBug 1.0** — versión mejorada y creada para la comunidad **hacking team**
+**HunterBug 1.2 — Bug Hunter Edition** — versión mejorada y creada para la comunidad **hacking team**
 by **Juan Antonio**.
 
 Herramienta de bug bounty y pruebas de seguridad autorizadas.

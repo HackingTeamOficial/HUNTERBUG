@@ -102,7 +102,7 @@ def html():
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>HunterBug 1.0 - Ficha de la herramienta</title>
+<title>HunterBug 1.2 - Ficha de la herramienta</title>
 <style>
   * {{ box-sizing: border-box; }}
   body {{
@@ -211,7 +211,7 @@ def html():
   <div class="wrap head">
     {f'<img src="{b64}" alt="HunterBug">' if b64 else ''}
     <div class="title">
-      <h1>HUNTERBUG<span class="v">1.0</span></h1>
+      <h1>HUNTERBUG<span class="v">1.2</span></h1>
       <p>Framework de evaluación de seguridad para bug hunters</p>
       <div class="credito">Versión mejorada y creada para la comunidad
         hacking team · by Juan Antonio</div>
@@ -266,7 +266,7 @@ def html():
   </div>
 
   <footer>
-    <b>HunterBug 1.0</b> · <span class="sub">versión mejorada y creada para la
+    <b>HunterBug 1.2</b> · <span class="sub">versión mejorada y creada para la
     comunidad hacking team · by Juan Antonio</span><br>
     Sin dependencias externas de red · Python 3 · Windows
   </footer>

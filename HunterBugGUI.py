@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""HunterBug 1.0 - Framework de evaluacion de seguridad.
+"""HunterBug 1.2 - Framework de evaluacion de seguridad.
 
 Interfaz con pestanas por categoria, resultados en tiempo real y ventanas
 independientes por modulo. Version mejorada creada para la comunidad
@@ -8,6 +8,7 @@ hacking team by Juan Antonio.
 """
 
 import json
+import io
 import os
 import random
 import sys
@@ -26,6 +27,12 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 from hb import ai, cve, events, graph, net, vulns, checks, metrics
+from hb import sqli as hb_sqli
+from hb import xss as hb_xss
+from hb import authz as hb_authz
+from hb import validacion as hb_validacion
+from hb import recon11 as hb_recon
+from hb import bounty as hb_bounty
 from hb import informe as hb_informe
 from hb import informe_intercambio as hb_intercambio
 from hb import pdfmin as hb_pdfmin
@@ -92,6 +99,20 @@ EXTENSION_INFORME = {
     "zap": "xml",
 }
 
+# Alcance de ejemplo para la pestaña de bug bounty: comodines de subdominios
+# con exclusiones, que es como se escribe normalmente en los programas.
+SCOPE_PLANTILLA = """# Pega aqui el alcance de tu programa y comprueba antes de lanzar nada
+*.ejemplo.com
+api.ejemplo.com
+!dev.ejemplo.com
+!staging.ejemplo.com
+"""
+
+# Plantilla de URLs en alcance (lo que se introduce por defecto)
+URLS_PLANTILLA = """https://www.ejemplo.com/
+https://dev.ejemplo.com/
+"""
+
 MODULOS = [
     ("dns",     "DNS",              "Registros A, AAAA, MX, TXT, NS, SOA, CAA", False),
     ("ip",      "IP / Reversa",     "Resolucion directa e inversa",             False),
@@ -134,6 +155,11 @@ def dir_informes():
         except OSError:
             return dir_datos()
     return d
+
+
+def marca_tiempo():
+    """Marca de tiempo legible para nombres de informe."""
+    return datetime.now().strftime("%Y%m%d-%H%M%S")
 
 
 def abrir_carpeta(ruta):
@@ -215,7 +241,7 @@ class HunterBugGUI(ctk.CTk):
     # ------------------------------------------------------------------ init
     def __init__(self):
         super().__init__()
-        self.title("HUNTERBUG 1.0 - Framework de Evaluacion de Seguridad")
+        self.title("HUNTERBUG 1.2 - Bug Hunter Edition")
         self.geometry("1560x960")
         self.minsize(1180, 760)
 
@@ -262,7 +288,8 @@ class HunterBugGUI(ctk.CTk):
 
         self.aplicar_tema()
         self.refrescar_fondo()
-        self.registrar("HunterBug 1.0 listo. Tema: %s." % self.modo, "exito")
+        self.registrar("HunterBug 1.2 — Bug Hunter Edition lista. Tema: %s."
+                       % self.modo, "exito")
         self.registrar("Uso exclusivo en pruebas autorizadas. Marca la casilla de "
                        "autorizacion para lanzar los modulos activos.", "aviso")
         self.after(120, self.procesar_eventos)
@@ -404,12 +431,12 @@ class HunterBugGUI(ctk.CTk):
         else:
             x_texto = 20
 
-        self.reg(ctk.CTkLabel(barra, text="HUNTERBUG 1.0",
+        self.reg(ctk.CTkLabel(barra, text="HUNTERBUG 1.2",
                               font=ctk.CTkFont(family="Consolas", size=18,
                                                weight="bold")),
                  fg_color='bar', text_color='green').place(x=x_texto, y=6)
         self.reg(ctk.CTkLabel(barra,
-                              text="Version mejorada para la comunidad hacking team",
+                              text="Bug Hunter Edition  ·  para la comunidad hacking team",
                               font=ctk.CTkFont(family="Consolas", size=8)),
                  fg_color='bar', text_color='text3').place(x=x_texto + 1, y=31)
 
@@ -1254,6 +1281,77 @@ class HunterBugGUI(ctk.CTk):
                                   anchor="w", justify="left"),
                      fg_color='bg', text_color='text3').pack(anchor="w")
 
+        # --- bug bounty: alcance y reporte listo para la plataforma ---
+        self.reg(ctk.CTkLabel(izq, text="BUG BOUNTY",
+                              font=ctk.CTkFont(family="Consolas", size=10,
+                                               weight="bold")),
+                 fg_color='bg2', text_color='green').pack(anchor="w",
+                                                          padx=8, pady=(12, 4))
+        self.reg(ctk.CTkLabel(izq, text="Alcance (pega el texto del programa):",
+                              font=ctk.CTkFont(family="Consolas", size=8),
+                              anchor="w", justify="left"),
+                 fg_color='bg2', text_color='text3').pack(anchor="w",
+                                                          padx=8, pady=(0, 3))
+        self.txt_scope = ctk.CTkTextbox(izq, height=86,
+                                        font=ctk.CTkFont(family="Consolas",
+                                                         size=9),
+                                        wrap="word")
+        self.txt_scope.pack(fill="x", padx=8, pady=(0, 6))
+        self.txt_scope.insert("1.0", SCOPE_PLANTILLA)
+        self.reg(ctk.CTkLabel(izq, text="URLs a comprobar (una por línea):",
+                              font=ctk.CTkFont(family="Consolas", size=8),
+                              anchor="w", justify="left"),
+                 fg_color='bg2', text_color='text3').pack(anchor="w",
+                                                          padx=8, pady=(0, 3))
+        self.entry_bounty_urls = ctk.CTkTextbox(
+            izq, height=54, font=ctk.CTkFont(family="Consolas", size=9),
+            wrap="word")
+        self.entry_bounty_urls.pack(fill="x", padx=8, pady=(0, 6))
+        self.entry_bounty_urls.insert("1.0", URLS_PLANTILLA)
+
+        fila_alcance = self.reg(ctk.CTkFrame(izq, corner_radius=0),
+                                fg_color='bg2')
+        fila_alcance.pack(fill="x", padx=8, pady=(0, 6))
+        self.reg(ctk.CTkButton(fila_alcance, text="COMPROBAR ALCANCE",
+                               width=200, height=28,
+                               font=ctk.CTkFont(family="Consolas", size=9,
+                                                weight="bold"),
+                               command=self.comprobar_alcance_gui),
+                 fg_color='green', hover_color='green_hover',
+                 text_color='bg').pack(side="left", padx=(0, 6))
+        self.reg(ctk.CTkButton(fila_alcance, text="LISTA EN ALCANCE",
+                               width=200, height=28,
+                               font=ctk.CTkFont(family="Consolas", size=9,
+                                                weight="bold"),
+                               command=self.filtrar_alcance_gui),
+                 fg_color='btn', hover_color='btn_hover',
+                 text_color='text2').pack(side="left")
+
+        fila_reporte = self.reg(ctk.CTkFrame(izq, corner_radius=0),
+                                fg_color='bg2')
+        fila_reporte.pack(fill="x", padx=8, pady=(0, 8))
+        self.var_plataforma = ctk.StringVar(value="hackerone")
+        self.reg(ctk.CTkOptionMenu(
+            fila_reporte, values=["hackerone", "bugcrowd", "generico"],
+            variable=self.var_plataforma, width=190, height=28,
+            font=ctk.CTkFont(family="Consolas", size=9, weight="bold")),
+            fg_color='btn', text_color='text2').pack(side="left", padx=(0, 6))
+        self.reg(ctk.CTkButton(fila_reporte,
+                               text="REPORTE PARA LA PLATAFORMA",
+                               width=260, height=28,
+                               font=ctk.CTkFont(family="Consolas", size=9,
+                                                weight="bold"),
+                               command=self.reporte_plataforma_gui),
+                 fg_color='green', hover_color='green_hover',
+                 text_color='bg').pack(side="left")
+        self.reg(ctk.CTkLabel(izq, text="Genera el reporte de cada hallazgo "
+                                        "con severidad, CVSS, confianza, pasos, "
+                                        "impacto y remediacion.",
+                              font=ctk.CTkFont(family="Consolas", size=8),
+                              anchor="w", justify="left"),
+                 fg_color='bg2', text_color='text3').pack(anchor="w",
+                                                          padx=8, pady=(0, 4))
+
         der = self.reg(ctk.CTkFrame(cuerpo, corner_radius=8, width=430),
                        fg_color='bg2')
         der.pack(side="right", fill="y")
@@ -1303,9 +1401,19 @@ class HunterBugGUI(ctk.CTk):
                 _, filas = metrics.cuadro(resultados, ctx=None)
             except Exception:
                 filas = []
-        return hb_informe.construir_datos(
+        # los hallazgos se deduplican, se puntuan y se ordenan antes de entrar
+        # en el informe: no se reporta dos veces el mismo fallo
+        hallazgos = list(self.hallazgos)
+        resumen_validacion = None
+        try:
+            proc = hb_validacion.procesar(hallazgos)
+            hallazgos = proc["hallazgos"]
+            resumen_validacion = proc["resumen"]
+        except Exception:
+            pass
+        datos = hb_informe.construir_datos(
             objetivo,
-            hallazgos=self.hallazgos,
+            hallazgos=hallazgos,
             resultados=resultados,
             puntuacion=puntuacion,
             filas_metricas=filas,
@@ -1314,13 +1422,16 @@ class HunterBugGUI(ctk.CTk):
             puertos=self.puertos,
             tecnologias=self.tecnologias,
             http_historial=self.http_historial,
-            cves=[h for h in self.hallazgos
+            cves=[h for h in hallazgos
                   if str(h.get("tipo", "")).lower() == "cve"
                   or str(h.get("id", "")).upper().startswith("CVE")],
             grafo=self.grafo,
             autorizado=bool(self.var_autorizado.get()),
             perfil=self.perfil.get(),
             duracion=getattr(self, "duracion_evaluacion", 0.0))
+        if resumen_validacion:
+            datos["validacion"] = resumen_validacion
+        return datos
 
     def _escribir_informe(self, texto, nivel="info"):
         try:
@@ -1387,6 +1498,116 @@ class HunterBugGUI(ctk.CTk):
             hb_intercambio.escribir_zap_xml(datos, ruta)
             return ruta, "%d alerta(s) en formato ZAP" % len(datos["hallazgos"])
         raise RuntimeError("formato desconocido: %s" % clave)
+
+    # --- bug bounty: alcance y reporte para la plataforma
+    def _salidas_bounty(self):
+        """Devuelve (reglas, urls) leidas de los widgets."""
+        texto = self.txt_scope.get("1.0", "end-1c")
+        reglas = hb_bounty.cargar_alcance(texto)
+        urls = [l.strip() for l in
+                self.entry_bounty_urls.get("1.0", "end-1c").splitlines()
+                if l.strip() and not l.strip().startswith("#")]
+        return reglas, urls
+
+    def comprobar_alcance_gui(self):
+        """Comprueba las URLs contra el alcance y lo escribe en el panel."""
+        reglas, urls = self._salidas_bounty()
+        if not reglas:
+            messagebox.showwarning("Alcance", "Pega el alcance del programa "
+                                   "antes de comprobar nada.")
+            return
+        if not urls:
+            messagebox.showwarning("Alcance", "Introduce al menos una URL.")
+            return
+        parte = hb_bounty.comprobar_lista(urls, reglas)
+        L = []
+        L.append("ALCANCE: %d regla(s), %d URL(s)" % (len(reglas), len(urls)))
+        L.append("")
+        for d in parte["dentro"]:
+            L.append("  [DENTRO] %s" % d["url"])
+            L.append("            %s" % d["motivo"])
+        for f in parte["fuera"]:
+            L.append("  [FUERA]  %s" % f["url"])
+            L.append("            %s" % f["motivo"])
+        L.append("")
+        L.append("Dentro: %d | Fuera: %d" % (parte["resumen"]["dentro"],
+                                             parte["resumen"]["fuera"]))
+        self._escribir_panel_informe("\n".join(L))
+        self.registrar("Alcance comprobado: %d dentro, %d fuera"
+                       % (parte["resumen"]["dentro"],
+                          parte["resumen"]["fuera"]),
+                       "exito" if parte["resumen"]["dentro"] else "aviso")
+
+    def filtrar_alcance_gui(self):
+        """Muestra solo las URLs que estan dentro del alcance."""
+        reglas, urls = self._salidas_bounty()
+        if not reglas or not urls:
+            messagebox.showwarning("Alcance", "Introduce alcance y URLs.")
+            return
+        dentro = [u for u in urls if hb_bounty.en_alcance(u, reglas)[0]]
+        self.entry_bounty_urls.delete("1.0", "end")
+        self.entry_bounty_urls.insert("1.0", "\n".join(dentro))
+        messagebox.showinfo("Alcance", "%d de %d URL(s) estan dentro del "
+                            "alcance." % (len(dentro), len(urls)))
+
+    def reporte_plataforma_gui(self):
+        """Genera el reporte de los hallazgos en el formato de la plataforma."""
+        if not self.hallazgos:
+            messagebox.showwarning("Reporte", "Todavia no hay hallazgos: "
+                                   "ejecuta una evaluacion primero.")
+            return
+        # se deduplican y se puntuan antes de escribir: no se reporta dos
+        # veces el mismo fallo ni con la severidad que salio por defecto
+        proc = hb_validacion.procesar(list(self.hallazgos))
+        hallazgos = proc["hallazgos"]
+        plataforma = (self.var_plataforma.get() or "hackerone").lower()
+        programa = (self.entry_target.get().strip() or self.target_actual()
+                    or "")
+        if "//" in programa:
+            programa = "//".join(programa.split("//")[1:])
+        md = hb_bounty.tabla_resumen(hallazgos)
+        md += "\n\n" + hb_bounty.reportes(hallazgos, programa=programa,
+                                          plataforma=plataforma)
+        L = ["REPORTE PARA %s" % plataforma.upper(),
+             "Programa: %s" % (programa or "(sin objetivo)"),
+             "Hallazgos: %d (de %d originales, %d fusionados)"
+             % (len(hallazgos), proc["resumen"]["originales"],
+                proc["resumen"]["fusionados"]),
+             "A revisar antes de enviar: %d" % proc["resumen"]["a_revisar"],
+             ""]
+        if proc["resumen"]["a_revisar"]:
+            L.append("Hallazgos a revisar (la evidencia no sostiene la "
+                     "severidad):")
+            for h in hallazgos:
+                if h.get("revisar"):
+                    L.append("  - %s: %s" % (h.get("titulo", "")[:70],
+                                             h.get("motivo_revision", "")))
+            L.append("")
+        L.append("=" * 60)
+        L.append("")
+        L.append(md)
+        salida = "\n".join(L)
+        self._escribir_panel_informe(salida)
+        # ademas se guarda en disco, que es donde se quiere el reporte
+        try:
+            ruta = os.path.join(dir_informes(),
+                                "reporte_%s_%s.md" % (plataforma,
+                                                      marca_tiempo()))
+            with io.open(ruta, "w", encoding="utf-8") as f:
+                f.write(salida)
+            self.informe_ultimo = ruta
+            messagebox.showinfo("Reporte", "Guardado en:\n" + ruta)
+            self.registrar("Reporte de %s guardado (%d hallazgos)"
+                           % (plataforma, len(hallazgos)), "exito")
+        except Exception as e:
+            messagebox.showerror("Reporte", "No se pudo guardar: %s" % e)
+
+    def _escribir_panel_informe(self, texto):
+        """Escribe texto en el panel de resultados de la pestana Informe."""
+        self.txt_informe.configure(state="normal")
+        self.txt_informe.delete("1.0", "end")
+        self.txt_informe.insert("1.0", texto)
+        self.txt_informe.configure(state="disabled")
 
     def descargar_informe(self, clave):
         if self.informe_generando:
@@ -2150,7 +2371,7 @@ class HunterBugGUI(ctk.CTk):
                               font=ctk.CTkFont(family="Consolas", size=30,
                                                weight="bold")),
                  fg_color='bar', text_color='green').place(x=xt, y=18)
-        self.reg(ctk.CTkLabel(cab, text="1.0",
+        self.reg(ctk.CTkLabel(cab, text="1.2",
                               font=ctk.CTkFont(family="Consolas", size=15,
                                                weight="bold")),
                  fg_color='bar', text_color='cyan').place(x=xt + 206, y=34)
@@ -2204,7 +2425,7 @@ class HunterBugGUI(ctk.CTk):
         seccion("CREDITOS")
         fila("Autor", "Juan Antonio")
         fila("Comunidad", "hacking team")
-        fila("Version", "1.0", 'cyan')
+        fila("Version", "1.2", 'cyan')
         fila("Proposito", "Bug bounty y pruebas de seguridad autorizadas")
 
         seccion("MOTORES INCLUIDOS")
@@ -2452,51 +2673,106 @@ class HunterBugGUI(ctk.CTk):
                 L("La URL no tiene parametros; anade ?clave=valor para probar SQLi.",
                   "aviso")
                 return
-            res = vulns.probar_sqli(objetivo, cabeceras=cab, log=L)
-            for h in res:
+            # Motor SQLi de 1.1: confirmacion por tiempo con guardas y falsos
+            # positivos cerrados. El barrido clasico aporta, pero no se duplica.
+            res = hb_sqli.analizar(objetivo, cabeceras=cab, pausa=0.15, log=L,
+                                   timeout=12)
+            confirmados = {h.get("parametro") for h in res["hallazgos"]
+                           if h["tipo"] == "sqli"}
+            for h in res["hallazgos"]:
                 self.bus.hallazgo(clave, h)
-            L("SQLi: %d hallazgo(s)." % len(res), "exito" if res else "info")
+            L("SQLi (1.1): %d parametro(s) probado(s), %d hallazgo(s)."
+              % (res["resumen"].get("parametros_probados", 0),
+                 len(res["hallazgos"])),
+              "exito" if res["hallazgos"] else "info")
+            for h in vulns.probar_sqli(objetivo, cabeceras=cab, log=L):
+                if h["evidencia"].get("parametro") in confirmados:
+                    continue
+                self.bus.hallazgo(clave, h)
 
         elif clave == "xss":
             if not vulns.parametros_de(objetivo):
                 L("La URL no tiene parametros; anade ?clave=valor para probar XSS.",
                   "aviso")
                 return
-            res = vulns.probar_xss(objetivo, cabeceras=cab, log=L)
-            for h in res:
+            # Motor XSS de 1.1: detecta el contexto del reflejo y elige la
+            # carga útil acorde; el barrido clasico no duplica lo confirmado.
+            res = hb_xss.analizar(objetivo, cabeceras=cab, pausa=0.15, log=L,
+                                  timeout=12)
+            confirmados = {h.get("parametro") for h in res["hallazgos"]
+                           if h["tipo"] == "xss"}
+            for h in res["hallazgos"]:
                 self.bus.hallazgo(clave, h)
-            L("XSS: %d hallazgo(s)." % len(res), "exito" if res else "info")
+            L("XSS (1.1): %d parametro(s) probado(s), %d reflejo(s), %d DOM XSS."
+              % (res["resumen"].get("parametros_probados", 0),
+                 res["resumen"].get("reflejos", 0),
+                 1 if res["resumen"].get("dom_xss") else 0),
+              "exito" if res["hallazgos"] else "info")
+            for h in vulns.probar_xss(objetivo, cabeceras=cab, log=L):
+                if h["evidencia"].get("parametro") in confirmados:
+                    continue
+                self.bus.hallazgo(clave, h)
 
         elif clave == "idor":
+            # Motor IDOR/BOLA de 1.1: descubre los objetos de la propia URL,
+            # evalua si el identificador es predecible y enumera vecinos de
+            # forma acotada. No necesita un patron manual.
             patron = cfg.get("patron_idor", "")
-            if "{id}" not in patron:
-                L("Indica un patron IDOR que contenga {id}.", "aviso")
+            if not hb_authz.descubrir_objetos(objetivo):
+                # sin objetos en la URL: si hay patron manual, se usa el
+                # barrido clasico; si no, no hay nada que enumerar
+                if "{id}" not in patron:
+                    L("La URL no tiene identificadores de objeto; prueba con "
+                      "/api/usuario/123 o ?cuenta=42.", "aviso")
+                    return
+                try:
+                    ida = int(cfg.get("id_a") or 1)
+                    idb = int(cfg.get("id_b") or 2)
+                except ValueError:
+                    ida, idb = 1, 2
+                for h in vulns.probar_idor(patron, ida, idb, cabeceras=cab,
+                                           log=L):
+                    self.bus.hallazgo(clave, h)
+                L("IDOR (patron manual): %d hallazgo(s)."
+                  % len(self.bus.hallazgos_de(clave)),
+                  "exito" if self.bus.hallazgos_de(clave) else "info")
                 return
-            try:
-                ida = int(cfg.get("id_a") or 1)
-                idb = int(cfg.get("id_b") or 2)
-            except ValueError:
-                ida, idb = 1, 2
-            res = vulns.probar_idor(patron, ida, idb, cabeceras=cab, log=L)
-            for h in res:
+            res = hb_authz.analizar(objetivo, cabeceras=cab, pausa=0.15, log=L,
+                                    max_vecinos=3)
+            for h in res["hallazgos"]:
                 self.bus.hallazgo(clave, h)
-            L("IDOR: %d resultado(s)." % len(res), "exito" if res else "info")
+            L("IDOR (1.1): %d objeto(s), %d hallazgo(s)."
+              % (res["resumen"]["objetos"], len(res["hallazgos"])),
+              "exito" if res["hallazgos"] else "info")
 
         elif clave == "bola":
-            url = cfg.get("url_bola", "")
+            url = cfg.get("url_bola") or objetivo
             if not url:
                 L("Indica la URL BOLA a comparar.", "aviso")
                 return
-            res = vulns.probar_bola(
+            res = hb_authz.bola(
                 url,
                 cookies_a=cfg.get("cookie_a") or None,
                 cookies_b=cfg.get("cookie_b") or None,
                 token_a=cfg.get("token_a") or None,
                 token_b=cfg.get("token_b") or None,
                 log=L)
-            for h in res:
+            for h in res["hallazgos"]:
                 self.bus.hallazgo(clave, h)
-            L("BOLA: %d resultado(s)." % len(res), "exito" if res else "info")
+            L("BOLA: %d resultado(s) (cobertura %.0f%%)."
+              % (len(res["hallazgos"]),
+                 (res["resumen"].get("cobertura") or 0) * 100),
+              "exito" if res["hallazgos"] else "info")
+            # la comparacion clasica, solo si no se cubrio ya
+            if not (cfg.get("cookie_a") or cfg.get("token_a")):
+                for h in vulns.probar_bola(
+                        url,
+                        cookies_a=cfg.get("cookie_a") or None,
+                        cookies_b=cfg.get("cookie_b") or None,
+                        token_a=cfg.get("token_a") or None,
+                        token_b=cfg.get("token_b") or None,
+                        log=L):
+                    self.bus.hallazgo(clave, h)
 
         elif clave == "catalogo":
             self.ejecutar_catalogo_modulo(
@@ -2642,8 +2918,8 @@ class HunterBugGUI(ctk.CTk):
             messagebox.showerror("Informe", "No se pudo guardar: %s" % e)
 
     def informe_markdown(self, d):
-        l = ["# Informe de evaluacion - HunterBug 1.0", "",
-             "- **Herramienta:** HunterBug 1.0 - version mejorada creada para la "
+        l = ["# Informe de evaluacion - HunterBug 1.2", "",
+             "- **Herramienta:** HunterBug 1.2 - version mejorada creada para la "
              "comunidad hacking team by Juan Antonio", "",
              "- **Objetivo:** %s" % d["objetivo"],
              "- **Fecha (UTC):** %s" % d["fecha"],
